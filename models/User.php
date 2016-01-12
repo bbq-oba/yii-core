@@ -36,20 +36,24 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
 
-    public static $status = [
+    public static $statusEnum = [
         self::STATUS_DELETED => '禁用',
         self::STATUS_ACTIVE => '启用',
     ];
 
     public function getShowStatus(){
         $return = [];
-        foreach(self::$status as $k=>$v){
+        foreach(static::$statusEnum as $k=>$v){
             $return[] = [
                 'label' => $v,
                 'value' => $k
             ];
         }
         return $return;
+    }
+
+    public function getViewStatus(){
+        return static::$statusEnum[$this->status];
     }
 
     /**
@@ -201,7 +205,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function beforeSave($insert)
     {
         if($insert){
-            $this->password = $this->setPassword($this->password);
+            $this->setPassword($this->password);
             $this->generateAuthKey();
             $this->generatePasswordResetToken();
         }
