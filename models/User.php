@@ -29,6 +29,9 @@ class User extends ActiveRecord implements IdentityInterface
     ];
 
     public static function checkIsSuperAdmin(){
+        if(\yii::$app->user->can('/*')){
+            return true;
+        }
         return \yii::$app->user->identity != null && in_array(\yii::$app->user->identity->id,self::$superUser);
     }
 
