@@ -142,6 +142,7 @@ class SystemMenu extends \kartik\tree\models\Tree
         foreach ($nodes as $node) {
             $array[$node->id] = $node->attributes;
         }
+        print_r($array);exit;
         yii::$app->cache->set(SERVER_ENV_PREFIX.':admin_menu', $array);
         return $array;
     }
