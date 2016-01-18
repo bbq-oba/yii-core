@@ -14,9 +14,7 @@ class VisitorController extends \yii\web\Controller
     }
     //页面标题
     public function actionLog(){
-        $data = API::run('Live.getLastVisitsDetails',[
-            'flat' => true
-        ]);
+        $data = API::run('Live.getLastVisitsDetails');
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('log',[
             'dataProvider' => $dataProvider
