@@ -41,12 +41,15 @@ $columns = [
         'header'=>'来源',
     ],
     [
+        'format'=>'raw',
+
         'value' => function($data){
             return Html::a($data["referrerName"],$data["referrerSearchEngineUrl"]);
         },
         'header' => '搜索引擎名称'
     ],
     [
+        'format'=>'raw',
         'value' => function($data){
             return Html::a($data["referrerKeyword"],$data["referrerUrl"]);
         },

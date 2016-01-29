@@ -18,6 +18,7 @@ class StatController extends \yii\web\Controller
         $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
         $params['filter_limit'] = 20;
         $data = API::run('Live.getLastVisitsDetails',$params);
+
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('index',[
             'dataProvider' => $dataProvider
