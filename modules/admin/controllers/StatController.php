@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\api\core\API;
+use app\helpers\Page;
 use yii\data\ArrayDataProvider;
 use yii\web\Response;
 
@@ -11,13 +12,12 @@ class StatController extends \yii\web\Controller
 
     public function actionIndex(){
         $type = \yii::$app->request->get("type","commonUser");
-
         $params = [];
-//        $params['doNotFetchActions'] = true;
         $params['segment'] =  $type == 'regUser' ?  "userId!=" : "userId==";
+
+        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
+        $params['filter_limit'] = 20;
         $data = API::run('Live.getLastVisitsDetails',$params);
-
-
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('index',[
             'dataProvider' => $dataProvider

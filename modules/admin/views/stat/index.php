@@ -17,6 +17,9 @@ $panel = '<div class="btn-group" role="group">'.
     Html::a("普通访客", ['index'], ['class' => 'btn btn-default'.($type != 'regUser' ? ' active': '')]).
     Html::a("注册用户", ['index','type'=>'regUser'], ['class' => 'btn btn-default'.($type == 'regUser' ? ' active': '')]).
 '</div>';
+//&filter_offset=40&filter_limit=20
+
+
 
 $columns = [
     ['class' => 'yii\grid\SerialColumn'],
@@ -36,6 +39,18 @@ $columns = [
     [
         'value'=>'referrerTypeName',
         'header'=>'来源',
+    ],
+    [
+        'value' => function($data){
+            return Html::a($data["referrerName"],$data["referrerSearchEngineUrl"]);
+        },
+        'header' => '搜索引擎名称'
+    ],
+    [
+        'value' => function($data){
+            return Html::a($data["referrerKeyword"],$data["referrerUrl"]);
+        },
+        'header'=>'关键词'
     ],
     [
         'value' => function($data){
@@ -85,7 +100,7 @@ $columns[] =             [
             'heading' => '',
             'type' => GridView::TYPE_SUCCESS,
             'before' => $panel,
-            'after' => false,
+            'after' => \app\helpers\Page::preNext(),
         ],
     ]); ?>
 
