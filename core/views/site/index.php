@@ -75,22 +75,28 @@ $this->title = 'Hello , '.yii::$app->user->identity->username;
                         <?php
 $u =$_SERVER['HTTP_HOST'];
 $s =STAT_TRACKER_URL;
-                        $str = <<<CODE
-<!-- 记录 -->
+$str = <<<CODE
 <script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//p.wo2365.com/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
+    var _paq = _paq || [];
+    <?php
+    // 在注册成功界面，加类似下面判断。
+    if (isset($username)) {
+         echo sprintf("_paq.push(['setUserId', '%s']);", $username);  // 关键代码
+         echo sprintf("_paq.push(['setCustomVariable',1,'regTime','%d','visit']);",time());
+    }
+    ?>
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//ad.wo2365.com/";
+        _paq.push(['setTrackerUrl', '//ad.wo2365.com/piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
 </script>
-<noscript><p><img src="//p.wo2365.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-<!-- 记录 -->
+
+
 CODE;
 ?>
 

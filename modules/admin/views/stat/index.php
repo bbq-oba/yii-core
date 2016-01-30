@@ -72,6 +72,21 @@ if($type == 'regUser'){
         'value'=>'userId',
         'header'=>'注册账号'
     ];
+    $columns[] = [
+        'value' => function($data) {
+            if(
+                    isset($data['customVariables']) && isset($data['customVariables'][1])
+                &&  isset($data['customVariables'][1]['customVariableName1'])
+                &&  $data['customVariables'][1]['customVariableName1'] == "regTime"
+                &&  $data['customVariables'][1]['customVariableValue1'] > 0
+            ){
+                return date("Y-m-d H:i:s" , $data['customVariables'][1]['customVariableValue1']);
+            }else{
+                return "";
+            }
+        },
+        'header'=>'注册时间'
+    ];
 }
 
 $columns[] =             [

@@ -19,6 +19,8 @@ class StatController extends \yii\web\Controller
         $params['filter_limit'] = 20;
         $data = API::run('Live.getLastVisitsDetails',$params);
 
+//        print_r($data);exit;
+
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('index',[
             'dataProvider' => $dataProvider
