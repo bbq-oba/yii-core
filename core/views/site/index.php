@@ -75,16 +75,20 @@ $this->title = 'Hello , '.yii::$app->user->identity->username;
                         <?php
 $u =$_SERVER['HTTP_HOST'];
 $s =STAT_TRACKER_URL;
+$p1 = "<?php";
+$p2 = "?>";
+
 $str = <<<CODE
+
 <script type="text/javascript">
     var _paq = _paq || [];
-    <?php
+    $p1
     // 在注册成功界面，加类似下面判断。
-    if (isset($username)) {
-         echo sprintf("_paq.push(['setUserId', '%s']);", $username);  // 关键代码
+    if (isset(\$username)) {
+         echo sprintf("_paq.push(['setUserId', '%s']);", \$username);  // 关键代码
          echo sprintf("_paq.push(['setCustomVariable',1,'regTime','%d','visit']);",time());
     }
-    ?>
+    $p2
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
