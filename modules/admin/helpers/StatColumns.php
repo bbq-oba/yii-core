@@ -68,6 +68,16 @@ class StatColumns
                 },
                 'header' => '关键词'
             ],
+            [
+                'value' => function($data){
+                    if($data['actionDetails'] && count($data['actionDetails'])){
+                        $pointUrl = array_shift($data['actionDetails']);
+                        return $pointUrl["url"];
+                    }
+                    return "";
+                },
+                'header' => '落地页Url'
+            ]
         ];
         return $columns;
     }
@@ -92,12 +102,13 @@ class StatColumns
 //                ]);
 //            },
 //        ];
+
         $columns =[
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{view}',
                 'buttons'=>[
                     'view'=>function ($url, $data, $key) {
-                        return Html::a(Html::icon('eye-open'), \yii\helpers\Url::to(['visitor-profile','visitorId'=>$data["visitorId"]]));
+                        return Html::a(Html::icon('eye-open'), \yii\helpers\Url::to([\yii::$app->controller->action->id,'visitorId'=>$data["visitorId"]]));
                     }
                 ]
             ];
@@ -127,7 +138,7 @@ class StatColumns
             },
             'header' => '注册时间'
         ];
-        $columns[] = self::getCommonEndColumns();
+//        $columns[] = self::getCommonEndColumns();
         return $columns;
     }
 

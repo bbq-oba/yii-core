@@ -16,8 +16,12 @@ class StatController extends \yii\web\Controller
         $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
         $params['filter_limit'] = 20;
         $params['segment'] = 'userId==';
-        $data = API::run('Live.getLastVisitsDetails',$params);
 
+        $visitorId = \yii::$app->request->get("visitorId");
+        if(!empty($visitorId)){
+            $params['segment'] = 'visitorId=='.$visitorId;
+        }
+        $data = API::run('Live.getLastVisitsDetails',$params);
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('common-user',[
             'dataProvider' => $dataProvider
@@ -28,6 +32,9 @@ class StatController extends \yii\web\Controller
         $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
         $params['filter_limit'] = 20;
         $params['segment'] = 'userId!=';
+        if(!empty($visitorId)){
+            $params['segment'] = 'visitorId=='.$visitorId;
+        }
         $data = API::run('Live.getLastVisitsDetails',$params);
 
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
@@ -36,10 +43,12 @@ class StatController extends \yii\web\Controller
         ]);
     }
     public function actionVisitorProfile($visitorId){
-        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
-        $params['filter_limit'] = 20;
+
         $params['segment'] = 'visitorId=='.$visitorId;
-        $data = API::run('Live.getLastVisitsDetails',$params);
+        $data = API::run('Live.getVisitorProfile',$params);
+
+        print_r($data);exit;
+
 
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('visitor-profile',[
