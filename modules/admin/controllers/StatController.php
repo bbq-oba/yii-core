@@ -10,30 +10,43 @@ use yii\web\Response;
 class StatController extends \yii\web\Controller
 {
 
-    public function actionIndex(){
-        $type = \yii::$app->request->get("type","commonUser");
-        $params = [];
-        $params['segment'] =  $type == 'regUser' ?  "userId!=" : "userId==";
+
+
+    public function actionCommonUser(){
+        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
+        $params['filter_limit'] = 20;
+        $params['segment'] = 'userId==';
+        $data = API::run('Live.getLastVisitsDetails',$params);
+
+        $dataProvider = new ArrayDataProvider(['allModels' => $data]);
+        return $this->render('common-user',[
+            'dataProvider' => $dataProvider
+        ]);
+    }
+    public function actionRegUser(){
 
         $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
         $params['filter_limit'] = 20;
+        $params['segment'] = 'userId!=';
         $data = API::run('Live.getLastVisitsDetails',$params);
 
-//        print_r($data);exit;
+        $dataProvider = new ArrayDataProvider(['allModels' => $data]);
+        return $this->render('reg-user',[
+            'dataProvider' => $dataProvider
+        ]);
+    }
+    public function actionVisitorProfile($visitorId){
+        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
+        $params['filter_limit'] = 20;
+        $params['segment'] = 'visitorId=='.$visitorId;
+        $data = API::run('Live.getLastVisitsDetails',$params);
 
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
-        return $this->render('index',[
+        return $this->render('visitor-profile',[
             'dataProvider' => $dataProvider
         ]);
     }
 
-
-//    public function actionIndex()
-//    {
-//        return $this->render('index');
-//    }
-
-    //页面标题
     public function actionTitle(){
         $data = API::run('Actions.getPageTitles');
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
@@ -69,8 +82,6 @@ class StatController extends \yii\web\Controller
         $data = API::run('Actions.getEntryPageUrls',$params);
         $data = json_encode($data);
         $a = \yii::$app->request->get('a',0);
-//$data = $a;
-//sleep(1);
         return $this->render('test'.$a, [
             'data' => $data
         ]);

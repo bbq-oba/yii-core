@@ -20,11 +20,11 @@ class Page
 
 
         $panel = '<div class="btn-group" role="group">'.
-            Html::a("上一页", array_merge($q,['index',
+            Html::a("上一页", array_merge($q,[\yii::$app->controller->action->id,
                 'filter_limit'=>20,
                 'filter_offset'=>($offset - 20) > 0 ? $offset - 20 : 0
             ]), ['class' => 'btn btn-default']).
-            Html::a("下一页", array_merge($q,['index',
+            Html::a("下一页", array_merge($q,[\yii::$app->controller->action->id,
                 'filter_limit'=>20,
                 'filter_offset'=>$offset + 20
             ]), ['class' => 'btn btn-default']).
