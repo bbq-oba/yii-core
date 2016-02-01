@@ -21,9 +21,10 @@ class StatColumns
             //访问时间
             [
                 'value' => function ($data) {
-                    return $data['serverDatePrettyFirstAction'] . '-' . $data['serverTimePrettyFirstAction'];
+                    return date("Y-m-d H:i:s",$data["serverTimestamp"]);
                 },
-                'header' => '访问时间'
+                'header' => '访问时间',
+//                'format' => ['date','Y-m-d H:i:s']
             ],
             [
                 'value' => 'visitorId',
@@ -76,7 +77,7 @@ class StatColumns
                     }
                     return "";
                 },
-                'header' => '落地页Url'
+                'header' => '落地页Url',
             ]
         ];
         return $columns;

@@ -10,7 +10,7 @@ use \app\helpers\Column;
 
 $this->title = '普通访客';
 $this->params['breadcrumbs'][] = $this->title;
-Yii::$app->timeZone = 'UTC';
+//Yii::$app->timeZone = 'UTC';
 $type = \yii::$app->request->get("type");
 
 //$panel = '<div class="btn-group" role="group">'.

@@ -22,6 +22,7 @@ class StatController extends \yii\web\Controller
             $params['segment'] = 'visitorId=='.$visitorId;
         }
         $data = API::run('Live.getLastVisitsDetails',$params);
+//print_r($data);exit;
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('common-user',[
             'dataProvider' => $dataProvider
