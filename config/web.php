@@ -24,6 +24,9 @@ $config = [
                 ]
             ],
         ],
+        'sms' => [
+            'class' => 'app\modules\sms\Module',
+        ],
     ],
     'as access' => [
         'class' => 'app\core\rbac\AccessControl',
@@ -90,12 +93,15 @@ $config = [
                 '*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'fileMap' => [
+                        'app'=>'app.php',
                         'column' => 'column.php',
                     ],
                 ],
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+
+        'smsdb'=>require(__DIR__ . '/smsdb.php'),
     ],
     'params' => $params,
 ];
@@ -122,10 +128,12 @@ if (YII_ENV_DEV) {
                 'generatorControllerPath'=>[
                     'app\controllers',
                     'app\modules\admin\controllers',
+                    'app\modules\sms\controllers',
                     'app\core\modules\system\controllers',
                 ],
                 'modelsPath'=>[
                     '@app/models',
+                    '@app/modules/sms/models',
                     '@app/core/models',
                 ],
             ],
