@@ -64,7 +64,7 @@ class SendingController extends Controller
         $model = new SendingSms();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->SmsIndex]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

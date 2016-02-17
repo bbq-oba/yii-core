@@ -44,6 +44,7 @@ class SendingSms extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [["PhoneNumber","SmsContent"],"required"],
             [['UserDefineNo', 'SendLevel', 'SendModem', 'NewFlag'], 'integer'],
             [['SmsUser', 'PutInType'], 'string', 'max' => 50],
             [['PhoneNumber'], 'string', 'max' => 20],
