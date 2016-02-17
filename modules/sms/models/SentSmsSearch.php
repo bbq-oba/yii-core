@@ -57,7 +57,7 @@ class SentSmsSearch extends SentSms
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->orderBy("SmsTime DESC");
         $query->andFilterWhere([
             'SmsIndex' => $this->SmsIndex,
             'SmsTime' => $this->SmsTime,
