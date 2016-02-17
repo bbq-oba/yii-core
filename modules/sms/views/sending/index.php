@@ -22,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'SmsIndex',
-            'SmsUser',
+//            'SmsIndex',
+//            'SmsUser',
             'PhoneNumber',
             'SmsContent',
-            'UserDefineNo',
+//            'UserDefineNo',
             // 'PutInType',
             // 'SendLevel',
             // 'SendModem',

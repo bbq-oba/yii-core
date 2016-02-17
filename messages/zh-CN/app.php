@@ -20,6 +20,9 @@ return [
 
     'Admin Configs'=>'参数列表',
     'Admin Config' =>'系统参数',
+    "Sending Sms" =>'待发短信列表',
+    "Sent Sms" => '已发短信',
+
 
 
     // Com
