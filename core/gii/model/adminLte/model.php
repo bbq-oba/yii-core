@@ -19,7 +19,7 @@ namespace <?= $generator->ns ?>;
 
 use Yii;
 use \app\core\models\Model;
-use \app\core\behaviors\TimestampBehavior;
+use \yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
@@ -61,9 +61,6 @@ class <?= $className ?> extends Model
          return [
              [
                  'class' => TimestampBehavior::className(),
-                 'createdAtAttribute' => 'create_time',
-                 'updatedAtAttribute' => 'update_time',
-                 'value' => Yii::$app->formatter->asDate('now', 'php:Y-m-d H:i:s'),
              ],
          ];
      }

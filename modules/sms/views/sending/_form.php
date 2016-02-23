@@ -12,7 +12,9 @@ use yii\widgets\ActiveForm;
 <div class="sending-sms-form box-body">
 
 
-    <?= $form->field($model, 'PhoneNumber')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phone')->textarea([
+        'rows'=>15
+    ]) ?>
 
     <?= $form->field($model, 'SmsContent')->textarea(['rows' => 5]) ?>
 

@@ -1,0 +1,1 @@
+git -c diff.mnemonicprefix=false -c core.quotepath=false pull --no-commit https://github.com/oyoy8629/yii-core.git master

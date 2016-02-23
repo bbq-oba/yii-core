@@ -3,16 +3,16 @@
 namespace app\modules\sms\controllers;
 
 use Yii;
-use app\modules\sms\models\SendingSms;
-use app\modules\sms\models\SendingSmsSearch;
+use app\modules\sms\models\Recvsmstable;
+use app\modules\sms\models\RecvsmstableSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\core\behaviors\TimestampBehavior;
 /**
- * SendingController implements the CRUD actions for SendingSms model.
+ * RecvController implements the CRUD actions for Recvsmstable model.
  */
-class SendingController extends Controller
+class RecvController extends Controller
 {
     public function behaviors()
     {
@@ -28,12 +28,12 @@ class SendingController extends Controller
     }
 
     /**
-     * Lists all SendingSms models.
+     * Lists all Recvsmstable models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SendingSmsSearch();
+        $searchModel = new RecvsmstableSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class SendingController extends Controller
     }
 
     /**
-     * Displays a single SendingSms model.
+     * Displays a single Recvsmstable model.
      * @param integer $id
      * @return mixed
      */
@@ -55,16 +55,16 @@ class SendingController extends Controller
     }
 
     /**
-     * Creates a new SendingSms model.
+     * Creates a new Recvsmstable model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SendingSms();
+        $model = new Recvsmstable();
 
-        if ($model->load(Yii::$app->request->post()) && $model->send()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->SmsIndex]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,18 +72,48 @@ class SendingController extends Controller
         }
     }
 
+    /**
+     * Updates an existing Recvsmstable model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
 
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->SmsIndex]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
 
     /**
-     * Finds the SendingSms model based on its primary key value.
+     * Deletes an existing Recvsmstable model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Recvsmstable model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SendingSms the loaded model
+     * @return Recvsmstable the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SendingSms::findOne($id)) !== null) {
+        if (($model = Recvsmstable::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

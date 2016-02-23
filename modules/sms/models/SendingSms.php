@@ -22,6 +22,7 @@ use Yii;
  */
 class SendingSms extends \yii\db\ActiveRecord
 {
+    public $phone;
     /**
      * @inheritdoc
      */
@@ -44,10 +45,10 @@ class SendingSms extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [["PhoneNumber","SmsContent"],"required"],
+            [["phone","SmsContent"],"required"],
             [['UserDefineNo', 'SendLevel', 'SendModem', 'NewFlag'], 'integer'],
             [['SmsUser', 'PutInType'], 'string', 'max' => 50],
-            [['PhoneNumber'], 'string', 'max' => 20],
+            [['PhoneNumber'], 'number', 'min' => 11],
             [['SmsContent'], 'string', 'max' => 200],
             [['RM1', 'RM2', 'RM3'], 'string', 'max' => 250]
         ];
@@ -73,4 +74,20 @@ class SendingSms extends \yii\db\ActiveRecord
             'RM3' => 'Rm3',
         ];
     }
+    public function send(){
+        $phone = preg_split("/\r\n/",$this->phone);
+        $phone = array_filter($phone);
+        $phone = array_unique($phone);
+        $array = [];
+        foreach($phone as $p){
+            if(preg_match("/\d{11}/",$p)){
+                $array[] = [$p,$this->SmsContent];
+            }
+        }
+        if ($array){
+            return static::getDb()->createCommand()->batchInsert('sendingsmstable', ['PhoneNumber', 'SmsContent'],$array)->execute();
+        }
+        return true;
+    }
+
 }
