@@ -60,12 +60,18 @@ class SentSmsSearch extends SentSms
         $query->orderBy("SmsTime DESC");
         $query->andFilterWhere([
             'SmsIndex' => $this->SmsIndex,
-            'SmsTime' => $this->SmsTime,
+//            'SmsTime' => $this->SmsTime,
             'Status' => $this->Status,
             'NewFlag' => $this->NewFlag,
             'UserDefineNo' => $this->UserDefineNo,
             'SentSetIndex' => $this->SentSetIndex,
         ]);
+
+        if(!empty($this->SmsTime) && strpos($this->SmsTime," 至 ")){
+            list($startTime,$endTime) = explode(" 至 ",$this->SmsTime);
+            $query->andFilterWhere(["between","SmsTime",$startTime,$endTime]);
+        }
+
 
         $query->andFilterWhere(['like', 'PhoneNumber', $this->PhoneNumber])
             ->andFilterWhere(['like', 'SmsContent', $this->SmsContent])

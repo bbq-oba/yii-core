@@ -64,19 +64,37 @@ class SentSms extends \yii\db\ActiveRecord
             'SmsTime' => '时间',
             'SmsUser' => 'Sms User',
             'Status' => '状态',
+            'viewStatus'=>'发送状态',
             'NewFlag' => 'New Flag',
             'UserDefineNo' => 'User Define No',
-            'SentSetIndex' => 'Sent Set Index',
+            'SentSetIndex' => '设备序号',
             'RM1' => 'Rm1',
             'RM2' => 'Rm2',
             'RM3' => 'Rm3',
             'RecvReportTime' => 'Recv Report Time',
         ];
     }
-    public static $status = [
-        '失败','成功'
+
+    const STATUS_FAILED = 0;
+    const STATUS_SUCCEED = 1;
+
+    public static $statusEnum = [
+        self::STATUS_FAILED => '失败',
+        self::STATUS_SUCCEED => '成功',
     ];
-   public function getViewStatus(){
-       return self::$status[$this->Status];
-   }
+
+    public function getShowStatus(){
+        $return = [];
+        foreach(static::$statusEnum as $k=>$v){
+            $return[] = [
+                'label' => $v,
+                'value' => $k
+            ];
+        }
+        return $return;
+    }
+    public function getViewStatus(){
+        return static::$statusEnum[$this->Status];
+    }
+
 }

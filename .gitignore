@@ -28,4 +28,3 @@ phpunit.phar
 web/assets/
 runtime/
 piwik/tmp/
-config/
