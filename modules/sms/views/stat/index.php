@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\modules\sms\models\SentSmsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sent Sms');
+$this->title = "发送统计";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sent-sms-index">
