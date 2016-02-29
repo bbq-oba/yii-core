@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\sms\models\SentSms;
+use yii\data\ArrayDataProvider;
 
 /**
  * SentSmsSearch represents the model behind the search form about `app\modules\sms\models\SentSms`.
@@ -80,6 +81,29 @@ class SentSmsSearch extends SentSms
             ->andFilterWhere(['like', 'RM2', $this->RM2])
             ->andFilterWhere(['like', 'RM3', $this->RM3])
             ->andFilterWhere(['like', 'RecvReportTime', $this->RecvReportTime]);
+
+        return $dataProvider;
+    }
+    public function stat($params){
+        $query = SentSms::find();
+        $this->load($params);
+        $query->select([
+            'COUNT(`STATUS`) as `all`',
+            'SUM(`Status`) as `succeed`',
+            "DATE_FORMAT(SmsTime,'%Y-%m-%d') as `date`"
+        ]);
+        $query->addGroupBy("TO_DAYS(SmsTime)");
+        if(!empty($this->SmsTime) && strpos($this->SmsTime," 至 ")){
+            list($startTime,$endTime) = explode(" 至 ",$this->SmsTime);
+            $startTime = $startTime." 00:00:00";
+            $endTime = $endTime." 23:59:59";
+            $query->andFilterWhere(["between","SmsTime",$startTime,$endTime]);
+        }
+
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $query->asArray()->all(),
+        ]);
+
 
         return $dataProvider;
     }
