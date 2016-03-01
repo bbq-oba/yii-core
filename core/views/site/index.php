@@ -79,15 +79,13 @@ $p1 = "<?php";
 $p2 = "?>";
 
 $str = <<<CODE
+
 <script type="text/javascript">
   var _paq = _paq || [];
-  $p1
-    // 在注册成功界面，加类似下面判断。
-    if (isset(\$username)) {
-         echo sprintf("_paq.push(['setUserId', '%s']);", \$username);  // 关键代码
-         echo sprintf("_paq.push(['setCustomVariable',1,'regTime','%d','visit']);",time());
-    }
-  $p2
+  if(document.getElementById("__RegisteSuccess__") == null){
+        _paq.push(['setUserId',document.getElementById("__RegisteSuccess__").value]);
+        _paq.push(['setCustomVariable',1,'regTime',Date.parse(new Date())/1000,'visit']);
+  }
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
