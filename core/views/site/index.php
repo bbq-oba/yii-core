@@ -82,7 +82,7 @@ $str = <<<CODE
 
 <script type="text/javascript">
   var _paq = _paq || [];
-  if(document.getElementById("__RegisteSuccess__") == null){
+  if(document.getElementById("__RegisteSuccess__") != null){
         _paq.push(['setUserId',document.getElementById("__RegisteSuccess__").value]);
         _paq.push(['setCustomVariable',1,'regTime',Date.parse(new Date())/1000,'visit']);
   }
