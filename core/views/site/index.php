@@ -73,30 +73,10 @@ $this->title = 'Hello , '.yii::$app->user->identity->username;
                 <td>
                     <pre>
                         <?php
-$u =$_SERVER['HTTP_HOST'];
-$s =STAT_TRACKER_URL;
-$p1 = "<?php";
-$p2 = "?>";
 
 $str = <<<CODE
 
-<script type="text/javascript">
-  var _paq = _paq || [];
-  if(document.getElementById("__RegisteSuccess__") != null){
-        _paq.push(['setUserId',document.getElementById("__RegisteSuccess__").value]);
-        _paq.push(['setCustomVariable',1,'regTime',Date.parse(new Date())/1000,'visit']);
-  }
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//p.wo2365.com/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//p.wo2365.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<script  type="text/javascript" src="http://ad.wo2365.com/tj.js"></script>
 CODE;
 ?>
 
