@@ -59,5 +59,9 @@ class SiteController extends Controller
 //        $model->save();
     }
 
+<<<<<<< Updated upstream
 
 }
+=======
+}
+>>>>>>> Stashed changes

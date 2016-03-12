@@ -1,7 +1,7 @@
 <?php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=stat_admin',
+    'dsn' => 'mysql:host=127.0.0.1;dbname=tj.sasa8.com',
     'username' => 'root',
     'password' => 'Wannagirl.',
     'charset' => 'utf8',
