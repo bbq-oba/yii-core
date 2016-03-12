@@ -39,7 +39,7 @@ class StatController extends \yii\web\Controller
         }
         $data = API::run('Live.getLastVisitsDetails',$params);
         $data = $this->getDb($data);
-
+print_r($data);
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('reg-user',[
             'dataProvider' => $dataProvider
