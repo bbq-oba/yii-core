@@ -73,8 +73,8 @@ class ApiVisitorDetail extends Model
         foreach($typeArray as $type){
             $return = self::getUserData($userString,$type,$referrer);
             if($return["IsSuccess"] && $return["Result"]){
-                foreach($return["Result"] as $username => $val){
-                    $data[$username]["visitor_datatype_".$type] = $val;
+                foreach($return["Result"] as $k => $val){
+                    $data[$val["UserName"]["visitor_datatype_".$type] = $val["Result"]];
                 }
             }
         }
