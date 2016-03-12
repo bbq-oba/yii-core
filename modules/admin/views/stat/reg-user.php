@@ -13,13 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 //Yii::$app->timeZone = 'UTC';
 $type = \yii::$app->request->get("type");
 
-//$panel = '<div class="btn-group" role="group">'.
-//    Html::a("普通访客", ['index'], ['class' => 'btn btn-default'.($type != 'regUser' ? ' active': '')]).
-//    Html::a("注册用户", ['index','type'=>'regUser'], ['class' => 'btn btn-default'.($type == 'regUser' ? ' active': '')]).
-//'</div>';
+$panel = '<div class="btn-group" role="group">'.
+    Html::a("更新用户API数据", ['update-reg-user']).
+'</div>';
 //&filter_offset=40&filter_limit=20
 
-$panel = "";
 ?>
 
 
