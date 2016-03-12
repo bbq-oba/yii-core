@@ -29,14 +29,14 @@ class ApiVisitorDetail extends Model
      /*
       * 更新时间
       */
-     public function behaviors()
-     {
-         return [
-             [
-                 'class' => TimestampBehavior::className(),
-             ],
-         ];
-     }
+//     public function behaviors()
+//     {
+//         return [
+//             [
+//                 'class' => TimestampBehavior::className(),
+//             ],
+//         ];
+//     }
 
 
     /**
