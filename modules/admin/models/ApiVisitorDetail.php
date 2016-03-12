@@ -45,7 +45,8 @@ class ApiVisitorDetail extends Model
     public function rules()
     {
         return [
-            [['visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_referrer','visitor_username', 'visitor_datatype_0'], 'string', 'max' => 255]
+            [[ 'visitor_referrer' ], 'integer'],
+            [['visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3','visitor_username', 'visitor_datatype_0'], 'string', 'max' => 255]
         ];
     }
 
