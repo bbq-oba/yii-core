@@ -82,14 +82,14 @@ class StatController extends \yii\web\Controller
 
         //匹配到data中返回
         foreach($data as $k=>$row){
-            if(isset($row["customVariables"]["customVariableName2"])
-                && $row["customVariables"]["customVariableName2"] == "regReferrer"
-                && isset($row["customVariables"]["customVariableValue2"])
-                && !empty($row["customVariables"]["customVariableValue2"])
-                && in_array($row["customVariables"]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
-                && in_array($row["customVariables"]["customVariableValue2"]."---".$row["userId"],array_keys($array))
+            if(isset($row["customVariables"][2]["customVariableName2"])
+                && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
+                && isset($row["customVariables"][2]["customVariableValue2"])
+                && !empty($row["customVariables"][2]["customVariableValue2"])
+                && in_array($row["customVariables"][2]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
+                && in_array($row["customVariables"][2]["customVariableValue2"]."---".$row["userId"],array_keys($array))
             ){
-                $data[$k] = array_merge($row,$array[$row["customVariables"]["customVariableValue2"]."---".$row["userId"]]);
+                $data[$k] = array_merge($row,$array[$row["customVariables"][2]["customVariableValue2"]."---".$row["userId"]]);
             }
         }
 
@@ -99,13 +99,13 @@ class StatController extends \yii\web\Controller
     public function format($data){
         $array = [];
         foreach($data as $row){
-            if(isset($row["customVariables"]["customVariableName2"])
-                && $row["customVariables"]["customVariableName2"] == "regReferrer"
-                && isset($row["customVariables"]["customVariableValue2"])
-                && !empty($row["customVariables"]["customVariableValue2"])
-                && in_array($row["customVariables"]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
+            if(isset($row["customVariables"][2]["customVariableName2"])
+                && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
+                && isset($row["customVariables"][2]["customVariableValue2"])
+                && !empty($row["customVariables"][2]["customVariableValue2"])
+                && in_array($row["customVariables"][2]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
             ){
-                $array[$row["customVariables"]["customVariableValue2"]][] = $row["userId"];
+                $array[$row["customVariables"][2]["customVariableValue2"]][] = $row["userId"];
             }
         }
 
