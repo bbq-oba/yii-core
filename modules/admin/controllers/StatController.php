@@ -108,7 +108,7 @@ class StatController extends \yii\web\Controller
                 $array[$row["customVariables"]["customVariableValue2"]][] = $row["userId"];
             }
         }
-
+print_r($array);
         if($array){
             $api = new ApiVisitorDetail();
             foreach($array as $referrer => $userArray){

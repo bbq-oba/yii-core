@@ -78,6 +78,7 @@ class ApiVisitorDetail extends Model
                 }
             }
         }
+        print_r($data);
         foreach($data as $user=>$val){
             $data[$user]["visitor_username"] = $user;
             $data[$user]["visitor_referrer"] = $referrer;
