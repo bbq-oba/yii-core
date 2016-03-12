@@ -103,6 +103,7 @@ class ApiVisitorDetail extends Model
             $model->load($array);
 print_r($model->attributes);
             $model->save();
+print_r($model->errors);
         }
 
 
