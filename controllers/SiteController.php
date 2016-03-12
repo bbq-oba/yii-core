@@ -32,6 +32,7 @@ class SiteController extends Controller
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            echo "xxxxxx";exit;
             return $this->goBack();
         }
         return $this->render('login', [
@@ -57,5 +58,6 @@ class SiteController extends Controller
 //        $model->generatePasswordResetToken();
 //        $model->save();
     }
+
 
 }
