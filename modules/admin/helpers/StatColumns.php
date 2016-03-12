@@ -10,6 +10,7 @@ namespace app\modules\admin\helpers;
  */
 use app\helpers\IP;
 use app\helpers\IpType;
+use app\modules\admin\models\ApiVisitorDetail;
 use kartik\grid\GridView;
 use \kartik\helpers\Html;
 
@@ -88,6 +89,7 @@ class StatColumns
         ];
     }
 
+
     public static function ColumnsIpType()
     {
         self::$columns[] = [
@@ -138,6 +140,10 @@ class StatColumns
             ];
     }
 
+
+
+
+
     public static function getRegUserColumns()
     {
         self::Columns1();
@@ -166,6 +172,36 @@ class StatColumns
                 }
             },
             'header' => '注册时间'
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  isset($data['visitor_referrer']) ? ApiVisitorDetail::$referrerTypeText[$data['visitor_referrer']] : "-";
+            },
+            'header' => '注册点'
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                    return  isset($data['visitor_datatype_0']) ? $data['visitor_datatype_0'] : "";
+            },
+            'header' => '所属推广号'
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  isset($data['visitor_datatype_1']) ? $data['visitor_datatype_1'] : "";
+            },
+            'header' => '首存金额'
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  isset($data['visitor_datatype_2']) ? $data['visitor_datatype_2'] : "";
+            },
+            'header' => '首存优惠'
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  isset($data['visitor_datatype_3']) ? $data['visitor_datatype_3'] : "";
+            },
+            'header' => '存款笔数'
         ];
         self::Columns10();
         self::Columns11();

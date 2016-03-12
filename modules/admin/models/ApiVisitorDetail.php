@@ -78,7 +78,6 @@ class ApiVisitorDetail extends Model
                 }
             }
         }
-        print_r($data);
         foreach($data as $user=>$val){
             $data[$user]["visitor_username"] = $user;
             $data[$user]["visitor_referrer"] = $referrer;
@@ -88,13 +87,9 @@ class ApiVisitorDetail extends Model
                 'visitor_username'=>$user,
                 'visitor_referrer'=>$referrer
             ]);
-
-
-
             if ($find){
                 $model = $find;
             }
-
             $array = [
                 "ApiVisitorDetail" =>array_merge([
                     'visitor_username'=>$user,
@@ -102,24 +97,20 @@ class ApiVisitorDetail extends Model
                 ],$val)
             ];
             $model->load($array);
-print_r($model->attributes);
             $model->save();
-print_r($model->errors);
         }
-
-
-
-
-
-
-
-
     }
 
     public static $referrerType = [
         1 => 'lbvbet',
         2 => 'wyvbet',
     ];
+
+    public static $referrerTypeText = [
+        1 => '乐宝',
+        2 => '永利汇',
+    ];
+
     public static function getUserData($userName,$userDataType,$referrer = 1){
         $fields=array(
             'userName'=>$userName, //用户名,多个用户以逗号分隔,必填

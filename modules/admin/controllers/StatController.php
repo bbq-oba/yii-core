@@ -39,7 +39,6 @@ class StatController extends \yii\web\Controller
         }
         $data = API::run('Live.getLastVisitsDetails',$params);
         $data = $this->getDb($data);
-print_r($data);
         $dataProvider = new ArrayDataProvider(['allModels' => $data]);
         return $this->render('reg-user',[
             'dataProvider' => $dataProvider
@@ -55,7 +54,7 @@ print_r($data);
         }
         $data = API::run('Live.getLastVisitsDetails',$params);
         $this->format($data);
-
+        $this->redirect(['reg-user']);
     }
 
 
@@ -104,14 +103,10 @@ print_r($data);
                 && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
                 && isset($row["customVariables"][2]["customVariableValue2"])
                 && !empty($row["customVariables"][2]["customVariableValue2"])
-//                && in_array($row["customVariables"][2]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
             ){
                 $array[$row["customVariables"][2]["customVariableValue2"]][] = $row["userId"];
             }
         }
-
-print_r($data);
-print_r($array);
         if($array){
             $api = new ApiVisitorDetail();
             foreach($array as $referrer => $userArray){
