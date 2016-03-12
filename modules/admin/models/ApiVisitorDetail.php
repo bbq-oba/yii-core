@@ -82,17 +82,27 @@ class ApiVisitorDetail extends Model
         foreach($data as $user=>$val){
             $data[$user]["visitor_username"] = $user;
             $data[$user]["visitor_referrer"] = $referrer;
+
             $model = new ApiVisitorDetail();
             $find = ApiVisitorDetail::findone([
                 'visitor_username'=>$user,
                 'visitor_referrer'=>$referrer
             ]);
+
+
+
             if ($find){
                 $model = $find;
             }
-            foreach($val as $k =>$v){
-                $model->$k = $v;
-            }
+
+            $array = [
+                "ApiVisitorDetail" =>array_merge([
+                    'visitor_username'=>$user,
+                    'visitor_referrer'=>$referrer,
+                ],$val)
+            ];
+            $model->load($array);
+print_r($model->attributes);
             $model->save();
         }
 
