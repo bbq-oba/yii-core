@@ -58,10 +58,4 @@ class SiteController extends Controller
 //        $model->generatePasswordResetToken();
 //        $model->save();
     }
-
-<<<<<<< Updated upstream
-
 }
-=======
-}
->>>>>>> Stashed changes
