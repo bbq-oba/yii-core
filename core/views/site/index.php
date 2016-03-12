@@ -76,7 +76,15 @@ $this->title = 'Hello , '.yii::$app->user->identity->username;
 
 $str = <<<CODE
 
-<script  type="text/javascript" src="http://ad.wo2365.com/tj.js"></script>
+
+<input type="hidden" id="__RegisterSuccess__" value="aaaabbbb" />
+<input type="hidden" id="__RegisterReferrer__" value="1" />
+
+乐宝 = 1
+永利汇 = 2
+
+
+<script  type="text/javascript" src="//tj.sasa8.com/tj.js"></script>
 CODE;
 ?>
 
