@@ -15,9 +15,9 @@ define('CURRENT_TIMESTAMP', $_SERVER['REQUEST_TIME']);
 define('CURRENT_DATETIME', date('Y-m-d H:i:s',CURRENT_TIMESTAMP));
 define('CURRENT_DATE', date('Y-m-d',CURRENT_TIMESTAMP));
 
-define('STAT_TRACKER_URL','//p.sasa8.com/piwik.php');
+define('STAT_TRACKER_URL','http:://p.sasa8.com/piwik.php');
 
-define('STAT_API_URL','//p.sasa8.com/index.php');
+define('STAT_API_URL','http://p.sasa8.com/index.php');
 define('STAT_API_TOKEN','c38de7c5e14711949af48b11464d8cba');
 
 define('DEFAULT_ID_SITE',1);
