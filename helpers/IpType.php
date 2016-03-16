@@ -22,7 +22,7 @@ class IpType
     public static function ip($ip){
         $url = 'http://apis.baidu.com/rtbasia/ip_type/ip_type?ip='.$ip;
         $curl = new Curl();
-        $curl->setHeader("apikey","29ddcb64dbe2f42764115b28941d2154");
+        $curl->setHeader("apikey","58d0d55af6ee8cda005ec2d674ff0db2");
         $curl->get($url);
         $curl->close();
 
@@ -35,6 +35,12 @@ class IpType
     public static function find($ip){
         $data = static::ip($ip);
         $data = json_decode($data,true);
+	
+	if(!isset($data['code']) ||  $data['code'] != 200 ){
+		exit('百度api错误');
+	}
+
+
         return in_array($data['data']['type'],array_keys(static::$type)) ? static::$type[$data['data']['type']] : "未知";
     }
 }

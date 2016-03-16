@@ -77,8 +77,8 @@ $this->title = 'Hello , '.yii::$app->user->identity->username;
 $str = <<<CODE
 
 
-<input type="hidden" id="__RegisterSuccess__" value="aaaabbbb" />
-<input type="hidden" id="__RegisterReferrer__" value="1" />
+<input type="hidden" id="RegisterSuccess" value="aaaabbbb" />
+<input type="hidden" id="RegisterReferrer" value="1" />
 
 乐宝 = 1
 永利汇 = 2
