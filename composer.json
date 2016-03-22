@@ -31,7 +31,8 @@
         "piwik/device-detector": "*",
         "php-curl-class/php-curl-class": "^4.8",
         "kartik-v/yii2-field-range": "*",
-        "kartik-v/yii2-date-range": "*"
+        "kartik-v/yii2-date-range": "*",
+        "kartik-v/yii2-builder": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

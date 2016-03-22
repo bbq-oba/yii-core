@@ -36,9 +36,9 @@ class IpType
         $data = static::ip($ip);
         $data = json_decode($data,true);
 	
-	if(!isset($data['code']) ||  $data['code'] != 200 ){
-		exit('百度api错误');
-	}
+        if(!isset($data['code']) ||  $data['code'] != 200 ){
+            return 'bd error';
+        }
 
 
         return in_array($data['data']['type'],array_keys(static::$type)) ? static::$type[$data['data']['type']] : "未知";
