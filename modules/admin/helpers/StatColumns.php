@@ -77,11 +77,7 @@ class StatColumns
     public static function Columns10(){
         self::$columns[] =['header' => '落地页Url',
             'value' => function($data){
-                if($data['actionDetails'] && count($data['actionDetails'])){
-                    $pointUrl = array_shift($data['actionDetails']);
-                    return $pointUrl["url"];
-                }
-                return "";
+                return $data["referrerUrl"];
             },
             'headerOptions'=>[
                 'style'=>'width:300px;'
@@ -157,7 +153,11 @@ class StatColumns
         self::Columns8();
         self::Columns9();
 
-        self::$columns [] = [ 'header' => '账号','value' => 'userId'];
+        self::$columns [] = [
+            'header' => '账号',
+            'value'  => 'userId',
+            'filter' => GridView::TEXT
+        ];
         self::$columns [] = [
             'value' => function ($data) {
                 if (

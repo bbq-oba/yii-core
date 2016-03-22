@@ -8,42 +8,13 @@ use app\modules\admin\models\ApiVisitorDetail;
 use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
+use app\modules\admin\models\VisitsDetails;
 
 class StatController extends \yii\web\Controller
 {
 
 
 
-    public function actionCommonUser(){
-        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
-        $params['filter_limit'] = 20;
-        $params['segment'] = 'userId==';
-
-        $visitorId = \yii::$app->request->get("visitorId");
-        if(!empty($visitorId)){
-            $params['segment'] = 'visitorId=='.$visitorId;
-        }
-        $data = API::run('Live.getLastVisitsDetails',$params);
-//print_r($data);exit;
-        $dataProvider = new ArrayDataProvider(['allModels' => $data]);
-        return $this->render('common-user',[
-            'dataProvider' => $dataProvider
-        ]);
-    }
-    public function actionRegUser(){
-        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
-        $params['filter_limit'] = 20;
-        $params['segment'] = 'userId!=';
-        if(!empty($visitorId)){
-            $params['segment'] = 'visitorId=='.$visitorId;
-        }
-        $data = API::run('Live.getLastVisitsDetails',$params);
-        $data = $this->getDb($data);
-        $dataProvider = new ArrayDataProvider(['allModels' => $data]);
-        return $this->render('reg-user',[
-            'dataProvider' => $dataProvider
-        ]);
-    }
 
     public function actionUpdateRegUser(){
         $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
@@ -56,123 +27,81 @@ class StatController extends \yii\web\Controller
         $this->format($data);
         $this->redirect(['reg-user','filter_offset'=>$params['filter_offset']]);
     }
-    public function actionApi(){
-        $username = \yii::$app->request->get('username');
-        $type = \yii::$app->request->get('type');
-        $r = \yii::$app->request->get('r');
-    print_r(ApiVisitorDetail::getUserData($username,$type,$r));
-    }
 
+    public function actionRegUserLebao(){
+        $model  = new VisitsDetails();
+        $model->load(\yii::$app->request->queryParams);
 
-    public function getDb($data){
-        $userArray = [];
+        $data = $model->search(1);
 
-        //找到piwik 返回数据的 userId
-        foreach($data as $row){
-            $userArray[] = $row["userId"];
-        }
-        $userArray = array_unique($userArray);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => $model->filter_limit,
+            ],
+        ]);
 
-        // 在数据库中查找 username
-        $find = ApiVisitorDetail::find()->where([
-            "in","visitor_username",$userArray
-        ])->asArray()->all();
-        $array = [];
-
-        //格式化username
-        foreach($find as $k=>$v){
-            $array[$v["visitor_referrer"]."---".$v["visitor_username"]] = $v;
-        }
-
-        //匹配到data中返回
-        foreach($data as $k=>$row){
-            if(isset($row["customVariables"][2]["customVariableName2"])
-                && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
-                && isset($row["customVariables"][2]["customVariableValue2"])
-                && !empty($row["customVariables"][2]["customVariableValue2"])
-                && in_array($row["customVariables"][2]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
-                && in_array($row["customVariables"][2]["customVariableValue2"]."---".$row["userId"],array_keys($array))
-            ){
-                $data[$k] = array_merge($row,$array[$row["customVariables"][2]["customVariableValue2"]."---".$row["userId"]]);
-            }
-        }
-
-        return $data;
-    }
-
-    public function format($data){
-        $array = [];
-        foreach($data as $row){
-            if(
-                isset($row["customVariables"][2]["customVariableName2"])
-                && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
-                && isset($row["customVariables"][2]["customVariableValue2"])
-                && !empty($row["customVariables"][2]["customVariableValue2"])
-            ){
-                $array[$row["customVariables"][2]["customVariableValue2"]][] = $row["userId"];
-            }
-        }
-        if($array){
-            $api = new ApiVisitorDetail();
-            foreach($array as $referrer => $userArray){
-                $api->getUserAllData(array_unique($userArray),$referrer);
-            }
-        }
-    }
-
-
-
-    public function actionVisitorProfile($visitorId){
-
-        $params['segment'] = 'visitorId=='.$visitorId;
-        $data = API::run('Live.getVisitorProfile',$params);
-
-        print_r($data);exit;
-
-
-        $dataProvider = new ArrayDataProvider(['allModels' => $data]);
-        return $this->render('visitor-profile',[
-            'dataProvider' => $dataProvider
+        return $this->render($model->render,[
+            'title'=>'乐宝注册',
+            'dataProvider' => $dataProvider,
+            'model' =>$model
         ]);
     }
 
-    public function actionTitle(){
-        $data = API::run('Actions.getPageTitles');
-        $dataProvider = new ArrayDataProvider(['allModels' => $data]);
-        return $this->render('title',[
-            'dataProvider' => $dataProvider
+
+    public function actionRegUserYonglihui(){
+        $model  = new VisitsDetails();
+        $model->load(\yii::$app->request->queryParams);
+
+        $data = $model->search(2);
+
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => $model->filter_limit,
+            ],
+        ]);
+
+        return $this->render($model->render,[
+            'title'=>'永利汇注册',
+            'dataProvider' => $dataProvider,
+            'model' =>$model
         ]);
     }
+    public function actionRegUserOther(){
+        $model  = new VisitsDetails();
+        $model->load(\yii::$app->request->queryParams);
 
-    public function actionEntryPageUrls(){
+        $data = $model->search(4);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => $model->filter_limit,
+            ],
+        ]);
 
-
-        if(\yii::$app->request->isAjax){
-            $params = [];
-            $idSubtable = \yii::$app->request->get('idSubtable',0);
-            if($idSubtable){
-                $params['idSubtable'] = $idSubtable;
-            }
-            $data = API::run('Actions.getEntryPageUrls',$params);
-            return $this->renderAjax('entry-page-cloumn',[
-                'data' => $data,
-                'lvl'=>\yii::$app->request->get('lvl',0) + 1
-            ]);
-        }
-        return $this->render('entry-page-urls');
+        return $this->render($model->render,[
+            'title'=>'无注册源',
+            'dataProvider' => $dataProvider,
+            'model' =>$model
+        ]);
     }
-    public function actionTest()
-    {
-        $params = [];
-        $a = \yii::$app->request->get('a',0);
-        if($a){
-            $params['idSubtable'] = $a;
-        }
-        $data = API::run('Actions.getEntryPageUrls',$params);
-        $data = json_encode($data);
-        $a = \yii::$app->request->get('a',0);
-        return $this->render('test'.$a, [
-            'data' => $data
+    public function actionCommonUser(){
+        $model  = new VisitsDetails();
+        $model->load(\yii::$app->request->queryParams);
+
+        $data = $model->search(3);
+
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $data,
+            'pagination' => [
+                'pageSize' => $model->filter_limit,
+            ],
+        ]);
+        return $this->render($model->render,[
+            'title'=>'未注册',
+            'dataProvider' => $dataProvider,
+            'model' =>$model
         ]);
     }
 }

@@ -25,6 +25,9 @@ class API
             'date'=>\yii::$app->session['date'],
         ];
         $params = array_merge($defaultParam,$params);
+
+        $params = array_filter($params);
+
         $curl = new Curl();
 
         $curl->setJsonDecoder(function($response) {
