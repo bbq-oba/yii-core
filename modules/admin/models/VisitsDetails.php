@@ -33,7 +33,7 @@ class VisitsDetails extends Model
     {
         return [
             // username and password are both required
-            [['visitorId', 'userId','filter_offset','filter_limit','date'], 'safe'],
+            [['visitorId', 'userId','filter_offset','filter_limit','regdate'], 'safe'],
         ];
     }
     public function search($type){
