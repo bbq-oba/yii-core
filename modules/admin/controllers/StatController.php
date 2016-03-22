@@ -54,9 +54,14 @@ class StatController extends \yii\web\Controller
         }
         $data = API::run('Live.getLastVisitsDetails',$params);
         $this->format($data);
-        $this->redirect(['reg-user']);
+        $this->redirect(['reg-user','filter_offset'=>$params['filter_offset']]);
     }
-
+    public function actionApi(){
+        $username = \yii::$app->request->get('username');
+        $type = \yii::$app->request->get('type');
+        $r = \yii::$app->request->get('r');
+    print_r(ApiVisitorDetail::getUserData($username,$type,$r));
+    }
 
 
     public function getDb($data){
