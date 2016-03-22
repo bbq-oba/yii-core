@@ -72,7 +72,7 @@ class ApiVisitorDetail extends Model
         $data = [];
         foreach($typeArray as $type){
             $return = self::getUserData($userString,$type,$referrer);
-            if($return["IsSuccess"] && $return["Result"]){
+	    if($return["IsSuccess"] && $return["Result"]){
                 foreach($return["Result"] as $k => $val){
                     $data[$val["UserName"]]["visitor_datatype_".$type] = $val["Result"];
                 }
@@ -123,7 +123,7 @@ class ApiVisitorDetail extends Model
         $fields=http_build_query($fields);
 
         $url='http://'.self::$referrerType[$referrer].'.gallary.work/api/user/GetUserData?'.$fields;
-        /**
+/**
          * 不得使用 file_get_contents();
          */
         $ch=curl_init($url);
@@ -133,7 +133,6 @@ class ApiVisitorDetail extends Model
         curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
         curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
         $json=curl_exec($ch);
-
         if($json===false){
             $json=curl_error($ch);
             var_dump($json);

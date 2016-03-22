@@ -12,7 +12,6 @@ use \app\helpers\Column;
 
 $this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
 
 
