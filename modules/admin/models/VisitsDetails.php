@@ -101,7 +101,6 @@ class VisitsDetails extends Model
         if($this->render == 'reg-user'){
             $data = $this->getDb($data);
         }
-
         if($this->do == 'update'){
             $this->format($data);
         }
