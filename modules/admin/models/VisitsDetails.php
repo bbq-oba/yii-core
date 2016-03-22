@@ -33,7 +33,7 @@ class VisitsDetails extends Model
     {
         return [
             // username and password are both required
-            [['visitorId', 'userId','filter_offset','filter_limit','regdate'], 'safe'],
+            [['visitorId', 'userId','filter_offset','filter_limit','regdate','render','do'], 'safe'],
         ];
     }
     public function search($type){
@@ -119,6 +119,7 @@ class VisitsDetails extends Model
                 $array[$row["customVariables"][2]["customVariableValue2"]][] = $row["userId"];
             }
         }
+
         if($array){
             $api = new ApiVisitorDetail();
             foreach($array as $referrer => $userArray){
