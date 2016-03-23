@@ -15,7 +15,7 @@ class Page
 {
     public static function preNext(){
         $offset = max(0,\yii::$app->request->get('filter_offset',0));
-        $limit = \yii::$app->request->get('filter_limit',50);
+        $limit = \yii::$app->request->get('filter_limit',100);
         $q = \yii::$app->request->queryParams;
 
 
