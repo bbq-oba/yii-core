@@ -132,8 +132,8 @@ class VisitsDetails extends Model
     public function getDb($data){
         $idvisits = [];
         foreach($data as $k=>$v){
-            $data[$v['idvisit']] = $v;
-            $idvisits = $v['idvisit'];
+            $data[$v['idVisit']] = $v;
+            $idvisits = $v['idVisit'];
         }
         $idvisits = array_unique($idvisits);
         $find = ApiVisitorDetail::find()->where([

@@ -182,7 +182,6 @@ class ApiVisitorDetail extends ActiveRecord
             $orderBy = 'created_at desc';
         }
         $data = self::find()->where($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
-print_r($data);
         self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
@@ -204,7 +203,6 @@ print_r($data);
                      *      'Result'   => 'bbb'
                      * ]
                      */
-		    print_r($return);
                     if($return["IsSuccess"] && $return["Result"]){
                         foreach($return["Result"] as $k => $val){
                             $ret[array_search($val['UserName'],$users)] = $val["Result"];
