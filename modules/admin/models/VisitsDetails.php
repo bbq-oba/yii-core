@@ -133,7 +133,7 @@ class VisitsDetails extends Model
         $idvisits = [];
         foreach($data as $k=>$v){
             $data[$v['idVisit']] = $v;
-            $idvisits = $v['idVisit'];
+            $idvisits[] = $v['idVisit'];
         }
         $idvisits = array_unique($idvisits);
         $find = ApiVisitorDetail::find()->where([
