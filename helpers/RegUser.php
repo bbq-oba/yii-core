@@ -86,6 +86,13 @@ class RegUser{
          * 不得使用 file_get_contents();
          */
         $ch=curl_init($url);
+        $curl->setJsonDecoder(function($response) {
+            $json_obj = json_decode($response, true);
+            if (!($json_obj === null)) {
+                $response = $json_obj;
+            }
+            return $response;
+        });
         curl_setopt($ch,CURLOPT_HEADER,0);
         curl_setopt ($ch,CURLOPT_RETURNTRANSFER, 1);
         curl_setopt ($ch,CURLOPT_CONNECTTIMEOUT, 10); //默认等待10 超时

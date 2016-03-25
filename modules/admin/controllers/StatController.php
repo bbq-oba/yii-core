@@ -18,7 +18,7 @@ class StatController extends \yii\web\Controller
     public function actionTest($user,$type,$ref){
         var_dump(RegUser::get($user,$type,$ref));
     }
-    public function actionoTest($user,$type,$ref){
+    public function actionOTest($user,$type,$ref){
         var_dump(RegUser::getUserData($user,$type,$ref));
     }
 
