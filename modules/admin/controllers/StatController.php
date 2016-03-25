@@ -16,10 +16,25 @@ class StatController extends \yii\web\Controller
 
 
     public function actionTest($user,$type,$ref){
-        print_r(RegUser::get($user,$type,$ref));
-    }
-    public function actionOTest($user,$type,$ref){
-        print_r(RegUser::getUserData($user,$type,$ref));
+
+        //所属推广号：0，用户首存金额：1，用户首存优惠：2，用户存款笔数：3
+        $array = [
+            0 => '所属推广号',
+            1 => '用户首存金额',
+            2 => '用户首存优惠',
+            3 => '用户存款笔数',
+            4 => '登录时间',
+            5 => '成功提款次数',
+            6 => '会员投注信息',
+            7 => '未存款之前领取的优惠',
+            8 => '所有优惠',
+        ];
+
+        foreach($array as $k=>$v){
+            echo "---  用戶名:$user bianhao 編號:$k-$v    ---------------\r\n";
+            print_r(RegUser::get($user,$type,$ref));
+            echo "\r\n";
+        }
     }
 
     public function actionUpdateRegUser(){
