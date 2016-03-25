@@ -144,8 +144,8 @@ class VisitsDetails extends Model
             $data[$v['idvisit']]['ip']      =    $v['ip'];
             $data[$v['idvisit']]['iptype']  =    $v['iptype'];
             $data[$v['idvisit']]['iptext']  =    $v['iptext'];
-            foreach(RegUser::$typeEnum as $k=>$v){
-                $data[$v['idvisit']]['visitor_datatype_'.$k] = $v['visitor_datatype_'.$k];
+            foreach(RegUser::$typeEnum as $i=>$j){
+                $data[$v['idvisit']]['visitor_datatype_'.$i] = $v['visitor_datatype_'.$i];
             }
         }
         return $data;
