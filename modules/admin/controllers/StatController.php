@@ -13,7 +13,10 @@ use app\modules\admin\models\VisitsDetails;
 
 class StatController extends \yii\web\Controller
 {
-
+    public function actionCron($type){
+        \app\models\ApiVisitorDetail::cronUpdateVisitorDataType($type,100,5);
+        return $this->render('cron');
+    }
 
     public function actionTest($user,$type,$ref){
         foreach(RegUser::$typeEnum as $k=>$v){

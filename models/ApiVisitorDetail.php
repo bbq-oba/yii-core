@@ -174,20 +174,16 @@ class ApiVisitorDetail extends ActiveRecord
      */
     public static function cronUpdateVisitorDataType($type,$limit = 100,$time = 0){
         if($time){
-echo "aaa";
-         //   $and = CURRENT_TIMESTAMP - '`updated_datetype_'.$type.'``' >$time;
-	    $and = sprintf(" %d - `%s` > %d  ",CURRENT_TIMESTAMP,'updated_datetype_'.$type,$time);
-            $orderBy = 'updated_datetype_'.$type.' asc';
+         //   $and = CURRENT_TIMESTAMP - '`updated_datatype_'.$type.'``' >$time;
+	        $and = sprintf(" %d - `%s` > %d  ",CURRENT_TIMESTAMP,'updated_datatype_'.$type,$time);
+            $orderBy = 'updated_datatype_'.$type.' asc';
         }else{
             $and = '1=1';
             $orderBy = 'created_at desc';
         }
-        $data = self::find()->where([
-            'visitor_datatype_'.$type => NULL,
-        ])->andWhere($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
+        $data = self::find()->where($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
 
-print_r($data);	
-        self::batchUpdateVisitorDataType($type,$data,$time);
+//        self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
     public static function batchUpdateVisitorDataType($type,$array,$time){
@@ -221,7 +217,7 @@ print_r($data);
                 $u = self::findOne($v['id']);
                 $u->{'visitor_datatype_'.$type} = isset($ret[$v['id']]) ? $ret[$v['id']] : ($time ? NULL : '');
                 if($time){
-                    $u->{'updated_datetype_'.$type} = CURRENT_TIMESTAMP;
+                    $u->{'updated_datatype_'.$type} = CURRENT_TIMESTAMP;
                 }
                 $u->update();
             }
