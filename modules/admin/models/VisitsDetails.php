@@ -140,7 +140,7 @@ class VisitsDetails extends Model
             "in","idvisit",$idvisits
         ])->asArray()->all();
         //格式化username
-        foreach($find as $k=>$v){
+        foreach($data as $k=>$v){
             $data[$v['idvisit']]['ip']      =    $v['ip'];
             $data[$v['idvisit']]['iptype']  =    $v['iptype'];
             $data[$v['idvisit']]['iptext']  =    $v['iptext'];
@@ -148,6 +148,22 @@ class VisitsDetails extends Model
                 $data[$v['idvisit']]['visitor_datatype_'.$i] = $v['visitor_datatype_'.$i];
             }
         }
+
+        $find = ArrayHelper::index($find,'idvisit');
+
+        foreach($data as $k=>$v){
+            $array = $find ? $find[$k] : false;
+
+            $data[$k]['ip']      =  $array ? $array['ip'] : '';
+            $data[$k]['iptype']  =    $array ? $array['iptype'] : '';
+            $data[$k]['iptext']  =    $array ? $array['iptext'] : '';
+            foreach(RegUser::$typeEnum as $i=>$j){
+                $data[$k]['visitor_datatype_'.$i] = ($array ? $array['visitor_datatype_'.$i] : '');
+            }
+        }
+
+
+
         return $data;
     }
 
