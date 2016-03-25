@@ -173,9 +173,10 @@ class ApiVisitorDetail extends ActiveRecord
      *                  如果是1800则表示 超过1800秒的数据，更新一次
      */
     public static function cronUpdateVisitorDataType($type,$limit = 100,$time = 0){
-
         if($time){
-            $and = CURRENT_TIMESTAMP - '`updated_datetype_'.$type.'``' >$time;
+echo "aaa";
+         //   $and = CURRENT_TIMESTAMP - '`updated_datetype_'.$type.'``' >$time;
+	    $and = sprintf(" %d - `%s` > %d  ",CURRENT_TIMESTAMP,'updated_datetype_'.$type,$time);
             $orderBy = 'updated_datetype_'.$type.' asc';
         }else{
             $and = '1=1';
@@ -184,7 +185,8 @@ class ApiVisitorDetail extends ActiveRecord
         $data = self::find()->where([
             'visitor_datatype_'.$type => NULL,
         ])->andWhere($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
-print_r($data);
+
+print_r($data);	
         self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
