@@ -32,15 +32,24 @@ class IpType
             return $curl->response;
         }
     }
+//    public static function find($ip){
+//        $data = static::ip($ip);
+//        $data = json_decode($data,true);
+//
+//        if(!isset($data['code']) ||  $data['code'] != 200 ){
+//            return false;
+//        }
+//        return in_array($data['data']['type'],array_keys(static::$type)) ? static::$type[$data['data']['type']] : "未知";
+//    }
+
     public static function find($ip){
         $data = static::ip($ip);
         $data = json_decode($data,true);
-	
+
         if(!isset($data['code']) ||  $data['code'] != 200 ){
-            return 'bd error';
+            return false;
         }
-
-
-        return in_array($data['data']['type'],array_keys(static::$type)) ? static::$type[$data['data']['type']] : "未知";
+        return in_array($data['data']['type'],array_keys(static::$type)) ? $data['data']['type'] : -1;
     }
+
 }

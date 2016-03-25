@@ -79,7 +79,7 @@ class VisitsDetails extends Model
 
         $params['filter_offset'] = max(0,$this->filter_offset);
 
-        $params['filter_limit'] = $this->filter_limit = $this->filter_limit ? max(0,$this->filter_limit) : 100;
+        $params['filter_limit'] = $this->filter_limit = $this->filter_limit ? max(0,$this->filter_limit) : 50;
 
 
         if(!empty($this->regdate) && strpos($this->regdate," 至 ")){   //如果有选择日期

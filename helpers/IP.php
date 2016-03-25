@@ -107,6 +107,21 @@ class IP
             fclose(self::$fp);
         }
     }
+
+
+    /**
+     * Convert binary/network address format to string/presentation format.
+     *
+     * @param string $ip IP address in binary/network address format, e.g. `"\x7F\x00\x00\x01"`.
+     * @return string IP address in string format, e.g. `'127.0.0.1'`.
+     */
+    public static function binaryToStringIP($ip)
+    {
+        // use @inet_ntop() because it throws an exception and E_WARNING on invalid input
+        $ipStr = @inet_ntop($ip);
+        return $ipStr === false ? '0.0.0.0' : $ipStr;
+    }
+
 }
 
 ?>

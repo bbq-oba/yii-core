@@ -9,12 +9,9 @@ $db = require(__DIR__ . '/db.php');
 return [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'gii'],
-    'controllerNamespace' => 'app\commands',
-    'modules' => [
-        'gii' => 'yii\gii\Module',
-    ],
-    'core' => [
+    'bootstrap' => ['log'],
+    'controllerNamespace' => 'app\console\controllers',
+    'components' => [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
@@ -25,7 +22,7 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['info','error', 'warning'],
                 ],
             ],
         ],
