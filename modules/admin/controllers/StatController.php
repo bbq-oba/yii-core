@@ -18,7 +18,9 @@ class StatController extends \yii\web\Controller
     public function actionTest($user,$type,$ref){
         var_dump(RegUser::get($user,$type,$ref));
     }
-
+    public function actionoTest($user,$type,$ref){
+        var_dump(RegUser::getUserData($user,$type,$ref));
+    }
 
     public function actionUpdateRegUser(){
         $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));

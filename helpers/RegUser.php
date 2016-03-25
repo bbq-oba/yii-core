@@ -74,7 +74,7 @@ class RegUser{
         $fields=array(
             'userName'=>$userName, //用户名,多个用户以逗号分隔,必填
             'userDataType'=>$userDataType, //要获取的用户数据类型,必填（所属推广号：0，用户首存金额：1，用户首存优惠：2，用户存款笔数：3）
-            'signKey'=>'', //不用修改
+            'signKey'=>self::SIGN_KEY, //不用修改
             'lastLoginStartTime'=>'', //最后登录开始时间,选填
             'lastLoginEndTime'=>'', //最后登录结束时间,选填
             'datatype'=>'json' //返回数据类型 xml or json
