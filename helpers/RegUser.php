@@ -67,7 +67,7 @@ class RegUser{
             if($curl->response === false){
                 return false;
             }
-            return json_decode($curl->response,true);
+            return json_decode($curl->response);
         }
     }
     public static function getUserData($userName,$userDataType,$referrer = 1){
