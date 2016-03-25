@@ -14,7 +14,7 @@ use app\modules\admin\models\VisitsDetails;
 class StatController extends \yii\web\Controller
 {
     public function actionCron($type){
-        \app\models\ApiVisitorDetail::cronUpdateVisitorDataType($type,100,5);
+        \app\models\ApiVisitorDetail::cronUpdateVisitorDataType($type,100,0);
         return $this->render('cron');
     }
 

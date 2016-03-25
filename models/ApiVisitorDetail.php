@@ -178,12 +178,11 @@ class ApiVisitorDetail extends ActiveRecord
 	        $and = sprintf(" %d - `%s` > %d  ",CURRENT_TIMESTAMP,'updated_datatype_'.$type,$time);
             $orderBy = 'updated_datatype_'.$type.' asc';
         }else{
-            $and = '1=1';
+            $and = ['visitor_datatype_'.$type=>NULL];
             $orderBy = 'created_at desc';
         }
         $data = self::find()->where($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
-
-//        self::batchUpdateVisitorDataType($type,$data,$time);
+        self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
     public static function batchUpdateVisitorDataType($type,$array,$time){
