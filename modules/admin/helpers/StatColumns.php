@@ -74,16 +74,23 @@ class StatColumns
             }
         ];
     }
+
     public static function Columns10(){
         self::$columns[] =['header' => '落地页Url',
             'value' => function($data){
-                return $data["referrerUrl"];
+                if($data['actionDetails'] && count($data['actionDetails'])){
+                    $pointUrl = array_shift($data['actionDetails']);
+                    return $pointUrl["url"];
+                }
+                return "";
             },
             'headerOptions'=>[
                 'style'=>'width:300px;'
             ]
         ];
     }
+
+
 
 
     public static function ColumnsIpType()
