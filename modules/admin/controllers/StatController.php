@@ -32,7 +32,7 @@ class StatController extends \yii\web\Controller
 
         foreach($array as $k=>$v){
             echo "---  用戶名:$user bianhao 編號:$k-$v    ---------------\r\n";
-            print_r(RegUser::get($user,$type,$ref));
+            print_r(RegUser::get($user,$k,$ref));
             echo "\r\n";
         }
     }
