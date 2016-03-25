@@ -175,8 +175,8 @@ class ApiVisitorDetail extends ActiveRecord
     public static function cronUpdateVisitorDataType($type,$limit = 100,$time = 0){
 
         if($time){
-            $and = CURRENT_TIMESTAMP - '`time_'.$type.'``' >$time;
-            $orderBy = 'time_'.$type.' asc';
+            $and = CURRENT_TIMESTAMP - '`updated_datetype_8'.$type.'``' >$time;
+            $orderBy = 'updated_datetype_8'.$type.' asc';
         }else{
             $and = '1=1';
             $orderBy = 'created_at desc';
@@ -185,10 +185,6 @@ class ApiVisitorDetail extends ActiveRecord
             'visitor_datatype_'.$type => NULL,
         ])->andWhere($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
         self::batchUpdateVisitorDataType($type,$data,$time);
-    }
-
-    public static function findAllByVisitorDataType0IsNull($num = 100){
-        return self::find()->where(['visitor_datatype_0' => NULL])->orderBy('created_at desc')->asArray()->limit($num)->all();
     }
 
     public static function batchUpdateVisitorDataType($type,$array,$time){

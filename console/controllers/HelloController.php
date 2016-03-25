@@ -5,6 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 namespace app\console\controllers;
+use app\helpers\RegUser;
 use app\models\ApiVisitorDetail;
 use yii\console\Controller;
 /**
@@ -21,6 +22,9 @@ class HelloController extends Controller
      * This command echoes what you have entered as the message.
      * @param string $message the message to be echoed.
      */
+    public function actionUser($type){
+        ApiVisitorDetail::cronUpdateVisitorDataType($type,100,30);
+    }
     public function actionIndex($message = 'hello world')
     {
 //        ApiVisitorDetail::cronInsert(5);
@@ -28,7 +32,12 @@ class HelloController extends Controller
 //        ApiVisitorDetail::cronUpdateIptype(1);
 
 
-        ApiVisitorDetail::cronUpdateVisitorDataType(0,100,0);
+        ApiVisitorDetail::cronUpdateVisitorDataType(0,100,RegUser::$typeEnum[0][1]);
+
+
+
+
+
 //        ApiVisitorDetail::cronUpdateVisitorDataType(1,100,0);
 //        ApiVisitorDetail::cronUpdateVisitorDataType(2,100,0);
 //        ApiVisitorDetail::cronUpdateVisitorDataType(3,100,0);
