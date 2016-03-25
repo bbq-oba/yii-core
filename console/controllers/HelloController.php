@@ -27,12 +27,12 @@ class HelloController extends Controller
     }
     public function actionIndex($message = 'hello world')
     {
-//        ApiVisitorDetail::cronInsert(5);
+        ApiVisitorDetail::cronInsert(100);
 //        ApiVisitorDetail::cronUpdateIptext(1);
 //        ApiVisitorDetail::cronUpdateIptype(1);
 
 
-        ApiVisitorDetail::cronUpdateVisitorDataType(0,100,RegUser::$typeEnum[0][1]);
+//        ApiVisitorDetail::cronUpdateVisitorDataType(0,100,RegUser::$typeEnum[0][1]);
 
 
 
@@ -47,5 +47,8 @@ class HelloController extends Controller
 //        ApiVisitorDetail::cronUpdateVisitorDataType(7,100,0);
 //        ApiVisitorDetail::cronUpdateVisitorDataType(8,100,0);
         echo $message . "\n";
+    }
+    public function actionTest(){
+           \yii::info(date('Y-m-d H:i;s'),'con');
     }
 }

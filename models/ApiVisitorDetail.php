@@ -184,6 +184,7 @@ class ApiVisitorDetail extends ActiveRecord
         $data = self::find()->where([
             'visitor_datatype_'.$type => NULL,
         ])->andWhere($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
+print_r($data);
         self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
@@ -205,9 +206,10 @@ class ApiVisitorDetail extends ActiveRecord
                      *      'Result'   => 'bbb'
                      * ]
                      */
+		    print_r($return);
                     if($return["IsSuccess"] && $return["Result"]){
                         foreach($return["Result"] as $k => $val){
-                            $ret[array_search($val['Username'],$users)] = $val["Result"];
+                            $ret[array_search($val['UserName'],$users)] = $val["Result"];
                         }
                     }
                 }
@@ -217,7 +219,7 @@ class ApiVisitorDetail extends ActiveRecord
                 $u = self::findOne($v['id']);
                 $u->{'visitor_datatype_'.$type} = isset($ret[$v['id']]) ? $ret[$v['id']] : ($time ? NULL : '');
                 if($time){
-                    $u->{'time_'.$type} = CURRENT_TIMESTAMP;
+                    $u->{'updated_datetype_'.$type} = CURRENT_TIMESTAMP;
                 }
                 $u->update();
             }
@@ -250,14 +252,14 @@ class ApiVisitorDetail extends ActiveRecord
             $array = [];
             foreach($data as$k=>$v){
                 $indentify = self::makeIndentify([
-                    $v['idvisitor'],$v['user_id'],$v['custom_var_k2']
+                    $v['idvisitor'],$v['user_id'],$v['custom_var_v2']
                 ]);
 
                 $array[$indentify] = [
                     $v['idvisit'],
                     $v['idvisitor'],                //idvisitor
                     $v['user_id'],                  //user_id
-                    $v['custom_var_k2'],             //来源
+                    $v['custom_var_v2'],             //来源
                     IP::binaryToStringIP($v['location_ip']),               //ip
                     $indentify,               //ip
                     CURRENT_TIMESTAMP,               //ip
