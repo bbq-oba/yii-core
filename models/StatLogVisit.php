@@ -191,7 +191,7 @@ class StatLogVisit extends Model
     public static function getNewRecord($limit = 100){
         return self::find()->where([
             'status'=>0,
-        ])->andWhere('user_id IS NOT NULL')->orderBy('visit_last_action_time desc')->limit($limit)->asArray()->all();
+        ])->andWhere(['>','custom_var_v2',0])->andWhere('user_id IS NOT NULL')->orderBy('visit_last_action_time desc')->limit($limit)->asArray()->all();
     }
 
 
