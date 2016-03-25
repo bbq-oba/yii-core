@@ -23,7 +23,7 @@ class HelloController extends Controller
      * @param string $message the message to be echoed.
      */
     public function actionUser($type){
-        ApiVisitorDetail::cronUpdateVisitorDataType($type,100,5);
+        ApiVisitorDetail::cronUpdateVisitorDataType($type,1,5);
     }
     public function actionIndex($message = 'hello world')
     {

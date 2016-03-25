@@ -182,6 +182,7 @@ class ApiVisitorDetail extends ActiveRecord
             $orderBy = 'created_at desc';
         }
         $data = self::find()->where($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
+print_r($data);
         self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
