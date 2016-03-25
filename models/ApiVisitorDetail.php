@@ -175,7 +175,7 @@ class ApiVisitorDetail extends ActiveRecord
     public static function cronUpdateVisitorDataType($type,$limit = 100,$time = 0){
         if($time){
          //   $and = CURRENT_TIMESTAMP - '`updated_datatype_'.$type.'``' >$time;
-	        $and = sprintf(" %d - `%s` > %d  ",CURRENT_TIMESTAMP,'updated_datatype_'.$type,$time);
+	        $and = sprintf(" %d - `%s` > %d OR `%s` IS NULL ",CURRENT_TIMESTAMP,'updated_datatype_'.$type,$time,'updated_datatype_'.$type);
             $orderBy = 'updated_datatype_'.$type.' asc';
         }else{
             $and = ['visitor_datatype_'.$type=>NULL];
