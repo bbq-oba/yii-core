@@ -10,6 +10,7 @@ namespace app\modules\admin\helpers;
  */
 use app\helpers\IP;
 use app\helpers\IpType;
+use app\helpers\RegUser;
 use app\modules\admin\models\ApiVisitorDetail;
 use kartik\grid\GridView;
 use \kartik\helpers\Html;
@@ -98,7 +99,7 @@ class StatColumns
         self::$columns[] = [
             'header' => 'Ip类型',
             'value' => function($data){
-                return IpType::find($data["visitIp"]);
+                return $data['iptype'];
             }
         ];
     }
@@ -154,7 +155,13 @@ class StatColumns
         self::Columns3();
         self::Columns4();
         self::Columns5();
-        self::Columns6();
+        self::$columns[] =[ 'header'=>'ip归属地',
+            'value'=>function($data){
+                return $data['iptext'];
+            },
+        ];
+
+
         self::ColumnsIpType();
         self::Columns7();
         self::Columns8();
@@ -186,30 +193,64 @@ class StatColumns
             },
             'header' => '注册点'
         ];
+
+        // 0
         self::$columns [] = [
             'value' => function ($data) {
-                    return  isset($data['visitor_datatype_0']) ? $data['visitor_datatype_0'] : "";
+                return  $data['visitor_datatype_0'];
             },
-            'header' => '所属推广号'
+            'header' => RegUser::$typeEnum[0][0]
         ];
         self::$columns [] = [
             'value' => function ($data) {
-                return  isset($data['visitor_datatype_1']) ? $data['visitor_datatype_1'] : "";
+                return  $data['visitor_datatype_1'];
             },
-            'header' => '首存金额'
+            'header' => RegUser::$typeEnum[1][0]
         ];
         self::$columns [] = [
             'value' => function ($data) {
-                return  isset($data['visitor_datatype_2']) ? $data['visitor_datatype_2'] : "";
+                return  $data['visitor_datatype_2'];
             },
-            'header' => '首存优惠'
+            'header' => RegUser::$typeEnum[2][0]
         ];
         self::$columns [] = [
             'value' => function ($data) {
-                return  isset($data['visitor_datatype_3']) ? $data['visitor_datatype_3'] : "";
+                return  $data['visitor_datatype_3'];
             },
-            'header' => '存款笔数'
+            'header' => RegUser::$typeEnum[3][0]
         ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  $data['visitor_datatype_4'];
+            },
+            'header' => RegUser::$typeEnum[4][0]
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  $data['visitor_datatype_5'];
+            },
+            'header' => RegUser::$typeEnum[5][0]
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  $data['visitor_datatype_6'];
+            },
+            'header' => RegUser::$typeEnum[6][0]
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  $data['visitor_datatype_7'];
+            },
+            'header' => RegUser::$typeEnum[7][0]
+        ];
+        self::$columns [] = [
+            'value' => function ($data) {
+                return  $data['visitor_datatype_8'];
+            },
+            'header' => RegUser::$typeEnum[8][0]
+        ];
+
+
         self::Columns10();
         self::Columns11();
         return self::$columns;

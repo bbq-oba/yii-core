@@ -1,8 +1,11 @@
 <?php
 namespace app\modules\admin\models;
 use app\api\core\API;
+use app\helpers\RegUser;
 use Yii;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
+
 /**
  * LoginForm is the model behind the login form.
  */
@@ -126,40 +129,25 @@ class VisitsDetails extends Model
             }
         }
     }
-
     public function getDb($data){
-        $userArray = [];
-
-        //找到piwik 返回数据的 userId
-        foreach($data as $row){
-            $userArray[] = $row["userId"];
+        $idvisits = [];
+        foreach($data as $k=>$v){
+            $data[$v['idvisit']] = $v;
+            $idvisits = $v['idvisit'];
         }
-        $userArray = array_unique($userArray);
-
-        // 在数据库中查找 username
+        $idvisits = array_unique($idvisits);
         $find = ApiVisitorDetail::find()->where([
-            "in","visitor_username",$userArray
+            "in","idvisit",$idvisits
         ])->asArray()->all();
-        $array = [];
-
         //格式化username
         foreach($find as $k=>$v){
-            $array[$v["visitor_referrer"]."---".$v["visitor_username"]] = $v;
-        }
-
-        //匹配到data中返回
-        foreach($data as $k=>$row){
-            if(isset($row["customVariables"][2]["customVariableName2"])
-                && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
-                && isset($row["customVariables"][2]["customVariableValue2"])
-                && !empty($row["customVariables"][2]["customVariableValue2"])
-                && in_array($row["customVariables"][2]["customVariableValue2"],array_keys(ApiVisitorDetail::$referrerType))
-                && in_array($row["customVariables"][2]["customVariableValue2"]."---".$row["userId"],array_keys($array))
-            ){
-                $data[$k] = array_merge($row,$array[$row["customVariables"][2]["customVariableValue2"]."---".$row["userId"]]);
+            $data[$v['idvisit']]['ip']      =    $v['ip'];
+            $data[$v['idvisit']]['iptype']  =    $v['iptype'];
+            $data[$v['idvisit']]['iptext']  =    $v['iptext'];
+            foreach(RegUser::$typeEnum as $k=>$v){
+                $data[$v['idvisit']]['visitor_datatype_'.$k] = $v['visitor_datatype_'.$k];
             }
         }
-
         return $data;
     }
 

@@ -25,28 +25,16 @@ class HelloController extends Controller
     public function actionUser($type){
         ApiVisitorDetail::cronUpdateVisitorDataType($type,1,5);
     }
-    public function actionIndex($message = 'hello world')
+    public function actionIndex($limit = 100)
     {
-        ApiVisitorDetail::cronInsert(1);
-//        ApiVisitorDetail::cronUpdateIptext(1);
-//        ApiVisitorDetail::cronUpdateIptype(1);
+        set_time_limit(0);
+        ApiVisitorDetail::cronInsert($limit);
+        ApiVisitorDetail::cronUpdateIptext($limit);
+        ApiVisitorDetail::cronUpdateIptype($limit);
+        for ($i = 0 ; $i<=5 ; $i++) {
+            ApiVisitorDetail::cronUpdateVisitorDataType($i, $limit, RegUser::$typeEnum[$i][1]);
+        }
 
-
-     //     ApiVisitorDetail::cronUpdateVisitorDataType(3,1,3);
-
-
-
-
-
-//        ApiVisitorDetail::cronUpdateVisitorDataType(1,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(2,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(3,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(4,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(5,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(6,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(7,100,0);
-//        ApiVisitorDetail::cronUpdateVisitorDataType(8,100,0);
-        echo $message . "\n";
     }
     public function actionTest(){
            \yii::info(date('Y-m-d H:i;s'),'con');

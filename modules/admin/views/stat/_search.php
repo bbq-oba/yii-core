@@ -48,13 +48,12 @@ echo Html::submitButton("搜索", [
     'name' =>Html::getInputName($model,'do'),
     'value'=>'search'
 ]);
-
-echo "&nbsp;&nbsp;";
-echo Html::submitButton("更新", [
-    'class' => 'btn btn-info',
-    'name' =>Html::getInputName($model,'do'),
-    'value'=>'update'
-]);
+//echo "&nbsp;&nbsp;";
+//echo Html::submitButton("更新", [
+//    'class' => 'btn btn-info',
+//    'name' =>Html::getInputName($model,'do'),
+//    'value'=>'update'
+//]);
 
 ActiveForm::end();
 ?>
