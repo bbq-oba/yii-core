@@ -44,7 +44,6 @@ class VisitsDetails extends Model
         if(!empty($this->visitorId)){
             $segment[] = 'visitorId=='.$this->visitorId;
         }
-        $userId = \yii::$app->request->get("userId");
         switch($type){
             case 1://乐宝用户
                 $segment[] = 'customVariableValue2==1';
@@ -103,6 +102,7 @@ class VisitsDetails extends Model
 
         if($this->render == 'reg-user'){
             $data = $this->getDb($data);
+            print_r($data);exit;
         }
         if($this->do == 'update'){
             $this->format($data);
@@ -129,9 +129,10 @@ class VisitsDetails extends Model
             }
         }
     }
-    public function getDb($data){
+    public function getDb($apiData){
         $idvisits = [];
-        foreach($data as $k=>$v){
+        $data = [];
+        foreach($apiData as $k=>$v){
             $data[$v['idVisit']] = $v;
             $idvisits[] = $v['idVisit'];
         }
@@ -140,19 +141,9 @@ class VisitsDetails extends Model
             "in","idvisit",$idvisits
         ])->asArray()->all();
         //格式化username
-        foreach($data as $k=>$v){
-            $data[$v['idvisit']]['ip']      =    $v['ip'];
-            $data[$v['idvisit']]['iptype']  =    $v['iptype'];
-            $data[$v['idvisit']]['iptext']  =    $v['iptext'];
-            foreach(RegUser::$typeEnum as $i=>$j){
-                $data[$v['idvisit']]['visitor_datatype_'.$i] = $v['visitor_datatype_'.$i];
-            }
-        }
-
         $find = ArrayHelper::index($find,'idvisit');
-
         foreach($data as $k=>$v){
-            $array = $find ? $find[$k] : false;
+            $array = isset($find[$k]) ? $find[$k] : false;
 
             $data[$k]['ip']      =  $array ? $array['ip'] : '';
             $data[$k]['iptype']  =    $array ? $array['iptype'] : '';
@@ -161,9 +152,6 @@ class VisitsDetails extends Model
                 $data[$k]['visitor_datatype_'.$i] = ($array ? $array['visitor_datatype_'.$i] : '');
             }
         }
-
-
-
         return $data;
     }
 
