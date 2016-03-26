@@ -34,7 +34,6 @@ class HelloController extends Controller
         for ($i = 0 ; $i<=5 ; $i++) {
             ApiVisitorDetail::cronUpdateVisitorDataType($i, $limit, RegUser::$typeEnum[$i][1]);
         }
-
     }
     public function actionTest(){
            \yii::info(date('Y-m-d H:i;s'),'con');

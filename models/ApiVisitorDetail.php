@@ -10,6 +10,7 @@ use \app\core\models\Model;
 use \yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Console;
 use yii\log\Logger;
 
 /**
@@ -232,7 +233,6 @@ class ApiVisitorDetail extends ActiveRecord
             'visitor_username',
             "visitor_referrer",
             "ip",
-            "identify",
             "created_at"
         ],$array)->execute();
     }
@@ -247,17 +247,12 @@ class ApiVisitorDetail extends ActiveRecord
         if($data){
             $array = [];
             foreach($data as$k=>$v){
-                $indentify = self::makeIndentify([
-                    $v['idvisitor'],$v['user_id'],$v['custom_var_v2']
-                ]);
-
-                $array[$indentify] = [
+                $array[$v['idvisit']] = [
                     $v['idvisit'],
                     $v['idvisitor'],                //idvisitor
                     $v['user_id'],                  //user_id
                     $v['custom_var_v2'],             //来源
                     IP::binaryToStringIP($v['location_ip']),               //ip
-                    $indentify,               //ip
                     CURRENT_TIMESTAMP,               //ip
                 ];
 
@@ -267,11 +262,11 @@ class ApiVisitorDetail extends ActiveRecord
             $batchInsert = [];
             if($array){
                 $findAll = ApiVisitorDetail::find()->where([
-                    'in','identify',array_keys($array)
+                    'in','idvisit',array_keys($array)
                 ])->asArray()->all();
 
                 if($findAll){
-                    $findAll = ArrayHelper::index($findAll,'identify');
+                    $findAll = ArrayHelper::index($findAll,'idvisit');
                     $batchInsert = array_diff_key($array,$findAll);
                 }else{
                     $batchInsert = $array;
