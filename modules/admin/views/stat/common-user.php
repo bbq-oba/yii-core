@@ -31,13 +31,17 @@ $panel = "";
         'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
-        'export' => false,
+        'export' => [
+            'fontAwesome' => true,
+            'target' =>'_blank'
+        ],
+        'toggleData'=>false,
         'condensed' => true,
         'hover' => true,
         'panel' => [
             'heading' => '',
             'type' => GridView::TYPE_SUCCESS,
-            'before' => $panel,
+            'before' => $this->render('../search/normal'),
             'after' => \app\helpers\Page::preNext(),
         ],
     ]); ?>

@@ -22,7 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
-        'export' => false,
+        'export' => [
+            'fontAwesome' => true,
+            'target' =>'_blank'
+        ],
+        'toggleData'=>false,
         'condensed' => true,
         'hover' => true,
         'panel' => [
