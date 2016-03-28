@@ -12,10 +12,11 @@ class DefaultController extends Controller
         return $this->render('index');
     }
     public function actionDate(){
-        $inputCalendarFrom = \yii::$app->request->post('inputCalendarFrom');
-        $inputCalendarTo = \yii::$app->request->post('inputCalendarTo');
+
+        $date = \yii::$app->request->post('date');
+        list ($from,$to) = explode(',',$date);
         $redirectUrl = \yii::$app->request->post('redirectUrl');
-        Module::setCommonSession(DEFAULT_ID_SITE,$inputCalendarFrom,$inputCalendarTo);
+        Module::setCommonSession(DEFAULT_ID_SITE,$from,$to);
         $this->redirect($redirectUrl);
     }
 }
