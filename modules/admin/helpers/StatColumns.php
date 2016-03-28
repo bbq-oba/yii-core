@@ -187,12 +187,12 @@ class StatColumns
             },
             'header' => '注册时间'
         ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  isset($data['visitor_referrer']) ? ApiVisitorDetail::$referrerTypeText[$data['visitor_referrer']] : "-";
-            },
-            'header' => '注册点'
-        ];
+        //self::$columns [] = [
+        //    'value' => function ($data) {
+        //        return  isset($data['visitor_referrer']) ? ApiVisitorDetail::$referrerTypeText[$data['visitor_referrer']] : "-";
+        //    },
+        //    'header' => '注册点'
+        //];
 
         // 0
         self::$columns [] = [

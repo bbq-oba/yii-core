@@ -20,8 +20,8 @@ if($model->render == 'reg-user'){
     echo $form->field($model, 'userId');
 
 }
-echo $form->field($model, 'filter_limit');
-
+//echo $form->field($model, 'filter_limit');
+echo Html::textInput('filter_limit',$model->filter_limit);
 echo $form->field($model, 'regdate',[
 ])->widget(\kartik\daterange\DateRangePicker::classname(),[
     'attribute'=>"regdate",

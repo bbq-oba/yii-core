@@ -78,7 +78,8 @@ class VisitsDetails extends Model
                 }
                 $this->render = 'reg-user';
         }
-
+	$this->filter_offset = \yii::$app->request->get('filter_offset');
+	$this->filter_limit = \yii::$app->request->get('filter_limit');
         $params['filter_offset'] = max(0,$this->filter_offset);
 
         $params['filter_limit'] = $this->filter_limit = $this->filter_limit ? max(0,$this->filter_limit) : 50;
