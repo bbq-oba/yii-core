@@ -57,22 +57,17 @@ class StatColumns
         ];
     }
     public static function Columns7(){
-        self::$columns[] =['header' => '来源url',
-            'format' => 'raw',
-            'value' => function ($data) {
-                $html = '来源：'.Html::a($data["referrerName"].$data["referrerKeyword"], $data["referrerSearchEngineUrl"])."<br />";
-                $html.= '链接：'.Html::a($data['referrerTypeName'], $data["referrerUrl"]);
-                return $html;
-            }
-        ];
+        self::$columns[] =['header' => '关键词','value' => 'referrerKeyword'];
+
     }
     public static function Columns8(){
-//        self::$columns[] =['header' => '搜索引擎',
-//            'format' => 'raw',
-//            'value' => function ($data) {
-//                return \kartik\helpers\Html::a($data["referrerName"], $data["referrerSearchEngineUrl"]);
-//            },
-//        ];
+        self::$columns[] =[
+            'header' => '来源url',
+            'format' => 'raw',
+            'value' => function($data){
+                return '<div style="width: 300px; overflow: hidden;">'.$data['referrerUrl'].'</div>';
+            },
+        ];
     }
     public static function Columns9(){
 //        self::$columns[] =['header' => '关键词',
@@ -89,16 +84,15 @@ class StatColumns
             'value' => function($data){
                 if($data['actionDetails'] && count($data['actionDetails'])){
                     $pointUrl = array_shift($data['actionDetails']);
-                    return ''.Html::a('落地链接',$pointUrl["url"]);;
+                    return '<div style="width: 300px; overflow: hidden;">'.$pointUrl["url"].'</div>';
                 }
                 return "";
             },
-            'headerOptions'=>[
-                'style'=>'width:300px;'
+            'options'=>[
+                'style'=>'width:300px; overflow:hidden;'
             ]
         ];
     }
-
 
 
 
@@ -130,32 +124,12 @@ class StatColumns
 
     public static function Columns11()
     {
-//        $columns = [
-//            'class' => '\kartik\grid\ExpandRowColumn',
-//            'value' => function ($data, $key, $index) {
-//                return GridView::ROW_COLLAPSED;
-//            },
-//            'detail' => function ($data, $key, $index, $column) {
-//                return \yii::$app->controller->view->render('log-action-details', [
-//                    'actions' => $data['actionDetails']
-//                ]);
-//            },
-//        ];
-        self::$columns[] = [
-                'class' => 'yii\grid\ActionColumn',
-                'template'=>'{view}',
-                'buttons'=>[
-                    'view'=>function ($url, $data, $key) {
-                        return Html::a(Html::icon('eye-open'), \yii\helpers\Url::to([\yii::$app->controller->action->id,'visitorId'=>$data["visitorId"]]));
-                    }
-                ]
-            ];
+        self::$columns[] =['header' => '',
+            'value' => function($data){
+                return '';
+            }
+        ];
     }
-
-
-
-
-
     public static function getRegUserColumns()
     {
         self::Columns1();

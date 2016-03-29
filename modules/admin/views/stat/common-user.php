@@ -28,7 +28,6 @@ $panel = "";
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => \app\modules\admin\helpers\StatColumns::getCommonUserColumns(),
-        'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'export' => [

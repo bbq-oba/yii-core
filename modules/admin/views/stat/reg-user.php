@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => \app\modules\admin\helpers\StatColumns::getRegUserColumns(),
-        'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'export' => [
