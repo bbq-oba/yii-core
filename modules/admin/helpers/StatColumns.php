@@ -57,31 +57,39 @@ class StatColumns
         ];
     }
     public static function Columns7(){
-        self::$columns[] =['header' => '来源', 'value' => 'referrerTypeName'];
-    }
-    public static function Columns8(){
-        self::$columns[] =['header' => '搜索引擎',
+        self::$columns[] =['header' => '来源url',
             'format' => 'raw',
             'value' => function ($data) {
-                return \kartik\helpers\Html::a($data["referrerName"], $data["referrerSearchEngineUrl"]);
-            },
-        ];
-    }
-    public static function Columns9(){
-        self::$columns[] =['header' => '关键词',
-            'format' => 'raw',
-            'value' => function ($data) {
-                return Html::a($data["referrerKeyword"], $data["referrerUrl"]);
+                $html = '来源：'.Html::a($data["referrerName"].$data["referrerKeyword"], $data["referrerSearchEngineUrl"])."<br />";
+                $html.= '链接：'.Html::a($data['referrerTypeName'], $data["referrerUrl"]);
+                return $html;
             }
         ];
+    }
+    public static function Columns8(){
+//        self::$columns[] =['header' => '搜索引擎',
+//            'format' => 'raw',
+//            'value' => function ($data) {
+//                return \kartik\helpers\Html::a($data["referrerName"], $data["referrerSearchEngineUrl"]);
+//            },
+//        ];
+    }
+    public static function Columns9(){
+//        self::$columns[] =['header' => '关键词',
+//            'format' => 'raw',
+//            'value' => function ($data) {
+//                return Html::a(, $data["referrerUrl"]);
+//            }
+//        ];
     }
 
     public static function Columns10(){
         self::$columns[] =['header' => '落地页Url',
+            'format' => 'raw',
             'value' => function($data){
                 if($data['actionDetails'] && count($data['actionDetails'])){
                     $pointUrl = array_shift($data['actionDetails']);
-                    return $pointUrl["url"];
+                    return ''.Html::a('落地链接',$pointUrl["url"]);;
                 }
                 return "";
             },

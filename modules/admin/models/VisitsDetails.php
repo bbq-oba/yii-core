@@ -1,5 +1,6 @@
 <?php
 namespace app\modules\admin\models;
+
 use app\api\core\API;
 use app\helpers\RegUser;
 use Yii;
@@ -18,6 +19,7 @@ class VisitsDetails extends Model
     public $regdate;
     public $do;
     public $render;
+
     /**
      * @inheritdoc
      */
@@ -29,6 +31,7 @@ class VisitsDetails extends Model
             'regdate' => '注册时间',
         ];
     }
+
     /**
      * @return array the validation rules.
      */
@@ -36,29 +39,31 @@ class VisitsDetails extends Model
     {
         return [
             // username and password are both required
-            [['visitorId', 'userId','filter_offset','filter_limit','regdate','render','do'], 'safe'],
+            [['visitorId', 'userId', 'filter_offset', 'filter_limit', 'regdate', 'render', 'do'], 'safe'],
         ];
     }
-    public function search($type){
+
+    public function search($type)
+    {
         $params = $segment = [];
-        if(!empty($this->visitorId)){
-            $segment[] = 'visitorId=='.$this->visitorId;
+        if (!empty($this->visitorId)) {
+            $segment[] = 'visitorId==' . $this->visitorId;
         }
-        switch($type){
+        switch ($type) {
             case 1://乐宝用户
                 $segment[] = 'customVariableValue2==1';
-                if($this->userId){
-                    $segment[] = 'userId=='.$this->userId;
-                }else{
+                if ($this->userId) {
+                    $segment[] = 'userId==' . $this->userId;
+                } else {
                     $segment[] = 'userId!=';                //有用户名的用户
                 }
                 $this->render = 'reg-user';
                 break;
             case 2://永利汇
                 $segment[] = 'customVariableValue2==2';
-                if($this->userId){
-                    $segment[] = 'userId=='.$this->userId;
-                }else{
+                if ($this->userId) {
+                    $segment[] = 'userId==' . $this->userId;
+                } else {
                     $segment[] = 'userId!=';                //有用户名的用户
                 }
                 $this->render = 'reg-user';
@@ -71,85 +76,86 @@ class VisitsDetails extends Model
             default:
                 //无注册源的用户
                 $segment[] = 'customVariableValue2=='; //
-                if($this->userId){
-                    $segment[] = 'userId=='.$this->userId;
-                }else{
+                if ($this->userId) {
+                    $segment[] = 'userId==' . $this->userId;
+                } else {
                     $segment[] = 'userId!=';                //有用户名的用户
                 }
                 $this->render = 'reg-user';
         }
-	$this->filter_offset = \yii::$app->request->get('filter_offset');
-	$this->filter_limit = \yii::$app->request->get('filter_limit');
-        $params['filter_offset'] = max(0,$this->filter_offset);
-
-        $params['filter_limit'] = $this->filter_limit = $this->filter_limit ? max(0,$this->filter_limit) : 50;
 
 
-        if(!empty($this->regdate) && strpos($this->regdate," 至 ")){   //如果有选择日期
-            list($startTime,$endTime) = explode(" 至 ",$this->regdate);
+
+
+        if (!empty($this->regdate) && strpos($this->regdate, " 至 ")) {   //如果有选择日期
+            list($startTime, $endTime) = explode(" 至 ", $this->regdate);
             $startTime = strtotime($startTime);
             $endTime = strtotime($endTime);
-            $params['date'] = '';   //去掉默认的date查询
-            $segment[] = 'customVariableValue1>='.$startTime;
-            $segment[] = 'customVariableValue1<='.$endTime;
+            $params['formatDate'] = false;   //去掉默认的date查询
+
+            $segment[] = 'customVariableValue1>=' . $startTime;
+            $segment[] = 'customVariableValue1<=' . $endTime;
+
         }
 
-        $params['segment'] = implode(';',$segment);
+        $params['segment'] = implode(';', $segment);
 
 
+        $data = API::run('Live.getLastVisitsDetails' , $params);
 
-        $data = API::run('Live.getLastVisitsDetails',$params);
-
-
-        if($this->render == 'reg-user'){
+        if ($this->render == 'reg-user') {
             $data = $this->getDb($data);
         }
-        if($this->do == 'update'){
+        if ($this->do == 'update') {
             $this->format($data);
         }
         return $data;
     }
-    public function format($data){
+
+    public function format($data)
+    {
         $array = [];
-        foreach($data as $row){
-            if(
+        foreach ($data as $row) {
+            if (
                 isset($row["customVariables"][2]["customVariableName2"])
                 && $row["customVariables"][2]["customVariableName2"] == "regReferrer"
                 && isset($row["customVariables"][2]["customVariableValue2"])
                 && !empty($row["customVariables"][2]["customVariableValue2"])
-            ){
+            ) {
                 $array[$row["customVariables"][2]["customVariableValue2"]][] = $row["userId"];
             }
         }
 
-        if($array){
+        if ($array) {
             $api = new ApiVisitorDetail();
-            foreach($array as $referrer => $userArray){
-                $api->getUserAllData(array_unique($userArray),$referrer);
+            foreach ($array as $referrer => $userArray) {
+                $api->getUserAllData(array_unique($userArray), $referrer);
             }
         }
     }
-    public function getDb($apiData){
+
+    public function getDb($apiData)
+    {
         $idvisits = [];
         $data = [];
-        foreach($apiData as $k=>$v){
+        foreach ($apiData as $k => $v) {
             $data[$v['idVisit']] = $v;
             $idvisits[] = $v['idVisit'];
         }
         $idvisits = array_unique($idvisits);
         $find = ApiVisitorDetail::find()->where([
-            "in","idvisit",$idvisits
+            "in", "idvisit", $idvisits
         ])->asArray()->all();
         //格式化username
-        $find = ArrayHelper::index($find,'idvisit');
-        foreach($data as $k=>$v){
+        $find = ArrayHelper::index($find, 'idvisit');
+        foreach ($data as $k => $v) {
             $array = isset($find[$k]) ? $find[$k] : false;
 
-            $data[$k]['ip']      =  $array ? $array['ip'] : '';
-            $data[$k]['iptype']  =    $array ? $array['iptype'] : '';
-            $data[$k]['iptext']  =    $array ? $array['iptext'] : '';
-            foreach(RegUser::$typeEnum as $i=>$j){
-                $data[$k]['visitor_datatype_'.$i] = ($array ? $array['visitor_datatype_'.$i] : '');
+            $data[$k]['ip'] = $array ? $array['ip'] : '';
+            $data[$k]['iptype'] = $array ? $array['iptype'] : '';
+            $data[$k]['iptext'] = $array ? $array['iptext'] : '';
+            foreach (RegUser::$typeEnum as $i => $j) {
+                $data[$k]['visitor_datatype_' . $i] = ($array ? $array['visitor_datatype_' . $i] : '');
             }
         }
         return $data;

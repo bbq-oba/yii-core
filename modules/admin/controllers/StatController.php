@@ -47,7 +47,7 @@ class StatController extends \yii\web\Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
             'pagination' => [
-                'pageSize' => $model->filter_limit,
+                'pageSize' => \yii::$app->request->get('filter_limit',50),
             ],
         ]);
 
@@ -68,7 +68,7 @@ class StatController extends \yii\web\Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
             'pagination' => [
-                'pageSize' => $model->filter_limit,
+                'pageSize' => \yii::$app->request->get('filter_limit',50),
             ],
         ]);
 
@@ -108,7 +108,7 @@ class StatController extends \yii\web\Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
             'pagination' => [
-                'pageSize' => $model->filter_limit,
+                'pageSize' => \yii::$app->request->get('filter_limit',50),
             ],
         ]);
         return $this->render($model->render,[

@@ -21,7 +21,6 @@ if($model->render == 'reg-user'){
 
 }
 //echo $form->field($model, 'filter_limit');
-echo Html::textInput('filter_limit',$model->filter_limit);
 echo $form->field($model, 'regdate',[
 ])->widget(\kartik\daterange\DateRangePicker::classname(),[
     'attribute'=>"regdate",
@@ -40,9 +39,25 @@ echo $form->field($model, 'regdate',[
     ],
 
 ]);
-
-
-
+?>
+<div style="display: inline-block">
+<?php
+echo \kartik\widgets\Select2::widget([
+    'name' => 'filter_limit',
+    'value' => \yii::$app->request->get('filter_limit',50),
+    'data' => [
+        20=>20,
+        50=>50,
+        100=>100,
+        200=>200,
+    ],
+    'options' => [
+        'placeholder' => '每页条数',
+    ]
+]);
+?>
+</div>
+<?php
 echo Html::submitButton("搜索", [
     'class' => 'btn btn-success',
     'name' =>Html::getInputName($model,'do'),
