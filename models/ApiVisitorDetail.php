@@ -135,7 +135,7 @@ class ApiVisitorDetail extends ActiveRecord
         $data = self::find()->where([
             'iptext' => NULL
         ])->andWhere('ip IS NOT NULL')->orderBy('created_at desc')->limit($limit)->asArray()->all();
-        return self::batchUpdateIptext($data);
+        self::batchUpdateIptext($data);
     }
 
     public static function batchUpdateIptext($array){
@@ -172,7 +172,12 @@ class ApiVisitorDetail extends ActiveRecord
      * @param int $time 是否根据时间更新数据，如果时间是0则表示此数据只更新一次
      *                  如果是1800则表示 超过1800秒的数据，更新一次
      */
-    public static function cronUpdateVisitorDataType($type,$limit = 100,$time = 0){
+    public static function cronUpdateVisitorDataType($type){
+
+        $limit = RegUser::$typeEnum[$type][3];
+        $time = RegUser::$typeEnum[$type][1];
+
+
         if($time){
          //   $and = CURRENT_TIMESTAMP - '`updated_datatype_'.$type.'``' >$time;
 	        $and = sprintf(" %d - `%s` > %d OR `%s` IS NULL ",CURRENT_TIMESTAMP,'updated_datatype_'.$type,$time,'updated_datatype_'.$type);
@@ -182,6 +187,7 @@ class ApiVisitorDetail extends ActiveRecord
             $orderBy = 'created_at desc';
         }
         $data = self::find()->where($and)->orderBy($orderBy)->limit($limit)->asArray()->all();
+
         self::batchUpdateVisitorDataType($type,$data,$time);
     }
 
