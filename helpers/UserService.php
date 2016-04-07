@@ -77,7 +77,7 @@ class UserService
         $curl->get($url,$params);
         $curl->setConnectTimeout(10);
         $curl->close();
-
+echo $curl->url;
         if ($curl->error) {
             return false;
         } else {
