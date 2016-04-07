@@ -62,6 +62,7 @@ class UserService
 
     public static function init($ref , $type , $params){
         $url = self::makeUrl($ref,$type);
+        $params = self::makeSign($params);
         return self::run($url,$params);
     }
 
