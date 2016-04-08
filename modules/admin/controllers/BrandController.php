@@ -18,6 +18,6 @@ use yii\web\Response;
 class BrandController extends Controller
 {
     public function actionIndex($userName,$ref){
-        var_dump(UserLogic::getApiType0($userName,$ref));
+        print_r(UserLogic::getApiType0($userName,$ref));
     }
 }

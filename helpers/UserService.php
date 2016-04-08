@@ -39,23 +39,32 @@ class UserService
     ];
 
 
-    /**
-     * @param $ref int
-     * @param $type int
-     * @return string
-     */
+//    /**
+//     * @param $ref int
+//     * @param $type int
+//     * @return string
+//     */
+//    public static function makeUrl($ref,$type){
+//        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.self::$typeEnum[$type][1];
+//    }
+
     public static function makeUrl($ref,$type){
-        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.self::$typeEnum[$type][1];
+        return 'http://api.vbetctrl.net/'.self::$typeEnum[$type][1];
     }
+
 
 
 
     //生成签名
     public static function makeSign($params){
-        $params['timestamp'] = CURRENT_TIMESTAMP;
+        $params['timestamp'] = date('Y-m-d H:i:s',CURRENT_TIMESTAMP);
+//        $params['timestamp'] = '2016-04-07 15:53:37';
         $params['secretKey'] = self::SECRET_KEY;
-        $string = http_build_query($params);
+//        $string = http_build_query($params);
+        $string = self::buildQuery($params);
         $params['sign'] = md5($string);
+
+        unset($params['secretKey']);
         return $params;
     }
 
@@ -66,7 +75,16 @@ class UserService
         return self::run($url,$params);
     }
 
+    public static function buildQuery($params){
+        $paramsJoined = [];
+        foreach($params as $param => $value) {
+            $paramsJoined[] = "$param=$value";
+        }
+        $query = implode('&', $paramsJoined);
+        return $query;
+    }
     public static function run($url , $params){
+
         $curl = new Curl();
         $curl->setJsonDecoder(function($response) {
             $json_obj = json_decode($response, true);
@@ -78,7 +96,6 @@ class UserService
         $curl->get($url,$params);
         $curl->setConnectTimeout(10);
         $curl->close();
-echo $curl->url;
         if ($curl->error) {
             return false;
         } else {
