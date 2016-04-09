@@ -29,13 +29,13 @@ class UserService extends Object
 
 
     public static $typeEnum  = [
-        0 => ['所属推广号'],
-        1 => ['用户首存金额'],
-        2 => ['用户首存优惠'],
-        3 => ['用户存款笔数'],
-        4 => ['登录时间'],
-        5 => ['成功提款次数'],
-        6 => ['会员投注信息'],
+        0 => ['所属推广号','api/Extension/ReferralCode'],
+        1 => ['用户首存金额','api/Extension/FirstDepositAmount'],
+        2 => ['用户首存优惠','api/Extension/FirstDepositBonus'],
+        3 => ['用户存款笔数','api/Extension/DepositCount'],
+        4 => ['登录时间','api/Extension/LastLogin'],
+        5 => ['成功提款次数','api/Extension/WithdrawalCount'],
+        6 => ['会员投注信息',' api/Extension/BetAmount'],
         7 => ['未存款之前领取的优惠'],
         8 => ['所有优惠'],
     ];

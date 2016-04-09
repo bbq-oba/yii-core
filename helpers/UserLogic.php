@@ -97,18 +97,6 @@ class UserLogic extends UserService
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     //  visitor_datatype_0
     public function cronVisitorDataType($type){
 
