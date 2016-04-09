@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\UserLogic;
+use app\helpers\UserService;
 use app\models\ApiVisitorConfig;
 use Yii;
 use app\models\Brand;
@@ -19,7 +20,7 @@ use yii\web\Response;
 class BrandController extends Controller
 {
     public function actionIndex($userName,$ref){
-        print_r(UserLogic::getApiType0($userName,$ref));
+        print_r(UserService::get($ref,0,['userName'=>$userName]));
     }
 
     public function actionTest(){

@@ -69,7 +69,9 @@ class UserService extends Object
 
 
     public static function get($ref , $type , $params){
-        $params = array_filter($params);
+        $params = array_filter($params,function($val){
+            return $val !== null;
+        });
         $url = self::makeUrl($ref,$type);
         $params = self::makeSign($params);
         return self::run($url,$params);
