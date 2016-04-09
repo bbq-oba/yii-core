@@ -140,7 +140,10 @@ class UserLogic extends UserService
                 \yii::$app->controller->stdout(sprintf("%s - %s:%s\n",$userName , UserService::$typeEnum[$type][0] , $return['data']), Console::BOLD);
                 $model->$fields = $return['data'];
                 $model->$update = CURRENT_TIMESTAMP;
-                $model->update();
+                $a = $model->update();
+		var_dump($a);
+		print_r($model->errors);
+		print_r($model->attributes);
             }else{
                 $i++;
                 if($i>5){
