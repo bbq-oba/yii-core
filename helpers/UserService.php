@@ -116,7 +116,7 @@ class UserService extends Object
             }
             $return['msg']  = $curl->response['Message'];
             $return['data'] = $curl->response['Data'];
-            return $curl->response;
+            return $return;
         }
     }
 
