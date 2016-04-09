@@ -61,7 +61,7 @@ class UserService extends Object
     public static function makeSign($params){
         $params['timestamp'] = date('Y-m-d H:i:s',CURRENT_TIMESTAMP);
         $params['secretKey'] = self::SECRET_KEY;
-        $params['sign'] = self::buildQuery($params);
+        $params['sign'] = md5(self::buildQuery($params));
 
         unset($params['secretKey']);
         return $params;
