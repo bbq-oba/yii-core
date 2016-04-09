@@ -44,13 +44,13 @@ class UserService
 //     * @param $type int
 //     * @return string
 //     */
-//    public static function makeUrl($ref,$type){
-//        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.self::$typeEnum[$type][1];
-//    }
-
     public static function makeUrl($ref,$type){
-        return 'http://api.vbetctrl.net/'.self::$typeEnum[$type][1];
+        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.self::$typeEnum[$type][1];
     }
+
+//    public static function makeUrl($ref,$type){
+//        return 'http://api.vbetctrl.net/'.self::$typeEnum[$type][1];
+//    }
 
 
 
@@ -62,9 +62,14 @@ class UserService
         $params['secretKey'] = self::SECRET_KEY;
 //        $string = http_build_query($params);
         $string = self::buildQuery($params);
+echo "验签：";
+echo $string."\r\n";
         $params['sign'] = md5($string);
 
         unset($params['secretKey']);
+echo "传参";
+print_r($params);
+echo "\r\n";
         return $params;
     }
 
@@ -94,6 +99,8 @@ class UserService
             return $response;
         });
         $curl->get($url,$params);
+
+echo "请求：".$curl->url."\r\n";
         $curl->setConnectTimeout(10);
         $curl->close();
         if ($curl->error) {
