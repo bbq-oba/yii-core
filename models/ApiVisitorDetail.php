@@ -92,11 +92,6 @@ class ApiVisitorDetail extends ActiveRecord
         return self::find()->where($conf)->orderBy('created_at desc')->limit($limit)->asArray()->all();
     }
 
-    //批量插入新数据
-    public static function cronInsert($num = 100){
-        $data = StatLogVisit::getNewRecord($num);
-        return self::InsertRecord($data);
-    }
 
 
 
@@ -128,26 +123,7 @@ class ApiVisitorDetail extends ActiveRecord
 
 
 
-    /*
-     * 更新ip归属地
-     * */
-    public static function cronUpdateIptext($limit = 100){
-        $data = self::find()->where([
-            'iptext' => NULL
-        ])->andWhere('ip IS NOT NULL')->orderBy('created_at desc')->limit($limit)->asArray()->all();
-        return self::batchUpdateIptext($data);
-    }
 
-    public static function batchUpdateIptext($array){
-        if($array){
-            foreach($array as $k=>$v){
-                $iptext = IP::find($v['ip']); //如果返回false 说明接口数据有问题
-                $data = self::findOne($v['id']);
-                $data->iptext = implode(' ',$iptext);
-                $data->update();
-            }
-        }
-    }
 
 
     //更新推广号 1次
@@ -242,41 +218,5 @@ class ApiVisitorDetail extends ActiveRecord
         return md5('indentify_'.implode(',',$array));
     }
 
-    public static function InsertRecord($data){
-        if($data){
-            $array = [];
-            foreach($data as$k=>$v){
-                $array[$v['idvisit']] = [
-                    $v['idvisit'],
-                    $v['idvisitor'],                //idvisitor
-                    $v['user_id'],                  //user_id
-                    $v['custom_var_v2'],             //来源
-                    IP::binaryToStringIP($v['location_ip']),               //ip
-                    CURRENT_TIMESTAMP,               //ip
-                ];
 
-            }
-//            \yii::error(var_export($array,1));
-            //查找所有已经存在的记录
-            $batchInsert = [];
-            if($array){
-                $findAll = ApiVisitorDetail::find()->where([
-                    'in','idvisit',array_keys($array)
-                ])->asArray()->all();
-
-                if($findAll){
-                    $findAll = ArrayHelper::index($findAll,'idvisit');
-                    $batchInsert = array_diff_key($array,$findAll);
-                }else{
-                    $batchInsert = $array;
-                }
-                $idvisits = ArrayHelper::getColumn($batchInsert,0,false);
-                StatLogVisit::updateAll([
-                    'status' =>1
-                ],['idvisit'=>$idvisits]);
-                self::xBatchInsert($batchInsert);
-            }
-            return count($batchInsert);
-        }
-    }
 }

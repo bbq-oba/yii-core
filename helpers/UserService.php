@@ -9,8 +9,10 @@
 namespace app\helpers;
 
 use \Curl\Curl;
+use yii\base\Component;
+use yii\base\Object;
 
-class UserService
+class UserService extends Object
 {
     public static $refEnum = [
         1=>[
@@ -27,15 +29,15 @@ class UserService
 
 
     public static $typeEnum  = [
-        0 => ['所属推广号','api/Extension/ReferralCode'],
-        1 => ['用户首存金额','api/Extension/FirstDepositAmount'],
-        2 => ['用户首存优惠','api/Extension/FirstDepositBonus'],
-        3 => ['用户存款笔数','api/Extension/DepositCount'],
-        4 => ['登录时间','api/Extension/LastLogin'],
-        5 => ['成功提款次数','api/Extension/WithdrawalCount'],
-        6 => ['会员投注信息',' api/Extension/BetAmount?userName={userName}&fromTime={fromTime}&toTime={toTime}&timestamp={timestamp}&sign={sign}'],
-        7 => ['未存款之前领取的优惠',86400],
-        8 => ['所有优惠',86400],
+        0 => ['所属推广号'],
+        1 => ['用户首存金额'],
+        2 => ['用户首存优惠'],
+        3 => ['用户存款笔数'],
+        4 => ['登录时间'],
+        5 => ['成功提款次数'],
+        6 => ['会员投注信息'],
+        7 => ['未存款之前领取的优惠'],
+        8 => ['所有优惠'],
     ];
 
 
@@ -58,23 +60,16 @@ class UserService
     //生成签名
     public static function makeSign($params){
         $params['timestamp'] = date('Y-m-d H:i:s',CURRENT_TIMESTAMP);
-//        $params['timestamp'] = '2016-04-07 15:53:37';
         $params['secretKey'] = self::SECRET_KEY;
-//        $string = http_build_query($params);
-        $string = self::buildQuery($params);
-echo "验签：";
-echo $string."\r\n";
-        $params['sign'] = md5($string);
+        $params['sign'] = self::buildQuery($params);
 
         unset($params['secretKey']);
-echo "传参";
-print_r($params);
-echo "\r\n";
         return $params;
     }
 
 
-    public static function init($ref , $type , $params){
+    public static function get($ref , $type , $params){
+        $params = array_filter($params);
         $url = self::makeUrl($ref,$type);
         $params = self::makeSign($params);
         return self::run($url,$params);
@@ -89,7 +84,6 @@ echo "\r\n";
         return $query;
     }
     public static function run($url , $params){
-
         $curl = new Curl();
         $curl->setJsonDecoder(function($response) {
             $json_obj = json_decode($response, true);
@@ -99,19 +93,31 @@ echo "\r\n";
             return $response;
         });
         $curl->get($url,$params);
-
-echo "请求：".$curl->url."\r\n";
         $curl->setConnectTimeout(10);
         $curl->close();
+        return self::handleResponse($curl);
+    }
+    public static function handleResponse($curl){
+        $return = [
+            'code' => 0,
+            'msg'  => '',
+            'data' => null,
+        ];
         if ($curl->error) {
-            return false;
+            return $return;
         } else {
             if($curl->response === false){
-                return false;
+                return $return;
             }
+            if($curl->response['StatusCode'] == 0){
+                $return['code'] = 200;
+            }else{
+                $return['code'] = 0;
+            }
+            $return['msg']  = $curl->response['Message'];
+            $return['data'] = $curl->response['Data'];
             return $curl->response;
         }
     }
-
 
 }

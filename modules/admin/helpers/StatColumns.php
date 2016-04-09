@@ -11,6 +11,7 @@ namespace app\modules\admin\helpers;
 use app\helpers\IP;
 use app\helpers\IpType;
 use app\helpers\RegUser;
+use app\helpers\UserService;
 use app\modules\admin\models\ApiVisitorDetail;
 use kartik\grid\GridView;
 use \kartik\helpers\Html;
@@ -144,7 +145,7 @@ class StatColumns
         ];
 
 
-        self::ColumnsIpType();
+//        self::ColumnsIpType();
         self::Columns7();
         self::Columns8();
         self::Columns9();
@@ -181,56 +182,56 @@ class StatColumns
             'value' => function ($data) {
                 return  $data['visitor_datatype_0'];
             },
-            'header' => RegUser::$typeEnum[0][0]
+            'header' => UserService::$typeEnum[0][0]
         ];
         self::$columns [] = [
             'value' => function ($data) {
                 return  $data['visitor_datatype_1'];
             },
-            'header' => RegUser::$typeEnum[1][0]
+            'header' => UserService::$typeEnum[1][0]
         ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  $data['visitor_datatype_2'];
-            },
-            'header' => RegUser::$typeEnum[2][0]
-        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return  $data['visitor_datatype_2'];
+//            },
+//            'header' => UserService::$typeEnum[2][0]
+//        ];
         self::$columns [] = [
             'value' => function ($data) {
                 return  $data['visitor_datatype_3'];
             },
-            'header' => RegUser::$typeEnum[3][0]
+            'header' => UserService::$typeEnum[3][0]
         ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  $data['visitor_datatype_4'];
-            },
-            'header' => RegUser::$typeEnum[4][0]
-        ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  $data['visitor_datatype_5'];
-            },
-            'header' => RegUser::$typeEnum[5][0]
-        ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  $data['visitor_datatype_6'];
-            },
-            'header' => RegUser::$typeEnum[6][0]
-        ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  $data['visitor_datatype_7'];
-            },
-            'header' => RegUser::$typeEnum[7][0]
-        ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return  $data['visitor_datatype_8'];
-            },
-            'header' => RegUser::$typeEnum[8][0]
-        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return  $data['visitor_datatype_4'];
+//            },
+//            'header' => UserService::$typeEnum[4][0]
+//        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return  $data['visitor_datatype_5'];
+//            },
+//            'header' => UserService::$typeEnum[5][0]
+//        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return  $data['visitor_datatype_6'];
+//            },
+//            'header' => UserService::$typeEnum[6][0]
+//        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return  $data['visitor_datatype_7'];
+//            },
+//            'header' => UserService::$typeEnum[7][0]
+//        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return  $data['visitor_datatype_8'];
+//            },
+//            'header' => UserService::$typeEnum[8][0]
+//        ];
 
 
         self::Columns10();
