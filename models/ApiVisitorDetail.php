@@ -22,13 +22,28 @@ use yii\log\Logger;
  * @property string $visitor_datatype_1
  * @property string $visitor_datatype_2
  * @property string $visitor_datatype_3
+ * @property string $visitor_datatype_4
+ * @property string $visitor_datatype_5
+ * @property string $visitor_datatype_6
+ * @property string $visitor_datatype_7
+ * @property string $visitor_datatype_8
+ * @property string $updated_datatype_0
+ * @property string $updated_datatype_1
+ * @property string $updated_datatype_2
+ * @property string $updated_datatype_3
+ * @property string $updated_datatype_4
+ * @property string $updated_datatype_5
+ * @property string $updated_datatype_6
+ * @property string $updated_datatype_7
+ * @property string $updated_datatype_8
  * @property integer $visitor_referrer
  * @property string $ip
  * @property integer $iptype
  * @property string $iptext
  * @property integer $updated_at
  * @property string $idvisitor
- * @property string $identify
+ * @property integer $created_at
+ * @property string $idvisit
  */
 class ApiVisitorDetail extends ActiveRecord
 {
@@ -59,22 +74,9 @@ class ApiVisitorDetail extends ActiveRecord
     public function rules()
     {
         return [
-            [['visitor_referrer', 'iptype', 'updated_at'], 'integer'],
-            [['visitor_username',  'ip', 'iptext'], 'string', 'max' => 255],
-            [['idvisitor'], 'string', 'max' => 8],
-            [
-                [
-                    'visitor_datatype_0',
-                    'visitor_datatype_1',
-                    'visitor_datatype_2',
-                    'visitor_datatype_3',
-                    'visitor_datatype_4',
-                    'visitor_datatype_5',
-                    'visitor_datatype_6',
-                    'visitor_datatype_7',
-                    'visitor_datatype_8',
-                ].'safe'
-            ],
+            [['updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'updated_datatype_4', 'updated_datatype_5', 'updated_datatype_6', 'updated_datatype_7', 'updated_datatype_8', 'visitor_referrer', 'iptype', 'updated_at', 'created_at', 'idvisit'], 'integer'],
+            [['visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_datatype_4', 'visitor_datatype_5', 'visitor_datatype_6', 'visitor_datatype_7', 'visitor_datatype_8', 'ip', 'iptext'], 'safe'],
+            [['idvisitor'], 'string', 'max' => 8]
         ];
     }
 
@@ -90,13 +92,28 @@ class ApiVisitorDetail extends ActiveRecord
             'visitor_datatype_1' => 'Visitor Datatype 1',
             'visitor_datatype_2' => 'Visitor Datatype 2',
             'visitor_datatype_3' => 'Visitor Datatype 3',
+            'visitor_datatype_4' => 'Visitor Datatype 4',
+            'visitor_datatype_5' => 'Visitor Datatype 5',
+            'visitor_datatype_6' => 'Visitor Datatype 6',
+            'visitor_datatype_7' => 'Visitor Datatype 7',
+            'visitor_datatype_8' => 'Visitor Datatype 8',
+            'updated_datatype_0' => 'Updated Datatype 0',
+            'updated_datatype_1' => 'Updated Datatype 1',
+            'updated_datatype_2' => 'Updated Datatype 2',
+            'updated_datatype_3' => 'Updated Datatype 3',
+            'updated_datatype_4' => 'Updated Datatype 4',
+            'updated_datatype_5' => 'Updated Datatype 5',
+            'updated_datatype_6' => 'Updated Datatype 6',
+            'updated_datatype_7' => 'Updated Datatype 7',
+            'updated_datatype_8' => 'Updated Datatype 8',
             'visitor_referrer' => 'Visitor Referrer',
             'ip' => 'Ip',
             'iptype' => 'Iptype',
             'iptext' => 'Iptext',
             'updated_at' => 'Updated At',
             'idvisitor' => 'Idvisitor',
-            'identify' => 'Identify',
+            'created_at' => 'Created At',
+            'idvisit' => 'Idvisit',
         ];
     }
 
