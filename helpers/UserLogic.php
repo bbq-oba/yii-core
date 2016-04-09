@@ -136,8 +136,6 @@ class UserLogic extends UserService
 //                'code' =>200 ,
 //                'data' =>'a'
 //            ];
-            print_r($model->attributes);
-            print_r($return);
             if($return['code'] == 200){
                 \yii::$app->controller->stdout(sprintf("%s - %d - %s",$userName , $type , $return['data']), Console::BOLD);
                 $model->$fields = $return['data'];

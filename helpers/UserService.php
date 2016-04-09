@@ -72,10 +72,8 @@ class UserService extends Object
         $params = array_filter($params,function($val){
             return $val !== null;
         });
-        print_r($params);
         $url = self::makeUrl($ref,$type);
         $params = self::makeSign($params);
-        print_r($params);
         return self::run($url,$params);
     }
 
