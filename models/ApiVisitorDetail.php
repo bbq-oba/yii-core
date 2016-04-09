@@ -60,8 +60,21 @@ class ApiVisitorDetail extends ActiveRecord
     {
         return [
             [['visitor_referrer', 'iptype', 'updated_at'], 'integer'],
-            [['visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'ip', 'iptext'], 'string', 'max' => 255],
+            [['visitor_username',  'ip', 'iptext'], 'string', 'max' => 255],
             [['idvisitor'], 'string', 'max' => 8],
+            [
+                [
+                    'visitor_datatype_0',
+                    'visitor_datatype_1',
+                    'visitor_datatype_2',
+                    'visitor_datatype_3',
+                    'visitor_datatype_4',
+                    'visitor_datatype_5',
+                    'visitor_datatype_6',
+                    'visitor_datatype_7',
+                    'visitor_datatype_8',
+                ].'safe'
+            ],
         ];
     }
 

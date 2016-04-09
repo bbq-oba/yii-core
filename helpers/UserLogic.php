@@ -137,13 +137,14 @@ class UserLogic extends UserService
 //                'data' =>'a'
 //            ];
             if($return['code'] == 200){
-                \yii::$app->controller->stdout(sprintf("%s - %s:%s\n",$userName , UserService::$typeEnum[$type][0] , $return['data']), Console::BOLD);
                 $model->$fields = $return['data'];
                 $model->$update = CURRENT_TIMESTAMP;
-                $a = $model->update();
-		var_dump($a);
-		print_r($model->errors);
-		print_r($model->attributes);
+
+                if(!$model->update()){
+                    print_r($model->errors);
+                }else{
+                    \yii::$app->controller->stdout(sprintf("%s - %s:%s Id:%d \n",$userName , UserService::$typeEnum[$type][0] , $return['data'],$model->id), Console::BOLD);
+                }
             }else{
                 $i++;
                 if($i>5){
