@@ -211,12 +211,12 @@ class StatColumns
             'header' => '推广信息',
             'format' => 'raw'
         ];
-        self::$columns [] = [
-            'value' => function ($data) {
-                return $data['visitor_datatype_1'];
-            },
-            'header' => ApiVisitorConfig::cache()
-        ];
+//        self::$columns [] = [
+//            'value' => function ($data) {
+//                return $data['visitor_datatype_1'];
+//            },
+//            'header' => ApiVisitorConfig::cache()
+//        ];
 //        self::$columns [] = [
 //            'value' => function ($data) {
 //                return  $data['visitor_datatype_2'];
