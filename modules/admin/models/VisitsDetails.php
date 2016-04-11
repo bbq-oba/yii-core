@@ -154,7 +154,7 @@ class VisitsDetails extends Model
             $data[$k]['ip'] = $array ? $array['ip'] : '';
             $data[$k]['iptype'] = $array ? $array['iptype'] : '';
             $data[$k]['iptext'] = $array ? $array['iptext'] : '';
-            
+
             $data[$k]['visitor_referrer'] = $array ? $array['visitor_referrer'] : '';
 
             for ($i = 0 ; $i < 10 ; $i++) {

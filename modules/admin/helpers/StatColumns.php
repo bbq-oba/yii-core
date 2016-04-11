@@ -199,7 +199,7 @@ class StatColumns
                 }
                 $array = [];
 
-                $regText = isset($data['visitor_referrer']) ? UserLogic::$refEnum[$data['visitor_referrer']] : "-";
+                $regText = in_array($data['visitor_referrer'],array_keys(UserLogic::$refEnum)) ? UserLogic::$refEnum[$data['visitor_referrer']]['txt'] : "-";
                 $array[] = sprintf("注册时间:%s", $regTime);
                 $array[] = sprintf("注册来源:%s", $regText);
                 $array[] = sprintf("注册网址:%s", $data['visitor_datatype_9']);
