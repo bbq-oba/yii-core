@@ -154,7 +154,8 @@ class VisitsDetails extends Model
             $data[$k]['ip'] = $array ? $array['ip'] : '';
             $data[$k]['iptype'] = $array ? $array['iptype'] : '';
             $data[$k]['iptext'] = $array ? $array['iptext'] : '';
-            foreach (RegUser::$typeEnum as $i => $j) {
+
+            for ($i = 0 ; $i < 10 ; $i++) {
                 $data[$k]['visitor_datatype_' . $i] = ($array ? $array['visitor_datatype_' . $i] : '');
             }
         }
