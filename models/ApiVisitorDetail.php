@@ -27,6 +27,7 @@ use yii\log\Logger;
  * @property string $visitor_datatype_6
  * @property string $visitor_datatype_7
  * @property string $visitor_datatype_8
+ * @property string $visitor_datatype_9
  * @property string $updated_datatype_0
  * @property string $updated_datatype_1
  * @property string $updated_datatype_2
@@ -36,6 +37,7 @@ use yii\log\Logger;
  * @property string $updated_datatype_6
  * @property string $updated_datatype_7
  * @property string $updated_datatype_8
+ * @property string $updated_datatype_9
  * @property integer $visitor_referrer
  * @property string $ip
  * @property integer $iptype
@@ -74,8 +76,8 @@ class ApiVisitorDetail extends ActiveRecord
     public function rules()
     {
         return [
-            [['updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'updated_datatype_4', 'updated_datatype_5', 'updated_datatype_6', 'updated_datatype_7', 'updated_datatype_8', 'visitor_referrer', 'iptype', 'updated_at', 'created_at', 'idvisit'], 'integer'],
-            [['visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_datatype_4', 'visitor_datatype_5', 'visitor_datatype_6', 'visitor_datatype_7', 'visitor_datatype_8', 'ip', 'iptext'], 'safe'],
+            [['updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'updated_datatype_4', 'updated_datatype_5', 'updated_datatype_6', 'updated_datatype_7', 'updated_datatype_8','updated_datatype_9', 'visitor_referrer', 'iptype', 'updated_at', 'created_at', 'idvisit'], 'integer'],
+            [['visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_datatype_4', 'visitor_datatype_5', 'visitor_datatype_6', 'visitor_datatype_7', 'visitor_datatype_8','visitor_datatype_9', 'ip', 'iptext'], 'safe'],
             [['idvisitor'], 'string', 'max' => 8]
         ];
     }
@@ -106,6 +108,7 @@ class ApiVisitorDetail extends ActiveRecord
             'updated_datatype_6' => 'Updated Datatype 6',
             'updated_datatype_7' => 'Updated Datatype 7',
             'updated_datatype_8' => 'Updated Datatype 8',
+            'updated_datatype_9' => 'Updated Datatype 9',
             'visitor_referrer' => 'Visitor Referrer',
             'ip' => 'Ip',
             'iptype' => 'Iptype',
