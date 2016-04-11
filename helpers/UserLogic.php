@@ -146,7 +146,7 @@ class UserLogic extends Object
                 if(!$model->update()){
                     print_r($model->errors);
                 }else{
-                    \yii::$app->controller->stdout(sprintf("%s - %s:%s Id:%d \n",$userName , $this->config['name'] , $return['data'],$model->id), Console::BOLD);
+                    \yii::$app->controller->stdout(sprintf("%s - %s:%s Id:%d \n",$userName , $config['name'] , $return['data'],$model->id), Console::BOLD);
                 }
             }else{
                 $i++;
