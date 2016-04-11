@@ -189,7 +189,7 @@ class UserLogic extends Object
 //     * @return string
 //     */
     public  function makeUrl($ref,$type){
-        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$this->config['url'];
+        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$this->config[$type]['url'];
     }
 
 
