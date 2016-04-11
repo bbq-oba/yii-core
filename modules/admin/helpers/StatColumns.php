@@ -203,13 +203,16 @@ class StatColumns
                 $array[] = sprintf("注册时间:%s", $regTime);
                 $array[] = sprintf("注册来源:%s", $regText);
                 $array[] = sprintf("注册网址:%s", $data['visitor_datatype_9']);
-                $array[] = sprintf("代理号:%s", $data['visitor_datatype_0']);
+                $array[] = sprintf("代理　号:%s", $data['visitor_datatype_0']);
                 $array[] = sprintf("首存金额:%s", $data['visitor_datatype_1']);
                 $array[] = sprintf("存款次数:%s", $data['visitor_datatype_3']);
                 return implode("<br />", $array);
             },
             'header' => '推广信息',
-            'format' => 'raw'
+            'format' => 'raw',
+            'headerOptions' => [
+                'style' => 'width:150px;'
+            ]
         ];
 //        self::$columns [] = [
 //            'value' => function ($data) {
