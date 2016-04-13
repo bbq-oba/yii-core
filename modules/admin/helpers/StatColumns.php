@@ -232,7 +232,7 @@ class StatColumns
         ];
         self::$columns [] = [
             'value' => function ($data) {
-                return $data['visitor_datatype_4'];
+                return $data['visitor_datatype_4'] ? date('Y-m-d H:i:s',strtotime($data['visitor_datatype_4']) + 28800) : null;
             },
             'header' => '登录时间'
         ];
