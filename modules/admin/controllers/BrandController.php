@@ -19,8 +19,9 @@ use yii\web\Response;
  */
 class BrandController extends Controller
 {
-    public function actionIndex($userName,$ref){
-        print_r(UserService::get($ref,0,['userName'=>$userName]));
+    public function actionIndex($userName,$ref,$type){
+	$obj = new UserLogic();
+        print_r($obj->get($ref,$type,['userName'=>$userName]));
     }
 
     public function actionTest(){
