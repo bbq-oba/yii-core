@@ -241,7 +241,8 @@ class ApiVisitorDetail extends ActiveRecord
             'visitor_username',
             "visitor_referrer",
             "ip",
-            "created_at"
+            "created_at",
+            "visitor_regtime"
         ],$array)->execute();
     }
 

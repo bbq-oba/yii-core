@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\helpers\MonthCron;
 use app\helpers\UserLogic;
 use app\helpers\UserService;
 use app\models\ApiVisitorConfig;
@@ -20,7 +21,7 @@ use yii\web\Response;
 class BrandController extends Controller
 {
     public function actionIndex($userName,$ref,$type){
-	$obj = new UserLogic();
+	    $obj = new UserLogic();
         print_r($obj->get($ref,$type,['userName'=>$userName]));
     }
 
@@ -30,5 +31,12 @@ class BrandController extends Controller
         (new UserLogic())->go();
 
        return $this->render('test');
+    }
+
+
+    public function actionMonth(){
+        $m = new MonthCron();
+        echo $m->getData(3);
+        return $this->render('test');
     }
 }
