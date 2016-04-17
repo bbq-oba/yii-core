@@ -148,12 +148,14 @@ class MonthLogic extends BaseLogic
                 $fieldName = 'visitor_datatype_'.$type;
                 $timeName =  'updated_datatype_'.$type;
                 $fieldReturn = $this->get($v['visitor_referrer'],$type,$params);
-
+                print_r($fieldReturn);
                 if($fieldReturn['code'] == 200){
                     $model->{$fieldName} = $fieldReturn['data'];
                     $model->{$timeName} = CURRENT_TIMESTAMP;
                 }
             }
+            print_r($model->attributes);
+
             if($model->save()){
                 $v->month_cron = 0;
                 $v->save();
