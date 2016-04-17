@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\ApiMonthCronSetting;
+use app\models\ApiMonthSetting;
 
 /**
- * ApiMonthCronSettingSearch represents the model behind the search form about `app\models\ApiMonthCronSetting`.
+ * ApiMonthDetailSearch represents the model behind the search form about `app\models\ApiMonthDetail`.
  */
-class ApiMonthCronSettingSearch extends ApiMonthCronSetting
+class ApiMonthSettingSearch extends ApiMonthSetting
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class ApiMonthCronSettingSearch extends ApiMonthCronSetting
     public function rules()
     {
         return [
-            [['id', 'time', 'status'], 'integer'],
+            [['id', 'time', 'status', 'updated_count', 'selected_count', 'created_at', 'updated_at'], 'integer'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ApiMonthCronSettingSearch extends ApiMonthCronSetting
      */
     public function search($params)
     {
-        $query = ApiMonthCronSetting::find();
+        $query = ApiMonthSetting::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -61,6 +61,10 @@ class ApiMonthCronSettingSearch extends ApiMonthCronSetting
             'id' => $this->id,
             'time' => $this->time,
             'status' => $this->status,
+            'updated_count' => $this->updated_count,
+            'selected_count' => $this->selected_count,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         return $dataProvider;

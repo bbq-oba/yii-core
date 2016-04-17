@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
-use app\helpers\MonthCron;
+use app\helpers\MonthLogic;
 use app\helpers\UserLogic;
 use app\helpers\UserService;
 use app\models\ApiVisitorConfig;
@@ -35,8 +35,9 @@ class BrandController extends Controller
 
 
     public function actionMonth(){
-        $m = new MonthCron();
-        echo $m->getData(3);
+        $m = new MonthLogic();
+        $m->reset();
+        $m->go();
         return $this->render('test');
     }
 }

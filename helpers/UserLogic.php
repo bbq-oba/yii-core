@@ -12,12 +12,11 @@ namespace app\helpers;
 use app\models\ApiVisitorConfig;
 use app\models\ApiVisitorDetail;
 use app\models\StatLogVisit;
-use Curl\Curl;
-use yii\base\Object;
+
 use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
 
-class UserLogic extends Object
+class UserLogic extends BaseLogic
 {
 
     public $config = [];
@@ -31,7 +30,9 @@ class UserLogic extends Object
         self::cronInsert($limit);
         self::cronUpdateIptext($limit);
         foreach($this->config as $type =>$config){
-            $this->cronVisitorDataType($type);
+            if(!$config['range']){
+                $this->cronVisitorDataType($type);
+            }
         }
     }
 
@@ -117,12 +118,7 @@ class UserLogic extends Object
         $order = $config['order'] ? $config['order'] : 'created_at asc';
         $limit = $config['limit'] ? $config['limit'] : 100;
 
-        $fromTime = $toTime = null;
 
-        if($config['range']){
-            $fromTime = date('Y-m-d H:i:s',$config['from']);
-            $toTime = date('Y-m-d H:i:s',$config['to']);
-        }
         $models = ApiVisitorDetail::find()->where($where)->orderBy($order)->limit($limit)->all();
 
         //连续5次失败则不更新
@@ -132,8 +128,6 @@ class UserLogic extends Object
             $ref = $model->visitor_referrer;
             $params = [
                 'userName' => $userName ,
-                'fromTime' => $fromTime,
-                'toTime'   => $toTime,
             ];
             $return = $this->get($ref,$type,$params);
 //            $return = [
@@ -157,106 +151,5 @@ class UserLogic extends Object
             }
         }
     }
-    public static $refEnum = [
-        1=>[
-            'url' => 'lbvbet',
-            'txt' => '乐宝'
-        ],
-        2=>[
-            'url' => 'wyvbet',
-            'txt' => '永利汇'
-        ]
-    ];
 
-    const SECRET_KEY = '604A0B84-FBAD-4B45-AF2D-E1F848CD543F';
-
-
-    public static $typeEnum  = [
-        0 => ['所属推广号','api/Extension/ReferralCode'],
-        1 => ['用户首存金额','api/Extension/FirstDepositAmount'],
-        2 => ['用户首存优惠','api/Extension/FirstDepositBonus'],
-        3 => ['用户存款笔数','api/Extension/DepositCount'],
-        4 => ['登录时间','api/Extension/LastLogin'],
-        5 => ['成功提款次数','api/Extension/WithdrawalCount'],
-        6 => ['会员投注信息',' api/Extension/BetAmount'],
-        7 => ['未存款之前领取的优惠'],
-        8 => ['所有优惠'],
-    ];
-
-
-//    /**
-//     * @param $ref int
-//     * @param $type int
-//     * @return string
-//     */
-    public  function makeUrl($ref,$type){
-        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$this->config[$type]['url'];
-    }
-
-
-
-    //生成签名
-    public static function makeSign($params){
-        $params['timestamp'] = date('Y-m-d H:i:s',CURRENT_TIMESTAMP);
-        $params['secretKey'] = self::SECRET_KEY;
-        $params['sign'] = md5(self::buildQuery($params));
-
-        unset($params['secretKey']);
-        return $params;
-    }
-
-
-    public function get($ref , $type , $params){
-        $params = array_filter($params,function($val){
-            return $val !== null;
-        });
-        $url = $this->makeUrl($ref,$type);
-        $params = self::makeSign($params);
-        return self::run($url,$params);
-    }
-
-    public static function buildQuery($params){
-        $paramsJoined = [];
-        foreach($params as $param => $value) {
-            $paramsJoined[] = "$param=$value";
-        }
-        $query = implode('&', $paramsJoined);
-        return $query;
-    }
-    public static function run($url , $params){
-        $curl = new Curl();
-        $curl->setJsonDecoder(function($response) {
-            $json_obj = json_decode($response, true);
-            if (!($json_obj === null)) {
-                $response = $json_obj;
-            }
-            return $response;
-        });
-        $curl->get($url,$params);
-        $curl->setConnectTimeout(10);
-        $curl->close();
-        return self::handleResponse($curl);
-    }
-    public static function handleResponse($curl){
-        $return = [
-            'code' => 0,
-            'msg'  => '',
-            'data' => null,
-        ];
-        if ($curl->error) {
-            return $return;
-        } else {
-            if($curl->response === false){
-                return $return;
-            }
-            if($curl->response['StatusCode'] == 0){
-                $return['code'] = 200;
-            }else{
-                $return['code'] = 0;
-            }
-            $return['msg']  = $curl->response['Message'];
-            $return['data'] = $curl->response['Data'];
-            return $return;
-        }
-    }
 }

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ApiMonthCronSettingSearch */
+/* @var $model app\models\ApiMonthDetailSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="api-month-cron-setting-search">
+<div class="api-month-detail-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -20,6 +20,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'time') ?>
 
     <?= $form->field($model, 'status') ?>
+
+    <?= $form->field($model, 'updated_count') ?>
+
+    <?= $form->field($model, 'selected_count') ?>
+
+    <?php // echo $form->field($model, 'created_at') ?>
+
+    <?php // echo $form->field($model, 'updated_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
