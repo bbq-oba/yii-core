@@ -38,7 +38,7 @@ class BrandController extends Controller
     public function actionMonth(){
         $m = new MonthLogic();
         $m->reset();
-        $m->go();
+        $m->go(2);
         return $this->render('test');
     }
 }
