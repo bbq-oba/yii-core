@@ -11,14 +11,14 @@ use \yii\behaviors\TimestampBehavior;
  * @property string $id
  * @property string $idvisit
  * @property string $mtime
- * @property string $visitor_datatype_0
- * @property string $visitor_datatype_1
- * @property string $visitor_datatype_2
- * @property string $visitor_datatype_3
- * @property string $updated_datatype_0
- * @property string $updated_datatype_1
- * @property string $updated_datatype_2
- * @property string $updated_datatype_3
+ * @property string $visitor_datatype_9
+ * @property string $visitor_datatype_10
+ * @property string $visitor_datatype_12
+ * @property string $visitor_datatype_11
+ * @property string $updated_datatype_9
+ * @property string $updated_datatype_10
+ * @property string $updated_datatype_11
+ * @property string $updated_datatype_12
  * @property string $visitor_username
  * @property integer $visitor_referrer
  * @property string $created_at
@@ -53,8 +53,8 @@ class ApiMonthDetail extends Model
     public function rules()
     {
         return [
-            [['idvisit', 'mtime', 'updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'visitor_referrer', 'created_at', 'updated_at'], 'integer'],
-            [['visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_username'], 'string', 'max' => 255]
+            [['idvisit', 'mtime', 'updated_datatype_9', 'updated_datatype_10', 'updated_datatype_11', 'updated_datatype_12', 'visitor_referrer', 'created_at', 'updated_at'], 'integer'],
+            [['visitor_datatype_9', 'visitor_datatype_10', 'visitor_datatype_12', 'visitor_datatype_11', 'visitor_username'], 'string', 'max' => 255]
         ];
     }
 
@@ -67,14 +67,14 @@ class ApiMonthDetail extends Model
             'id' => 'ID',
             'idvisit' => 'Idvisit',
             'mtime' => 'Mtime',
-            'visitor_datatype_0' => 'Visitor Datatype 0',
-            'visitor_datatype_1' => 'Visitor Datatype 1',
-            'visitor_datatype_2' => 'Visitor Datatype 2',
-            'visitor_datatype_3' => 'Visitor Datatype 3',
-            'updated_datatype_0' => 'Updated Datatype 0',
-            'updated_datatype_1' => 'Updated Datatype 1',
-            'updated_datatype_2' => 'Updated Datatype 2',
-            'updated_datatype_3' => 'Updated Datatype 3',
+            'visitor_datatype_9' => 'Visitor Datatype 0',
+            'visitor_datatype_10' => 'Visitor Datatype 1',
+            'visitor_datatype_12' => 'Visitor Datatype 2',
+            'visitor_datatype_11' => 'Visitor Datatype 3',
+            'updated_datatype_9' => 'Updated Datatype 0',
+            'updated_datatype_10' => 'Updated Datatype 1',
+            'updated_datatype_11' => 'Updated Datatype 2',
+            'updated_datatype_12' => 'Updated Datatype 3',
             'visitor_username' => 'Visitor Username',
             'visitor_referrer' => 'Visitor Referrer',
             'created_at' => 'Created At',

@@ -88,8 +88,9 @@ class ApiVisitorConfig extends Model
                 'is_closed' => 0
             ])->asArray()->all();
 
+            $return =ArrayHelper::index($data,"type");
 
-            \yii::$app->cache->set($key,$data);
+            \yii::$app->cache->set($key,$return);
         }
         return $return;
     }

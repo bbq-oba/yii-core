@@ -27,7 +27,7 @@ class UserLogic extends BaseLogic
 
         foreach($config as $k=>$v){
             if(!$v['range']){
-                $this->config[$v['type']] = $v;
+                $this->config[$k] = $v;
             }
         }
 
