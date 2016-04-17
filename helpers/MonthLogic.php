@@ -141,8 +141,8 @@ class MonthLogic extends BaseLogic
 
             $params = [
                 'userName' =>  $v->visitor_username ,
-                'fromTime' => $fromTime,
-                'toTime'   => $toTime,
+                'fromTime' => strtotime($fromTime),
+                'toTime'   => strtotime($toTime),
             ];
 
 
