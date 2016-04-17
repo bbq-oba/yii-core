@@ -24,7 +24,6 @@ class MonthLogic extends BaseLogic
     public function init(){
         set_time_limit(0);
         $config = ApiVisitorConfig::cache(1);
-
         //只要月更新的配置
         $this->config = [];
         foreach($config as $k=>$v){
@@ -115,7 +114,8 @@ class MonthLogic extends BaseLogic
 
         $toTime = date('Y-m-d H:i:s',$toTimeStamp);
 
-        $update = [];
+
+
         foreach($array as $k=>$v){
             //查找月表是否有该数据，有则不存储
             //逐条获取api 获取完后 数据更新完毕
@@ -144,6 +144,9 @@ class MonthLogic extends BaseLogic
                 'fromTime' => $fromTime,
                 'toTime'   => $toTime,
             ];
+
+
+
             foreach($this->config as $type => $config){
                 $fieldName = 'visitor_datatype_'.$type;
                 $timeName =  'updated_datatype_'.$type;
