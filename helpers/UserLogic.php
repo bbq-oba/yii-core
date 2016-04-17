@@ -20,9 +20,17 @@ class UserLogic extends BaseLogic
 {
 
     public $config = [];
+
     public function init(){
         set_time_limit(0);
-        $this->config = ApiVisitorConfig::cache(1);
+        $config = ApiVisitorConfig::cache(1);
+
+        foreach($config as $k=>$v){
+            if(!$v['range']){
+                $this->config[$v['type']] = $v;
+            }
+        }
+
         parent::init();
     }
 
@@ -30,9 +38,7 @@ class UserLogic extends BaseLogic
         self::cronInsert($limit);
         self::cronUpdateIptext($limit);
         foreach($this->config as $type =>$config){
-            if(!$config['range']){
-                $this->cronVisitorDataType($type);
-            }
+            $this->cronVisitorDataType($type);
         }
     }
 

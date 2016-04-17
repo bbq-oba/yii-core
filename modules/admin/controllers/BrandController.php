@@ -22,6 +22,7 @@ class BrandController extends Controller
 {
     public function actionIndex($userName,$ref,$type){
 	    $obj = new UserLogic();
+
         print_r($obj->get($ref,$type,['userName'=>$userName]));
     }
 
