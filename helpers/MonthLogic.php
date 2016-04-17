@@ -85,9 +85,9 @@ class MonthLogic extends BaseLogic
         $this->_init(true);
     }
 
-    public function go(){
+    public function go($limit = 100){
         $this->start();
-        $this->getUpdate(2);
+        $this->getUpdate($limit);
     }
 
     //查找需要更新的条目
@@ -141,8 +141,8 @@ class MonthLogic extends BaseLogic
 
             $params = [
                 'userName' =>  $v->visitor_username ,
-                'fromTime' => strtotime($fromTime),
-                'toTime'   => strtotime($toTime),
+                'fromTime' => ($fromTime),
+                'toTime'   => ($toTime),
             ];
 
 

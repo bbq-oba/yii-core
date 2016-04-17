@@ -5,6 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 namespace app\console\controllers;
+use app\helpers\MonthLogic;
 use app\helpers\RegUser;
 use app\helpers\UserLogic;
 use app\models\ApiVisitorDetail;
@@ -33,6 +34,11 @@ class HelloController extends Controller
     {
         (new UserLogic())->go($limit);
     }
+
+    public function actionMonth($limit = 100){
+        (new MonthLogic())->go($limit);
+    }
+
     public function actionTest(){
            \yii::info(date('Y-m-d H:i;s'),'con');
     }

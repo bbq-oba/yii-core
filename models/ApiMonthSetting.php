@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\MonthLogic;
 use Yii;
 use \app\core\models\Model;
 use \yii\behaviors\TimestampBehavior;
@@ -115,6 +116,9 @@ class ApiMonthSetting extends Model
            $model->setScenario('updating');
            $model->status = $model->time;
            $model->update();
+
+           $m = new MonthLogic();
+           $m->reset();
         }
     }
 }
