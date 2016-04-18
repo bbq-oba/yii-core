@@ -28,7 +28,7 @@ class MonthLogic extends BaseLogic
         $this->config = [];
         foreach($config as $k=>$v){
             if($v['range']){
-                $this->config[] = $v;
+                $this->config[$v['type']] = $v;
             }
         }
 
