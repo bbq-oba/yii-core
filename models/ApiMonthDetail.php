@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\UserLogic;
 use Yii;
 use \app\core\models\Model;
 use \yii\behaviors\TimestampBehavior;
@@ -69,9 +70,10 @@ class ApiMonthDetail extends ActiveRecord
             'id' => 'ID',
             'idvisit' => 'Idvisit',
             'mtime' => 'Mtime',
-            'visitor_datatype_10' => 'Visitor Datatype 10',
-            'visitor_datatype_11' => 'Visitor Datatype 11',
-            'visitor_datatype_12' => 'Visitor Datatype 12',
+            'viewMtime' => '月份',
+            'visitor_datatype_10' => '投注总额',
+            'visitor_datatype_11' => '优惠总额',
+            'visitor_datatype_12' => '派彩总额',
             'visitor_datatype_13' => 'Visitor Datatype 13',
 
             'updated_datatype_10' => 'Updated Datatype 10',
@@ -79,8 +81,9 @@ class ApiMonthDetail extends ActiveRecord
             'updated_datatype_12' => 'Updated Datatype 12',
             'updated_datatype_13' => 'Updated Datatype 13',
 
-            'visitor_username' => 'Visitor Username',
-            'visitor_referrer' => 'Visitor Referrer',
+            'visitor_username' => '用户名',
+            'visitor_referrer' => '来源',
+            'viewVisitorReferrer' => '来源',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -98,5 +101,11 @@ class ApiMonthDetail extends ActiveRecord
     }
 
 
+    public function getViewVisitorReferrer(){
+        return UserLogic::$refEnum[$this->visitor_referrer]['txt'];
+    }
+    public function getViewMtime(){
+        return date('Y-m',$this->mtime);
+    }
 
 }

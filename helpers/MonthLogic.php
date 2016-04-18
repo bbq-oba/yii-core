@@ -76,7 +76,18 @@ class MonthLogic extends BaseLogic
     //如果更新当前月份,不用初始化,强制更新往期数据需要更新,更新往期
     public function _init($forceUpdate = false){
         if($forceUpdate){
-            ApiVisitorDetail::updateAll(['month_cron' => $this->time]);
+
+            $fromTime = intval($this->time);
+
+            $y = date('Y',$this->time);
+            $m = date('m',$this->time);
+
+            $toTime = mktime(0,0,0,$m + 1,1,$y);
+
+
+            ApiVisitorDetail::updateAll(['month_cron' => $this->time],[
+                ['between','visitor_regtime', $fromTime,$toTime]
+            ]);
         }
     }
 

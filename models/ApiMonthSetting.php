@@ -71,8 +71,8 @@ class ApiMonthSetting extends Model
             'viewTime' => '月份',
             'viewIsUpdating' => '状态',
             'status' => '状态',
-            'updated_count' => '更新量',
-            'selected_count' => '总量',
+            'updatedCount' => '更新量',
+            'allCount' => '总量',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];
@@ -125,5 +125,22 @@ class ApiMonthSetting extends Model
     }
 
 
+    public function getUpdatedCount(){
+        return ApiMonthDetail::find()->where([
+            'mtime'=>$this->time
+        ])->count();
+    }
 
+    public function getAllCount(){
+        $fromTime = intval($this->time);
+
+        $y = date('Y',$this->time);
+        $m = date('m',$this->time);
+
+        $toTime = mktime(0,0,0,$m + 1,1,$y);
+
+
+        return ApiVisitorDetail::find()->where(['between','visitor_regtime', $fromTime,$toTime])->count();
+
+    }
 }

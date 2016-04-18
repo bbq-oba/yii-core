@@ -23,7 +23,7 @@ return [
     "Sending Sms" =>'待发短信列表',
     "Sent Sms" => '已发短信',
 
-
+    "Api Month Details"=>'月统计',
 
     // Com
     'User Donated Charity Logs'=>'运动记录',

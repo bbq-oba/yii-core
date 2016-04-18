@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\ApiMonthSetting;
-use app\models\ApiMonthSettingSearch;
 use Yii;
+use app\models\ApiMonthDetail;
+use app\models\ApiMonthDetailSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use app\core\behaviors\TimestampBehavior;
 /**
  * ApiMonthDetailController implements the CRUD actions for ApiMonthDetail model.
  */
-class ApiMonthSettingController extends Controller
+class ApiMonthDetailController extends Controller
 {
     public function behaviors()
     {
@@ -27,18 +27,13 @@ class ApiMonthSettingController extends Controller
         ];
     }
 
-    public function actionUpdating($id){
-        $model = new ApiMonthSetting();
-        $model->updateTheMonth($id);
-        $this->redirect(['index']);
-    }
     /**
      * Lists all ApiMonthDetail models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ApiMonthSettingSearch();
+        $searchModel = new ApiMonthDetailSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,8 +61,8 @@ class ApiMonthSettingController extends Controller
      */
     public function actionCreate()
     {
-        $model = new ApiMonthSetting();
-        $model->setScenario('create');
+        $model = new ApiMonthDetail();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -118,7 +113,7 @@ class ApiMonthSettingController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ApiMonthSetting::findOne($id)) !== null) {
+        if (($model = ApiMonthDetail::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

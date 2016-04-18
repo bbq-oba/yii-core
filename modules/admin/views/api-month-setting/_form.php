@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <?php $form = ActiveForm::begin(); ?>
 <div class="api-month-detail-form box-body">
 
-    <?= $form->field($model, 'time')->dropDownList(\app\helpers\MonthCron::getMonth()) ?>
+    <?= $form->field($model, 'time')->dropDownList(\app\helpers\MonthLogic::getMonth()) ?>
 
 </div>
 <div class="box-footer">

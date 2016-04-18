@@ -28,9 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->viewTime.$data->viewIsUpdating;
                 }
             ],
-            'updated_count',
-            'selected_count',
-            'created_at',
+            'updatedCount',
+            'allCount',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' =>'{view}',
+                'buttons' =>[
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('查看',\yii\helpers\Url::to(['/admin/api-month-detail/index','ApiMonthDetailSearch[mtime]'=>$model->time]));
+                    },
+                ]
+            ],
             // 'updated_at',
 
             [
