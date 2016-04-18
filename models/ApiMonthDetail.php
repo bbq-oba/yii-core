@@ -53,8 +53,8 @@ class ApiMonthDetail extends Model
     public function rules()
     {
         return [
-            [['idvisit', 'mtime', 'updated_datatype_9', 'updated_datatype_10', 'updated_datatype_11', 'updated_datatype_12', 'visitor_referrer', 'created_at', 'updated_at'], 'integer'],
-            [['visitor_datatype_9', 'visitor_datatype_10', 'visitor_datatype_12', 'visitor_datatype_11', 'visitor_username'], 'string', 'max' => 255]
+            [['idvisit', 'mtime', 'updated_datatype_10', 'updated_datatype_11', 'updated_datatype_12', 'updated_datatype_13', 'visitor_referrer', 'created_at', 'updated_at'], 'integer'],
+            [[ 'visitor_datatype_10','visitor_datatype_11', 'visitor_datatype_12', 'visitor_datatype_13', 'visitor_username'], 'safe']
         ];
     }
 
@@ -67,14 +67,16 @@ class ApiMonthDetail extends Model
             'id' => 'ID',
             'idvisit' => 'Idvisit',
             'mtime' => 'Mtime',
-            'visitor_datatype_9' => 'Visitor Datatype 0',
-            'visitor_datatype_10' => 'Visitor Datatype 1',
-            'visitor_datatype_12' => 'Visitor Datatype 2',
-            'visitor_datatype_11' => 'Visitor Datatype 3',
-            'updated_datatype_9' => 'Updated Datatype 0',
-            'updated_datatype_10' => 'Updated Datatype 1',
-            'updated_datatype_11' => 'Updated Datatype 2',
-            'updated_datatype_12' => 'Updated Datatype 3',
+            'visitor_datatype_10' => 'Visitor Datatype 10',
+            'visitor_datatype_11' => 'Visitor Datatype 11',
+            'visitor_datatype_12' => 'Visitor Datatype 12',
+            'visitor_datatype_13' => 'Visitor Datatype 13',
+
+            'updated_datatype_10' => 'Updated Datatype 10',
+            'updated_datatype_11' => 'Updated Datatype 11',
+            'updated_datatype_12' => 'Updated Datatype 12',
+            'updated_datatype_13' => 'Updated Datatype 13',
+
             'visitor_username' => 'Visitor Username',
             'visitor_referrer' => 'Visitor Referrer',
             'created_at' => 'Created At',
