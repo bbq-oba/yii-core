@@ -81,7 +81,6 @@ class BaseLogic extends Object
         return $query;
     }
     public static function run($url , $params){
-        print_r($params);
         $curl = new Curl();
         $curl->setJsonDecoder(function($response) {
             $json_obj = json_decode($response, true);
@@ -91,7 +90,6 @@ class BaseLogic extends Object
             return $response;
         });
         $curl->get($url,$params);
-        echo $curl->url;
 
         $curl->setConnectTimeout(10);
         $curl->close();

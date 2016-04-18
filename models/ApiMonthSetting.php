@@ -108,9 +108,11 @@ class ApiMonthSetting extends Model
     public function getViewIsUpdating(){
         return $this->status ? ' [正在更新]' : '';
     }
-    public function updateTheMonth($id){
+    public function updateTheMonth($id , $tip = true){
         if($this->updating > 0){
-            \yii::$app->session->setFlash('success',"还有数据尚未更新完成，请稍后");
+            if($tip){
+                \yii::$app->session->setFlash('success',"还有数据尚未更新完成，请稍后");
+            }
         }else{
            $model = self::findOne($id);
            $model->setScenario('updating');
@@ -121,4 +123,7 @@ class ApiMonthSetting extends Model
            $m->reset();
         }
     }
+
+
+
 }

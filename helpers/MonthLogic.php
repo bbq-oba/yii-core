@@ -15,6 +15,7 @@ use app\models\ApiVisitorConfig;
 use app\models\ApiVisitorDetail;
 use app\models\ApiVisitorRangeDetail;
 use app\models\StatLogVisit;
+use DeviceDetector\Parser\Device\Console;
 use yii\helpers\ArrayHelper;
 
 class MonthLogic extends BaseLogic
@@ -86,8 +87,16 @@ class MonthLogic extends BaseLogic
     }
 
     public function go($limit = 100){
-        $this->start();
-        $this->getUpdate($limit);
+
+        $model = new ApiMonthSetting();
+        $data = $model->getUpdating();
+
+        if($data){
+
+            $this->start();
+            $this->getUpdate($limit);
+        }
+
     }
 
     //查找需要更新的条目
@@ -151,20 +160,34 @@ class MonthLogic extends BaseLogic
                 $fieldName = 'visitor_datatype_'.$type;
                 $timeName =  'updated_datatype_'.$type;
                 $fieldReturn = $this->get($v['visitor_referrer'],$type,$params);
-                print_r($fieldReturn);
+
                 if($fieldReturn['code'] == 200){
                     $model->{$fieldName} = $fieldReturn['data'];
                     $model->{$timeName} = CURRENT_TIMESTAMP;
+
+                    \yii::$app->controller->stdout(sprintf("%s - %s:%s Id:%d \n",$v->visitor_username , $config['name'] , $fieldReturn['data'],$model->id), \yii\helpers\Console::BOLD);
+
                 }
             }
-            print_r($model->attributes);
+
 
             if($model->save()){
                 $v->month_cron = 0;
                 $v->save();
+            }else{
+                print_r($model->errors);
             };
 
         }
+
+
+        if(!ApiVisitorDetail::getMonthCronData($this->time)){
+            $model = new ApiMonthSetting();
+            $data = $model->getUpdating();
+            $model->updateTheMonth($data->id,false);
+        }
+
+
     }
 
 

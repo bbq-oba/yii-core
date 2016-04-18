@@ -252,5 +252,10 @@ class ApiVisitorDetail extends ActiveRecord
         return md5('indentify_'.implode(',',$array));
     }
 
+    public static function getMonthCronData($time){
+        return self::find()->where([
+            'month_cron' =>$time
+        ])->count();
+    }
 
 }

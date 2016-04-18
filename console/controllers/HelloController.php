@@ -33,11 +33,10 @@ class HelloController extends Controller
     public function actionIndex($limit = 100)
     {
         (new UserLogic())->go($limit);
-        (new MonthLogic())->go($limit);
     }
 
     public function actionMonth($limit = 100){
-
+        (new MonthLogic())->go($limit);
     }
 
     public function actionTest(){
