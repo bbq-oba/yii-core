@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use \app\core\models\Model;
 use \yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "{{%api_month_detail}}".
  *
@@ -24,7 +26,7 @@ use \yii\behaviors\TimestampBehavior;
  * @property string $created_at
  * @property string $updated_at
  */
-class ApiMonthDetail extends Model
+class ApiMonthDetail extends ActiveRecord
 {
     /**
      * @inheritdoc
