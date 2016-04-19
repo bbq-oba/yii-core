@@ -232,12 +232,6 @@ class StatColumns
         ];
         self::$columns [] = [
             'value' => function ($data) {
-                return $data['visitor_datatype_4'] ? date('Y-m-d H:i:s',strtotime($data['visitor_datatype_4']) + 28800) : null;
-            },
-            'header' => '登录时间'
-        ];
-        self::$columns [] = [
-            'value' => function ($data) {
                 return $data['visitor_datatype_5'];
             },
             'header' => '提款次数'
@@ -283,6 +277,18 @@ class StatColumns
 //            },
 //            'header' => UserService::$typeEnum[8][0]
 //        ];
+
+
+
+         self::$columns [] = [
+            'value' => function ($data) {
+                return $data['visitor_datatype_4'] ? date('Y-m-d H:i:s',strtotime($data['visitor_datatype_4']) + 43200) : null;
+            },
+            'header' => '最后登陆'
+         ];
+
+
+        
 
 
         self::Columns10();
