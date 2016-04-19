@@ -70,7 +70,7 @@ class VisitsDetails extends Model
                 break;
             case 3:
                 //未注册用户
-                $segment[] = 'userId==';
+//                $segment[] = 'userId==';
                 $this->render = 'common-user';
                 break;
             default:
