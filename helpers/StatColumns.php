@@ -48,7 +48,7 @@ class StatColumns
                 if ($data['visitorType'] == 'new') {
                     return '新访客';
                 } else {
-                    return '老访客<br />第' . $data['visitCount'] . '次访问';
+                    return '老访客<br />第' . ($data['visitCount']+1) . '次访问';
                 }
             },
             'format' => 'raw',
