@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="brand-index">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'columns' => \app\modules\admin\helpers\StatColumns::getRegUserColumns(),
+        'columns' => \app\helpers\StatColumns::getRegUserColumns(),
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'export' => [

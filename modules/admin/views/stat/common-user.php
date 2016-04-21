@@ -27,7 +27,7 @@ $panel = "";
 <div class="brand-index">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'columns' => \app\modules\admin\helpers\StatColumns::getCommonUserColumns(),
+        'columns' => \app\helpers\StatColumns::getCommonUserColumns(),
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'export' => [

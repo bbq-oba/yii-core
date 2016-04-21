@@ -82,7 +82,7 @@ $columns = [
 <div class="brand-index">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'columns' => \app\modules\admin\helpers\StatColumns::getRegUserColumns(),
+        'columns' => \app\helpers\StatColumns::getRegUserColumns(),
         'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],

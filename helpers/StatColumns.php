@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\helpers;
+namespace app\helpers;
 
 /**
  * Created by PhpStorm.
