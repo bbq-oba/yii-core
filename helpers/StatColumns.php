@@ -130,6 +130,15 @@ class StatColumns
     public static function getCommonUserColumns()
     {
         self::Columns1();
+	self::$columns[] = [
+            'header' => 'id',
+            'value' => 'idVisit',
+	];
+        self::$columns [] = [
+            'header' => '账号',
+            'value' => 'userId',
+            'filter' => GridView::TEXT
+        ];
         self::Columns2();
         self::Columns3();
         self::Columns4();
@@ -156,6 +165,10 @@ class StatColumns
     public static function getRegUserColumns()
     {
         self::Columns1();
+        self::$columns[] = [
+            'header' => 'id',
+            'value' => 'idVisit',
+        ];
         self::Columns2();
         self::Columns3();
         self::Columns4();
