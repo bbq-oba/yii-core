@@ -3,9 +3,9 @@
  */
 var _paq = _paq || [];
 if(document.getElementById("RegisterSuccess") != null && document.getElementById("RegisterReferrer") != null){
+    _paq.push(['setUserId',document.getElementById("RegisterSuccess").value]);
     _paq.push(['setCustomVariable',1,'regTime',Date.parse(new Date())/1000,'visit']);
     _paq.push(['setCustomVariable',2,'regReferrer',document.getElementById("RegisterReferrer").value,'visit']);
-    _paq.push(['setCustomVariable',3,'regUser',document.getElementById("RegisterSuccess").value,'visit']);
 }
 _paq.push(['trackPageView']);
 _paq.push(['enableLinkTracking']);
