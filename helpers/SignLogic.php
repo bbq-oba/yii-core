@@ -31,6 +31,8 @@ class SignLogic extends BaseLogic
     public function post($url,$params){
         $sign = self::makeSign($params);
         $url = $url.'?timestamp='.CURRENT_TIMESTAMP.'&sign='.$sign;
+        echo $url."\r\n";
+        print_r($params);
         return self::run($url,$params,self::METHOD_POST);
     }
 
