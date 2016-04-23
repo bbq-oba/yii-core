@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="Scripts/md5-utf8.js"></script>
+    <script type="text/ecmascript">
+
+        function getUTCNow() {
+            var d = new Date();
+            var yyyy = d.getUTCFullYear();
+            var MM = d.getMonth() < 9 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1);
+            var dd = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+            var HH = d.getUTCHours() < 10 ? "0" + d.getUTCHours() : d.getUTCHours();
+            var mm = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+            var ss = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+
+            return (yyyy + '-' + MM + '-' + dd + ' ' + HH + ':' + mm + ':' + ss);
+        }
+        
+        var api = 'http://lbvbet.gallary.work/';
+        var secretKey = '604A0B84-FBAD-4B45-AF2D-E1F848CD543F';
+
+        $(function () {
+            $('#regist').click(function () {
+                $('#loading').show();
+
+                var params = { 'UserName': $('#rUserName').val(), 'Password': $('#rPassword').val(), 'TrueName' : '', 'Phone': $('#rPhone').val(), 'Email':'', 'ReferralCode': $('#rReferralCode').val() };
+
+                // 所有API方法都有timestamp和sign两个参数（以get方式传递）
+
+                // API方法的timestamp参数的值：
+                //// 调用方法时的UTC时间(格式yyy-MM-dd HH:mm:ss)
+                var timestamp = getUTCNow();
+
+                // API方法sign参数的值：
+                //// 该方法sign参数以外的所有参数和secretKey及他们的值用下面的方式(按参数先后顺序，注意参数名大小写，没有值的传空字符串，secretKey放最后)连接成字符串（UTF-8格式），然后进行md5加密成32位字符串。
+                var str = 'UserName=' + $('#rUserName').val() + '&Password=' + $('#rPassword').val() + '&TrueName=' + '&Phone=' + $('#rPhone').val() + '&Email=&ReferralCode=' + $('#rReferralCode').val() + '&timestamp=' + timestamp + '&secretKey=' + secretKey;
+                var sign = md5(str);
+
+                $.ajax({
+                    type: "POST",
+                    url: api + "api/Extension/Regist?timestamp=" + timestamp + "&sign=" + sign,
+                    data: params,
+                    xhrFields: { withCredentials: true },
+                    success: function (data) {
+                        $('#loading').hide();
+                        if (data && data.StatusCode == 0) {
+                            $('#registResult div').html('注册成功：' + data.Data);
+                        }
+                        else {
+                            $('#registResult div').html('注册失败：' + data.Message);
+                        }
+                        $('#registResult').show();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        $('#loading').hide();
+                        $('#registResult div').html('调用api/Extension/Regist失败：' + errorThrown);
+                        $('#registResult').show();
+                    }
+                });
+            });
+
+            $('#referralCode').click(function () {
+                $('#loading').show();
+
+                var timestamp = getUTCNow();
+
+                var str = 'userName=' + $('#cUserName').val() + '&timestamp=' + timestamp + '&secretKey=' + secretKey;
+                var sign = md5(str);
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "api/Extension/ReferralCode?userName=" + $('#cUserName').val() + "&timestamp=" + timestamp + "&sign=" + sign,
+                    xhrFields: { withCredentials: true },
+                    success: function (data) {
+                        $('#loading').hide();
+                        if (data && data.StatusCode == 0) {
+                            $('#codeResult div').html('获取成功：' + data.Data);
+                        }
+                        else {
+                            $('#codeResult div').html('获取成功：' + data.Message);
+                        }
+                        $('#codeResult').show();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        $('#loading').hide();
+                        $('#codeResult div').html('调用api/Extension/ReferralCode失败：' + errorThrown);
+                        $('#codeResult').show();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body style="padding-top:20px;">
+    <div id="loading" style="position:absolute; left:0; top:0; bottom:0; right:0; z-index:99; display:none;text-align:center;font-weight:bold;">正在处理...</div>
+    <fieldset>
+    <legend>注册</legend>
+    用户名: <input type="text" id="rUserName" />
+    密码: <input type="text" id="rPassword" />
+    电话: <input type="text" id="rPhone" />
+    推荐码: <input type="text" id="rReferralCode" />
+        <input type="button" id="regist" value="注册" />
+        <fieldset id="registResult" style="display:none;">
+        <legend>返回结果</legend>
+            <div></div>
+        </fieldset>
+    </fieldset>
+    <fieldset>
+        <legend>获取推荐码</legend>
+        用户名: <input type="text" id="cUserName" />
+         <input type="button" id="referralCode" value="获取" />
+         <fieldset id="codeResult" style="display:none;">
+            <legend>返回结果</legend>
+             <div></div>
+         </fieldset>
+    </fieldset>
+</body>
+</html>
