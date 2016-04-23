@@ -28,4 +28,21 @@ class SignLogic extends BaseLogic
         return $this->post($url,$post);
     }
 
+    public function post($url,$params){
+        $sign = self::makeSign($params);
+        $url = $url.'?timestamp='.CURRENT_TIMESTAMP.'&sign='.$sign;
+        return self::run($url,$params,self::METHOD_POST);
+    }
+
+
+    //生成签名
+    public static function makeSign($params){
+        $params['timestamp'] = date('Y-m-d H:i:s',CURRENT_TIMESTAMP);
+        $params['secretKey'] = self::SECRET_KEY;
+        $sign = md5(self::buildQuery($params));
+        return $sign;
+    }
+
+
+
 }

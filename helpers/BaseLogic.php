@@ -72,10 +72,7 @@ class BaseLogic extends Object
 
 
 
-    public function post($url,$params){
-        $params = self::makeSign($params);
-        return self::run($url,$params,self::METHOD_POST);
-    }
+
 
 
     public function curl ($ref , $type , $params , $method){
