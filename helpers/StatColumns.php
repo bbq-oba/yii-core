@@ -43,19 +43,26 @@ class StatColumns
 
     public static function Columns4()
     {
-        self::$columns[] = ['header' => '访客类别',
-            'value' => function ($data) {
-                if ($data['visitorType'] == 'new') {
-                    return '新访客';
-                } else {
-                    return '老访客<br />第' . ($data['visitCount']+1) . '次访问';
-                }
-            },
-            'format' => 'raw',
-            'headerOptions' => [
-                'style' => 'width:100px;'
-            ]
-        ];
+	self::$columns[] = [
+		'header'=>'访问次数',
+		'value'=>'actions'
+	];
+
+
+
+//        self::$columns[] = ['headear' => '访客类别',
+//            'value' => function ($data) {
+//                if ($data['visitorType'] == 'new') {
+//                    return '新访客';
+//                } else {
+//                    return '老访客<br />第' . ($data['visitCount']+1) . '次访问';
+//                }
+//            },
+//            'format' => 'raw',
+//            'headerOptions' => [
+ //               'style' => 'width:100px;'
+  //          ]
+ //       ];
     }
 
     public static function Columns5()
