@@ -113,7 +113,12 @@ class BaseLogic extends Object
             'data' => null,
         ];
         if ($curl->error) {
-            return $return;
+
+            return [
+                'code'=>$curl->errorCode,
+                'msg'=>$curl->errorMessage,
+                'data'=>null
+            ];
         } else {
             if($curl->response === false){
                 return $return;
