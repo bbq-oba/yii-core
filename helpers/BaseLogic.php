@@ -63,13 +63,25 @@ class BaseLogic extends Object
     }
 
 
+    const METHOD_GET = 'get';
+    const METHOD_POST = 'post';
+
     public function get($ref , $type , $params){
+        return $this->curl($ref,$type,$params, self::METHOD_GET);
+    }
+
+
+
+
+
+
+    public function curl ($ref , $type , $params , $method){
         $params = array_filter($params,function($val){
             return $val !== null;
         });
         $url = $this->makeUrl($ref,$type);
         $params = self::makeSign($params);
-        return self::run($url,$params);
+        return self::run($url,$params,$method);
     }
 
     public static function buildQuery($params){
@@ -80,7 +92,7 @@ class BaseLogic extends Object
         $query = implode('&', $paramsJoined);
         return $query;
     }
-    public static function run($url , $params){
+    public static function run($url , $params , $method){
         $curl = new Curl();
         $curl->setJsonDecoder(function($response) {
             $json_obj = json_decode($response, true);
@@ -89,8 +101,7 @@ class BaseLogic extends Object
             }
             return $response;
         });
-        $curl->get($url,$params);
-
+        $curl->$method($url,$params);
         $curl->setConnectTimeout(10);
         $curl->close();
         return self::handleResponse($curl);
