@@ -27,14 +27,14 @@ class SignLogic extends BaseLogic
     }
     public function signUp($post,$ref){
         $url = $this->makeUrl($ref,self::URL_SIGN_UP);
-        echo $url."<br />";
-        print_r($post);
         return $this->signPost($url,$post);
     }
 
     public function signPost($url,$params){
         $sign = self::makeSign($params);
         $url = $url.'?timestamp='.urlencode(date('Y-m-d H:i:s',CURRENT_TIMESTAMP)).'&sign='.$sign;
+echo $url."<br />";
+        print_r($params);
         return $this->post($url,$params);
     }
 
