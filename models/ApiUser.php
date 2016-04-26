@@ -94,8 +94,7 @@ class ApiUser extends Model
         if (!$this->checkModel) {
             $this->addError('smsCode', '短信验证码错误');
             return false;
-        }
-        if ($this->checkModel->code != $this->smsCode) {
+        }        if ($this->checkModel->code != $this->smsCode) {
             $this->addError('smsCode', '短信验证码错误');
             return false;
         }

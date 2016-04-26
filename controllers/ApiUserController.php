@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\api\yunpian\SmsOperator;
+use app\helpers\SignLogic;
 use app\helpers\SmsHelper;
 use Yii;
 use app\models\ApiUser;
@@ -66,7 +67,10 @@ class ApiUserController extends Controller
         $model = new ApiUser();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $render = (new SignLogic())->signIn($model->UserName,$model->Password);
+            return $this->render('in',[
+                'render'=>$render
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
