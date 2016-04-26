@@ -34,7 +34,10 @@ class SignForm extends Model
 
     public function signUp(){
         $logic = new SignLogic();
-        return $logic->signUp($this->attributes,1);
+        $return = $logic->signUp($this->attributes,1);
+        if($return['code'] != 200){
+            $this->addError('Username',$return['msg']);
+        }
     }
 
 

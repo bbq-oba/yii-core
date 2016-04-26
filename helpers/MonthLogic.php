@@ -170,7 +170,7 @@ class MonthLogic extends BaseLogic
             foreach($this->config as $type => $config){
                 $fieldName = 'visitor_datatype_'.$type;
                 $timeName =  'updated_datatype_'.$type;
-                $fieldReturn = $this->get($v['visitor_referrer'],$type,$params);
+                $fieldReturn = $this->getByType($v['visitor_referrer'],$type,$params);
 
                 if($fieldReturn['code'] == 200){
                     $model->{$fieldName} = $fieldReturn['data'];

@@ -19,6 +19,21 @@ use yii\helpers\Console;
 class UserLogic extends BaseLogic
 {
 
+    public static $typeEnum  = [
+        0 => ['所属推广号','api/Extension/ReferralCode'],
+        1 => ['用户首存金额','api/Extension/FirstDepositAmount'],
+        2 => ['用户首存优惠','api/Extension/FirstDepositBonus'],
+        3 => ['用户存款笔数','api/Extension/DepositCount'],
+        4 => ['登录时间','api/Extension/LastLogin'],
+        5 => ['成功提款次数','api/Extension/WithdrawalCount'],
+        6 => ['会员投注信息',' api/Extension/BetAmount'],
+        7 => ['未存款之前领取的优惠'],
+        8 => ['所有优惠'],
+    ];
+
+
+
+
     public $config = [];
 
     public function init(){
@@ -108,6 +123,7 @@ class UserLogic extends BaseLogic
 
 
 
+
     //  visitor_datatype_0
     public function cronVisitorDataType($type){
 
@@ -135,7 +151,7 @@ class UserLogic extends BaseLogic
             $params = [
                 'userName' => $userName ,
             ];
-            $return = $this->get($ref,$type,$params);
+            $return = $this->getByType($ref,$type,$params);
 //            $return = [
 //                'code' =>200 ,
 //                'data' =>'a'
