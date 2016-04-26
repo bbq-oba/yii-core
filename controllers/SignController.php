@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+
 use app\helpers\Mobile;
 use app\helpers\SignLogic;
 use app\helpers\SmsHelper;
@@ -13,15 +14,17 @@ class SignController extends Controller
 
     public $layout = '@app/views/sign/layouts/sign';
 
-    public function actionCaptchaCode($mobile){
+    public function actionCaptchaCode($mobile)
+    {
         \yii::$app->response->format = Response::FORMAT_JSON;
-        if(Mobile::check($mobile)){
+        if (Mobile::check($mobile)) {
             $return = SmsHelper::send($mobile);
-        }else{
-            $return = ['code'=>203, 'msg'=>'请输入正确手机号'];
+        } else {
+            $return = ['code' => 203, 'msg' => '请输入正确手机号'];
         }
         return $return;
     }
+
     /**
      * Creates a new ApiUser model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -33,14 +36,22 @@ class SignController extends Controller
         $model = new ApiUser();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $render = (new SignLogic())->signIn($model->UserName,$model->Password);
-            return $this->render('in',[
-                'render'=>$render
+            $signIn = (new SignLogic())->signIn($model->UserName, $model->Password);
+            return $this->render('in', [
+                'signIn' => $signIn
             ]);
         } else {
             return $this->render('up', [
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionTest($u = 'oyoy862123xz', $p = '123123z')
+    {
+        $signIn = (new SignLogic())->signIn($u, $p);
+            return $this->render('in', [
+                'signIn' => $signIn
+            ]);
     }
 }
