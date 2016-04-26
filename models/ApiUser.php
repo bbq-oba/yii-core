@@ -123,6 +123,7 @@ class ApiUser extends Model
     public function ApiSignUp(){
         $logic = new SignLogic();
         $return = $logic->signUp($this->attributes,1);
+        print_r($return);
         if($return['code'] != 200){
             $this->addError('Username',$return['msg']);
             return false;
