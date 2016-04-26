@@ -21,13 +21,22 @@ class SignLogic extends BaseLogic
 
 
     public  function makeUrl($ref,$url){
-        return 'http://api.vbetctrl.net/'.$url;
+//        return 'http://api.vbetctrl.net/'.$url;
         return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
 //        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
     }
     public function signUp($post,$ref){
+
+        $params['UserName'] = $post['UserName'];
+        $params['Password'] = $post['Password'];
+        $params['TrueName'] = $post['TrueName'];
+        $params['Phone'] = $post['Phone'];
+        $params['Email'] = $post['Email'];
+        $params['ReferralCode'] = $post['ReferralCode'];
+
+
         $url = $this->makeUrl($ref,self::URL_SIGN_UP);
-        return $this->signPost($url,$post);
+        return $this->signPost($url,$params);
     }
 
     public function signPost($url,$params){
