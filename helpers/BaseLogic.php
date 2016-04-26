@@ -102,7 +102,8 @@ class BaseLogic extends Object
             return $response;
         });
         $curl->$method($url,$params);
-        $curl->setConnectTimeout(10);
+print_r($curl);exit;        
+$curl->setConnectTimeout(10);
         $curl->close();
         return self::handleResponse($curl);
     }

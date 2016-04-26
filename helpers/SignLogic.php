@@ -21,7 +21,8 @@ class SignLogic extends BaseLogic
 
 
     public  function makeUrl($ref,$url){
-        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
+	return 'http://api.vbetctrl.net/'.$url;     
+//   return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
     }
     public function signUp($post,$ref){
         $url = $this->makeUrl($ref,self::URL_SIGN_UP);
@@ -30,9 +31,9 @@ class SignLogic extends BaseLogic
 
     public function post($url,$params){
         $sign = self::makeSign($params);
-        $url = $url.'?timestamp='.date('Y-m-d H:i:s',CURRENT_TIMESTAMP).'&sign='.$sign;
+        $url = $url.'?timestamp='.urlencode(date('Y-m-d H:i:s',CURRENT_TIMESTAMP)).'&sign='.$sign;
         echo $url."\r\n";
-        print_r($params);
+        echo http_build_query($params);
         return self::run($url,$params,self::METHOD_POST);
     }
 
