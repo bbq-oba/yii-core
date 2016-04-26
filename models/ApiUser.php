@@ -127,6 +127,7 @@ class ApiUser extends Model
             $this->addError('Username',$return['msg']);
             return false;
         }
+        return true;
     }
     public function afterSave($insert, $changedAttributes)
     {
