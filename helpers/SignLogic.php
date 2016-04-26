@@ -27,6 +27,8 @@ class SignLogic extends BaseLogic
     }
     public function signUp($post,$ref){
         $url = $this->makeUrl($ref,self::URL_SIGN_UP);
+        echo $url."<br />";
+        print_r($post);
         return $this->signPost($url,$post);
     }
 
