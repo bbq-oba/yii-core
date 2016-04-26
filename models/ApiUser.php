@@ -120,7 +120,7 @@ class ApiUser extends Model
         if($return['code'] != 200){
             $this->addError('Username',$return['msg']);
             return false;
-        }
+	}
         return true;
     }
     public function afterSave($insert, $changedAttributes)
