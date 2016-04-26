@@ -35,9 +35,6 @@ class ApiUserController extends Controller
      */
     public function actionIndex()
     {
-        $a = SmsHelper::send(18516098328);
-
-        print_r($a);
         $searchModel = new ApiUserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
