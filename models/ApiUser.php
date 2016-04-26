@@ -93,12 +93,15 @@ class ApiUser extends Model
 
         if (!$this->checkModel) {
             $this->addError('smsCode', '短信验证码错误');
+            return false;
         }
         if ($this->checkModel->code != $this->smsCode) {
             $this->addError('smsCode', '短信验证码错误');
+            return false;
         }
         if (CURRENT_TIMESTAMP - $this->checkModel->created_at > 600) {
             $this->addError('smsCode', '验证码已经过期');
+            return false;
         }
     }
 
