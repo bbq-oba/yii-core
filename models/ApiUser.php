@@ -118,7 +118,7 @@ class ApiUser extends Model
         $logic = new SignLogic();
         $return = $logic->signUp($this->attributes,1);
         if($return['code'] != 200){
-            $this->addError('Username',$return['msg']);
+            $this->addError('UserName',$return['msg']);
             return false;
         }
         return true;
