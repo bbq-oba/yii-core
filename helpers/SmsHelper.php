@@ -32,13 +32,11 @@ class SmsHelper
             $code = rand(10000, 99999);
             $sms = new SmsOperator();
             $content = '【乐宝娱乐】您的验证码：' . $code . '，官网网址：http://79333.net';
-//            $send = $sms->single_send([
-//                'mobile'=>$mobile,
-//                'text'=>$content
-//            ]);
-//            ll->statusCode = 200;
-            if (1) {
-                //$send->statusCode == 200){
+            $send = $sms->single_send([
+                'mobile'=>$mobile,
+                'text'=>$content
+            ]);
+            if ($send->statusCode == 200){
                 CaptchaCode::insertCode($mobile, $code, $content);
                 return ['code'=>200, 'msg'=>'ok'];
             }
