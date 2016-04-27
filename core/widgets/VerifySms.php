@@ -123,7 +123,7 @@ class VerifySms extends InputWidget
             var verifyFlag = true;
 
             var timer;
-            var time = initTime =  5;
+            var time = initTime =  120;
             function vStart(){
                jQuery('#$id').attr('disabled','disabled').html('<span id=\"verifyTime\">'+time+'</span>秒后重新获取');
                timer = window.setTimeout(function(){
