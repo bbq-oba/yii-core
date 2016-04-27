@@ -45,7 +45,7 @@ class SignLogic extends BaseLogic
         $timestamp = date('Y-m-d H:i:s', CURRENT_TIMESTAMP);
         $sign = self::makeSign($post);
 
-        $url = $this->makeUrl($ref, self::URL_SIGN_IN) . '?' . http_build_query([
+        $url = 'http://api.lb118.com/'. self::URL_SIGN_IN . '?' . http_build_query([
                 'timestamp' => $timestamp,
                 'sign' => $sign
             ]);
