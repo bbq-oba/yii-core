@@ -9,6 +9,12 @@ $this->title = Yii::t('app', 'Create') . Yii::t('app', 'Api User');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Api Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .api-user-create {
+        width: 300px;
+        margin: 30px auto 0 auto;
+    }
+</style>
 <div class="api-user-create box box-danger">
     <?php $form = ActiveForm::begin(); ?>
     <div class="api-user-form box-body">
@@ -16,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'Phone')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'smsCode')->widget(\app\core\widgets\VerifySms::className(), [
-            'template' => '<div class="row"><div class="col-lg-3">{input}</div><div class="col-lg-6">{button}</div></div>',
+            'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{button}</div></div>',
         ]) ?>
 
         <?= $form->field($model, 'UserName')->textInput(['maxlength' => true]) ?>
