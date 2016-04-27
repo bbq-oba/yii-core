@@ -38,7 +38,8 @@ class SignController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->render('in', [
                 'username' => $model->UserName,
-                'password' => $model->Password
+                'password' => $model->Password,
+                'mobile'=>$model->Phone
             ]);
         } else {
             return $this->render('up', [
@@ -52,6 +53,7 @@ class SignController extends Controller
             return $this->render('in', [
                 'password' => $p,
                 'username' => $u,
+                'mobile'=>123123123
             ]);
     }
 }
