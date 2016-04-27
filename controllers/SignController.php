@@ -47,11 +47,11 @@ class SignController extends Controller
         }
     }
 
-    public function actionTest($u = 'oyoy862123xz', $p = '123123z')
+    public function actionTest($u = 'oooo1111', $p = '123123z')
     {
-        $signIn = (new SignLogic())->signIn($u, $p);
             return $this->render('in', [
-                'signIn' => $signIn
+                'password' => $p,
+                'username' => $u,
             ]);
     }
 }
