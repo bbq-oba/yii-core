@@ -1,8 +1,24 @@
-<form id="signIn" method="post" action="<?php echo $signIn['url']?>">
-    <input type="text" name="UserName" value="<?php echo $signIn['UserName']?>">
-    <input type="text" name="Password" value="<?php echo $signIn['Password']?>">
-    <input type="submit">
-</form>
+<script type="javascript">
+    $(function(){
+        var username = '<?php echo $signIn['UserName']?>';
+        var password = '<?php echo $signIn['Password']?>';
+        $.ajax({
+            type: "GET",
+            url: "http://www.lebao.ph/user/DoQuickLogin",
+            data: {
+                username:username,
+                password:password
+            },
+            success: function (data) {
+                if(data.success == 'true'){
+                    window.location.href="http://www.lebao.ph/";
+                }
+            },
+            dataType:"json"
+        });
+    })
+</script>
+
 <!--<form id="signIn">-->
 <!---->
 <!--</form>-->
