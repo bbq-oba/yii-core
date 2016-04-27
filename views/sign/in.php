@@ -1,7 +1,8 @@
-<script type="javascript">
-    $(function(){
-        var username = '<?php echo $username;?>';
-        var password = '<?php echo $password;?>';
+<?php
+
+$js = <<<EOF
+        var username = '$username';
+        var password = '$password';
         $.ajax({
             type: "GET",
             url: "http://www.lebao.ph/user/DoQuickLogin",
@@ -16,5 +17,8 @@
             },
             dataType:"json"
         });
-    })
-</script>
+EOF;
+
+
+\yii::$app->controller->view->registerJs($js,\yii\web\View::POS_READY);
+?>
