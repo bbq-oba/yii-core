@@ -5,8 +5,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\ApiUser */
 
-$this->title = Yii::t('app', 'Create') . Yii::t('app', 'Api User');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Api Users'), 'url' => ['index']];
+$this->title = '注册';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style>
