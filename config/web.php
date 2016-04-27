@@ -32,7 +32,9 @@ $config = [
         'class' => 'app\core\rbac\AccessControl',
         'allowActions' => [
             'site/login',
-            'site/error'
+            'site/error',
+            'sign/up',
+            'sign/in'
         ]
     ],
     'components' => [
