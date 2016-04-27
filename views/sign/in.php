@@ -1,7 +1,7 @@
 <script type="javascript">
     $(function(){
-        var username = '<?php echo $signIn['UserName']?>';
-        var password = '<?php echo $signIn['Password']?>';
+        var username = '<?php echo $username;?>';
+        var password = '<?php echo $password;?>';
         $.ajax({
             type: "GET",
             url: "http://www.lebao.ph/user/DoQuickLogin",

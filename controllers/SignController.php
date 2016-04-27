@@ -36,9 +36,9 @@ class SignController extends Controller
         $model = new ApiUser();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $signIn = (new SignLogic())->signIn($model->UserName, $model->Password);
             return $this->render('in', [
-                'signIn' => $signIn
+                'username' => $model->UserName,
+                'password' => $model->Password
             ]);
         } else {
             return $this->render('up', [
