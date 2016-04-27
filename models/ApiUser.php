@@ -57,7 +57,7 @@ class ApiUser extends Model
             [['Phone','UserName','Password', 'smsCode'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['UserName', 'Password', 'TrueName', 'ReferralCode', 'Email'], 'string', 'max' => 255],
-            [['ReferralCode','default','value'=>'A000246']],
+            ['ReferralCode','default','value'=>'A000246'],
             [['Phone'], 'validatePhone'],
             [['smsCode'], 'validateSmsCode']
         ];
