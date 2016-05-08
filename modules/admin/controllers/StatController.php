@@ -3,11 +3,12 @@
 namespace app\modules\admin\controllers;
 
 use app\api\core\API;
+use app\helpers\ArrayDataProvider;
 use app\helpers\Page;
 use app\helpers\RegUser;
 use app\modules\admin\models\ApiVisitorDetail;
-use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\Response;
 use app\modules\admin\models\VisitsDetails;
 
@@ -99,22 +100,46 @@ class StatController extends \yii\web\Controller
 
 
 
-    public function actionCommonUser(){
-        $model  = new VisitsDetails();
-        $model->load(\yii::$app->request->queryParams);
+//    public function actionCommonUser(){
+//        $model  = new VisitsDetails();
+//        $model->load(\yii::$app->request->queryParams);
+//
+//        $data = $model->search(3);
+//
+//        $dataProvider = new ArrayDataProvider([
+//            'allModels' => $data,
+//            'totalCount'=>1000,
+//            'pagination' => [
+//                'pageSize' => \yii::$app->request->get('filter_limit',50),
+//            ],
+//        ]);
+//        return $this->render($model->render,[
+//            'title'=>'未注册',
+//            'dataProvider' => $dataProvider,
+//            'model' =>$model
+//        ]);
+//    }
 
-        $data = $model->search(3);
+    public function actionCommonUser(){
+        $model = new \app\models\VisitForm();
+        $model->load(\yii::$app->request->queryParams);
+        $model->initSearch();
+        $count = $model->search('VisitsSummary.getVisits');
+        $model->initPage();
+        $data = $model->search('Live.getLastVisitsDetails');
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
+            'totalCount'=>$count['value'],
             'pagination' => [
-                'pageSize' => \yii::$app->request->get('filter_limit',50),
+                'pageSize' =>$model->pageSize,
             ],
         ]);
-        return $this->render($model->render,[
+        return $this->render('common-user',[
             'title'=>'未注册',
             'dataProvider' => $dataProvider,
             'model' =>$model
         ]);
     }
+
 }

@@ -20,28 +20,37 @@ $type = \yii::$app->request->get("type");
 //&filter_offset=40&filter_limit=20
 
 $panel = "";
-
+$panelHeadingTemplate = <<< HTML
+    {summary}
+    <h3 class="panel-title">
+        {heading}
+    </h3>
+    <div class="clearfix"></div>
+HTML;
 ?>
 
 
 <div class="brand-index">
     <?= GridView::widget([
+        'panelHeadingTemplate' => $panelHeadingTemplate,
         'dataProvider' => $dataProvider,
         'columns' => \app\helpers\StatColumns::getCommonUserColumns(),
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
-        'export' => [
-            'fontAwesome' => true,
-            'target' =>'_blank'
-        ],
-        'toggleData'=>false,
+        'export' => false,
+//        'floatHeader'=>true,
+//        'floatOverflowContainer'=>false,
+//        'floatHeaderOptions' => ['top' => 0],
+        'toggleData' => false,
         'condensed' => true,
         'hover' => true,
         'panel' => [
             'heading' => '',
             'type' => GridView::TYPE_SUCCESS,
-            'before' => $this->render('../search/normal'),
-            'after' => \app\helpers\Page::preNext(),
+            'before' => $this->render('../search/common_search',[
+                'model'=>$model
+            ]),
+            'after' => false
         ],
     ]); ?>
 

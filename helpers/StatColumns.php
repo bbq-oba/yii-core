@@ -43,11 +43,10 @@ class StatColumns
 
     public static function Columns4()
     {
-	self::$columns[] = [
-		'header'=>'访问次数',
-		'value'=>'actions'
-	];
-
+        self::$columns[] = [
+            'header' => '访问次数',
+            'value' => 'actions'
+        ];
 
 
 //        self::$columns[] = ['headear' => '访客类别',
@@ -60,9 +59,9 @@ class StatColumns
 //            },
 //            'format' => 'raw',
 //            'headerOptions' => [
- //               'style' => 'width:100px;'
-  //          ]
- //       ];
+        //               'style' => 'width:100px;'
+        //          ]
+        //       ];
     }
 
     public static function Columns5()
@@ -137,10 +136,10 @@ class StatColumns
     public static function getCommonUserColumns()
     {
         self::Columns1();
-	self::$columns[] = [
+        self::$columns[] = [
             'header' => 'id',
             'value' => 'idVisit',
-	];
+        ];
         self::$columns [] = [
             'header' => '账号',
             'value' => 'userId',
@@ -219,14 +218,14 @@ class StatColumns
                 }
                 $array = [];
 
-                $regText = in_array($data['visitor_referrer'],array_keys(UserLogic::$refEnum)) ? UserLogic::$refEnum[$data['visitor_referrer']]['txt'] : "-";
+                $regText = in_array($data['visitor_referrer'], array_keys(UserLogic::$refEnum)) ? UserLogic::$refEnum[$data['visitor_referrer']]['txt'] : "-";
                 $array[] = sprintf("注册时间:%s", $regTime);
                 $array[] = sprintf("注册来源:%s", $regText);
                 $array[] = sprintf("注册网址:%s", $data['visitor_datatype_9']);
                 $array[] = sprintf("代理　号:%s", $data['visitor_datatype_0']);
                 $array[] = sprintf("首存金额:%s", $data['visitor_datatype_1']);
                 $array[] = sprintf("存款次数:%s", $data['visitor_datatype_3']);
-                return '<div style="width:200px">'.implode("<br />", $array).'</div>';
+                return '<div style="width:200px">' . implode("<br />", $array) . '</div>';
             },
             'header' => '推广信息',
             'format' => 'raw',
@@ -299,16 +298,12 @@ class StatColumns
 //        ];
 
 
-
-         self::$columns [] = [
+        self::$columns [] = [
             'value' => function ($data) {
-                return $data['visitor_datatype_4'] ? date('Y-m-d H:i:s',strtotime($data['visitor_datatype_4']) + 43200) : null;
+                return $data['visitor_datatype_4'] ? date('Y-m-d H:i:s', strtotime($data['visitor_datatype_4']) + 43200) : null;
             },
             'header' => '最后登陆'
-         ];
-
-
-        
+        ];
 
 
         self::Columns10();
