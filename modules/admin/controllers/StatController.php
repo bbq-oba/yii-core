@@ -130,7 +130,7 @@ class StatController extends \yii\web\Controller
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
-            'totalCount'=>$count['value'],
+            'totalCount'=>isset($count['value']) ? $count['value'] : 0 ,
             'pagination' => [
                 'pageSize' =>$model->pageSize,
             ],
