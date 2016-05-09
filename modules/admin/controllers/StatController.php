@@ -127,8 +127,14 @@ class StatController extends \yii\web\Controller
         $count = $model->search('VisitsSummary.getVisits');
         $model->initPage();
         $data = $model->search('Live.getLastVisitsDetails');
+	
+	if(isset($data['result']) && $data['result'] == 'error'){
+		\yii::$app->session->setFlash('error',$data['message']);
+		return $this->redirect('common-user');
+	}        
 
-        $dataProvider = new ArrayDataProvider([
+
+	$dataProvider = new ArrayDataProvider([
             'allModels' => $data,
             'totalCount'=>isset($count['value']) ? $count['value'] : 0 ,
             'pagination' => [

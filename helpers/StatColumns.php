@@ -31,7 +31,7 @@ class StatColumns
     {
         self::$columns[] = ['header' => '访问时间',
             'value' => function ($data) {
-                return date("Y-m-d H:i:s", $data["serverTimestamp"]);
+                return isset($data["serverTimestamp"]) ? date("Y-m-d H:i:s", $data["serverTimestamp"]) : '';
             },
         ];
     }
@@ -73,7 +73,7 @@ class StatColumns
     {
         self::$columns[] = ['header' => 'ip归属地',
             'value' => function ($data) {
-                return implode(" ", IP::find($data["visitIp"]));
+                return isset($data['visitIp']) ? implode(" ", IP::find($data["visitIp"])) : '';
             },
         ];
     }
@@ -90,7 +90,8 @@ class StatColumns
             'header' => '来源url',
             'format' => 'raw',
             'value' => function ($data) {
-                return '<div style="width: 300px; overflow: hidden;">' . $data['referrerUrl'] . '</div>';
+                return isset($data['referrerUrl']) ? ('<div style="width: 300px; overflow: hidden;">' . $data['referrerUrl'] . '</div>') : '';
+
             },
         ];
     }
@@ -110,7 +111,7 @@ class StatColumns
         self::$columns[] = ['header' => '落地页Url',
             'format' => 'raw',
             'value' => function ($data) {
-                if ($data['actionDetails'] && count($data['actionDetails'])) {
+                if (isset($data['actionDetails']) && $data['actionDetails'] && count($data['actionDetails'])) {
                     $pointUrl = array_shift($data['actionDetails']);
                     return '<div style="width: 300px; overflow: hidden;">' . $pointUrl["url"] . '</div>';
                 }
