@@ -31,10 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '',
             'type' => GridView::TYPE_SUCCESS,
-            'before' => $this->render('_search',[
+            'before' => $this->render('../search/common_search',[
                 'model'=>$model
             ]),
-            'after' => \app\helpers\Page::preNext(),
+            'after' => false
         ],
     ]); ?>
 

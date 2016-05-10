@@ -14,15 +14,17 @@ use app\modules\admin\models\VisitsDetails;
 
 class StatController extends \yii\web\Controller
 {
-    public function actionCron($type,$num){
-        \app\models\ApiVisitorDetail::cronUpdateVisitorDataType($type,$num,5);
+    public function actionCron($type, $num)
+    {
+        \app\models\ApiVisitorDetail::cronUpdateVisitorDataType($type, $num, 5);
         return $this->render('cron');
     }
 
-    public function actionTest($user,$type,$ref){
-        foreach(RegUser::$typeEnum as $k=>$v){
+    public function actionTest($user, $type, $ref)
+    {
+        foreach (RegUser::$typeEnum as $k => $v) {
             echo "---  用戶名:$user  --  $k-$v[0]    ---------------\r\n";
-            print_r(RegUser::get($user,$k,$ref));
+            print_r(RegUser::get($user, $k, $ref));
             echo "\r\n";
         }
     }
@@ -39,44 +41,62 @@ class StatController extends \yii\web\Controller
 //        $this->redirect(['reg-user','filter_offset'=>$params['filter_offset']]);
 //    }
 
-    public function actionRegUserLebao(){
-        $model  = new VisitsDetails();
+    public function actionRegUserLebao()
+    {
+        $model = new \app\models\VisitForm();
         $model->load(\yii::$app->request->queryParams);
-
-        $data = $model->search(1);
+        $model->initSearch();
+        $model->segment[] = 'customVariableValue2==1';
+        $count = $model->search('VisitsSummary.getVisits');
+        $model->initPage();
+        $data = $model->search('Live.getLastVisitsDetails');
+        if (isset($data['result']) && $data['result'] == 'error') {
+            \yii::$app->session->setFlash('error', $data['message']);
+            return $this->redirect('common-user');
+        }
+        $data = $model->getDb($data);
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
+            'totalCount' => isset($count['value']) ? $count['value'] : 0,
             'pagination' => [
-                'pageSize' => \yii::$app->request->get('filter_limit',50),
+                'pageSize' => $model->pageSize,
             ],
         ]);
-
-        return $this->render($model->render,[
-            'title'=>'乐宝注册',
+        return $this->render('reg-user', [
+            'title' => '乐宝用户',
             'dataProvider' => $dataProvider,
-            'model' =>$model
+            'model' => $model
         ]);
     }
 
 
-    public function actionRegUserYonglihui(){
-        $model  = new VisitsDetails();
+    public function actionRegUserYonglihui()
+    {
+        $model = new \app\models\VisitForm();
         $model->load(\yii::$app->request->queryParams);
-
-        $data = $model->search(2);
+        $model->initSearch();
+        $model->segment[] = 'customVariableValue2==2';
+        $count = $model->search('VisitsSummary.getVisits');
+        $model->initPage();
+        $data = $model->search('Live.getLastVisitsDetails');
+        if (isset($data['result']) && $data['result'] == 'error') {
+            \yii::$app->session->setFlash('error', $data['message']);
+            return $this->redirect('common-user');
+        }
+        $data = $model->getDb($data);
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
+            'totalCount' => isset($count['value']) ? $count['value'] : 0,
             'pagination' => [
-                'pageSize' => \yii::$app->request->get('filter_limit',50),
+                'pageSize' => $model->pageSize,
             ],
         ]);
-
-        return $this->render($model->render,[
-            'title'=>'永利汇注册',
+        return $this->render('reg-user', [
+            'title' => '永利汇用户',
             'dataProvider' => $dataProvider,
-            'model' =>$model
+            'model' => $model
         ]);
     }
 //    public function actionRegUserOther(){
@@ -99,7 +119,6 @@ class StatController extends \yii\web\Controller
 //    }
 
 
-
 //    public function actionCommonUser(){
 //        $model  = new VisitsDetails();
 //        $model->load(\yii::$app->request->queryParams);
@@ -120,31 +139,32 @@ class StatController extends \yii\web\Controller
 //        ]);
 //    }
 
-    public function actionCommonUser(){
+    public function actionCommonUser()
+    {
         $model = new \app\models\VisitForm();
         $model->load(\yii::$app->request->queryParams);
         $model->initSearch();
         $count = $model->search('VisitsSummary.getVisits');
         $model->initPage();
         $data = $model->search('Live.getLastVisitsDetails');
-	
-	if(isset($data['result']) && $data['result'] == 'error'){
-		\yii::$app->session->setFlash('error',$data['message']);
-		return $this->redirect('common-user');
-	}        
+
+        if (isset($data['result']) && $data['result'] == 'error') {
+            \yii::$app->session->setFlash('error', $data['message']);
+            return $this->redirect('common-user');
+        }
 
 
-	$dataProvider = new ArrayDataProvider([
+        $dataProvider = new ArrayDataProvider([
             'allModels' => $data,
-            'totalCount'=>isset($count['value']) ? $count['value'] : 0 ,
+            'totalCount' => isset($count['value']) ? $count['value'] : 0,
             'pagination' => [
-                'pageSize' =>$model->pageSize,
+                'pageSize' => $model->pageSize,
             ],
         ]);
-        return $this->render('common-user',[
-            'title'=>'未注册',
+        return $this->render('common-user', [
+            'title' => '未注册',
             'dataProvider' => $dataProvider,
-            'model' =>$model
+            'model' => $model
         ]);
     }
 
