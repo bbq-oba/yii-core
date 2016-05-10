@@ -45,6 +45,7 @@ class StatController extends \yii\web\Controller
     {
         $model = new \app\models\VisitForm();
         $model->load(\yii::$app->request->queryParams);
+        $model->segment[] = 'userId!=';
         $model->initSearch();
         $model->segment[] = 'customVariableValue2==1';
         $count = $model->search('VisitsSummary.getVisits');
@@ -75,6 +76,7 @@ class StatController extends \yii\web\Controller
     {
         $model = new \app\models\VisitForm();
         $model->load(\yii::$app->request->queryParams);
+        $model->segment[] = 'userId!=';
         $model->initSearch();
         $model->segment[] = 'customVariableValue2==2';
         $count = $model->search('VisitsSummary.getVisits');
