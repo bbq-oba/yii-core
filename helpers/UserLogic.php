@@ -91,7 +91,7 @@ class UserLogic extends BaseLogic
                     $v['user_id'],                  //user_id
                     $v['custom_var_v2'],             //来源
                     IP::binaryToStringIP($v['location_ip']),               //ip
-                    CURRENT_TIMESTAMP,               //ip
+                    0,               //ip
                     $v['custom_var_v1']
                 ];
 
