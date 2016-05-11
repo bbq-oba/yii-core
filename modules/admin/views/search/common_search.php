@@ -51,7 +51,7 @@ echo FormGrid::widget([
         [
             'attributes' => [       // 1 column layout
                 'pageSize' => [
-                    'type' => Form::INPUT_DROPDOWN_LIST,
+                    'type' => Form::INPUT_TEXT,
                     'options' => [
                         'name' => 'per-page'
                     ],
