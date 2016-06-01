@@ -1,3 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推广注册</title>
+    <link href="/sign/css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div CLASS="BG">
+    <div class="BG-BOX" >
+        <div class="title-box">
+            <img src="/sign/img/TITLE.PNG" class="TIT">
+            <img src="/sign/img/slot.png" CLASS="SLOT">
+        </div>
+        <from>
+            <div CLASS="FROM">
+                <label>手机号码</label>
+                <input class="INP-1" type="text">
+            </div>
+            <div class="FROM">
+                <label class="lab1" style="padding: 0 29px 0 18px;">验证码</label>
+                <input type="text" class="INP-2">
+                <input type="button" value="获取验证码" class="INP-3">
+            </div>
+            <div CLASS="FROM">
+                <label>用户帐户</label>
+                <input type="text" class="INP-4">
+            </div>
+            <div CLASS="FROM">
+                <label>用户密码</label>
+                <input class="INP-5" type="text">
+            </div>
+            <div class="FROM">
+                <a href="#"><img src="/sign/img/zhuce-btn.png" style="margin-top: 10px;"></a>
+            </div>
+        </from>
+    </div>
+</div>
+</body>
+</html>
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;

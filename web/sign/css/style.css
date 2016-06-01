@@ -1,0 +1,25 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    font-size: 12px;
+    font-family: "微软雅黑";
+    background-color: #580000;
+}
+
+.BG{background: url(../img/bg.jpg) no-repeat; width: 1920px;  height: 985px;}
+ul li{float:left;}
+input,a{outline:none;}
+.BG-BOX{width: 1400px;height: 985px; text-align: center; margin: 0 auto;}
+.TIT{margin: 115px 0 0 7px;}
+.SLOT{margin-left: 96px;}
+.FROM{margin-top: 10px; margin-bottom: 10px;}
+.FROM label{font-size: 18px;color: #fff;padding: 0 12px;}
+.INP-1{width: 226px; height: 35px;Border-radius: 8px;padding: 0 10px;font-size: 14px;}
+.lab1{font-size: 18px;color: #fff;padding: 0 21px;}
+.INP-2{width: 86px; height: 35px;Border-radius: 8px;padding: 0 10px;font-size: 14px;}
+.INP-3{width: 130px; margin-left: 9px;border: 0; height: 0px; line-height: 0px;padding: 17px 21px 21px 21px; background: url(../img/yz-btn.png) no-repeat;color: #fff;font-size: 16px;}
+.INP-4{width: 226px; height: 35px;Border-radius: 8px;padding: 0 10px;font-size: 14px;}
+.INP-5{width: 226px; height: 35px;Border-radius: 8px;padding: 0 10px;font-size: 14px;}

@@ -57,7 +57,7 @@ class ApiUser extends Model
             [['Phone','UserName','Password', 'smsCode'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['UserName', 'Password', 'TrueName', 'ReferralCode', 'Email'], 'string', 'max' => 255],
-            ['ReferralCode','default','value'=>'A000246'],
+            ['ExtendCode','default','value'=>'A000355'],
             [['Phone'], 'validatePhone'],
             [['smsCode'], 'validateSmsCode']
         ];
@@ -76,7 +76,7 @@ class ApiUser extends Model
             'verifyCode' => '验证码',
             'smsCode' => '短信码',
             'Phone' => '电话',
-            'ReferralCode' => '推荐码',
+            'ExtendCode' => '推荐码',
             'Email' => '邮箱',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
