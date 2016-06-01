@@ -1,48 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>推广注册</title>
-    <link href="/sign/css/style.css" rel="stylesheet" type="text/css">
-
-</head>
-<body>
-<div CLASS="BG">
-    <div class="BG-BOX" >
-        <div class="title-box">
-            <img src="/sign/img/TITLE.PNG" class="TIT">
-            <img src="/sign/img/slot.png" CLASS="SLOT">
-        </div>
-        <from>
-            <div CLASS="FROM">
-                <label>手机号码</label>
-                <input class="INP-1" type="text">
-            </div>
-            <div class="FROM">
-                <label class="lab1" style="padding: 0 29px 0 18px;">验证码</label>
-                <input type="text" class="INP-2">
-                <input type="button" value="获取验证码" class="INP-3">
-            </div>
-            <div CLASS="FROM">
-                <label>用户帐户</label>
-                <input type="text" class="INP-4">
-            </div>
-            <div CLASS="FROM">
-                <label>用户密码</label>
-                <input class="INP-5" type="text">
-            </div>
-            <div class="FROM">
-                <a href="#"><img src="/sign/img/zhuce-btn.png" style="margin-top: 10px;"></a>
-            </div>
-        </from>
-    </div>
-</div>
-</body>
-</html>
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
+use \kartik\form\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\ApiUser */
 
@@ -51,30 +9,56 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style>
     .api-user-create {
-        width: 300px;
-        margin: 30px auto 0 auto;
+        width: 350px;
+        margin: 0px auto 0 auto;
     }
+    input:-webkit-autofill {
+        background-color: #FAFFBD;
+        background-image: none;
+        color: #000;
+    }
+    .api-user-form .has-success .control-label{ color: #ffffff;}
+    .api-user-form .has-error label,.has-error .help-block{ color: #ffffff;}
+    .control-label { font-size: 18px; color:#ffffff;}
+    .regBtn{ width: 246px; margin: 0; padding: 0; border:0; background: none; text-indent:  -9999px;
+        font-size:0;
+        height:66px; background-image:url("/sign/img/zhuce-btn.png");}
 </style>
-<div class="api-user-create box box-danger">
-    <?php $form = ActiveForm::begin(); ?>
-    <div class="api-user-form box-body">
 
-        <?= $form->field($model, 'Phone')->textInput(['maxlength' => true]) ?>
+<link href="/sign/css/style.css" rel="stylesheet" type="text/css">
 
-        <?= $form->field($model, 'smsCode')->widget(\app\core\widgets\VerifySms::className(), [
-            'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{button}</div></div>',
-        ]) ?>
+<div CLASS="BG">
+    <div class="BG-BOX" >
+        <div class="title-box">
+            <img src="/sign/img/TITLE.PNG" class="TIT">
+            <img src="/sign/img/slot.png" CLASS="SLOT">
+        </div>
+        <div class="api-user-create box box-danger">
+            <?php $form = \kartik\form\ActiveForm::begin(
+                [
+                    'type' => ActiveForm::TYPE_HORIZONTAL,
+                    'formConfig' => ['labelSpan' =>4, 'deviceSize' => ActiveForm::SIZE_SMALL]
+                ]
+            ); ?>
+            <div class="api-user-form box-body">
+                <?= $form->field($model, 'Phone')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'UserName')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'smsCode')->widget(\app\core\widgets\VerifySms::className(), [
+                    'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{button}</div></div>',
+                ]) ?>
 
-        <?= $form->field($model, 'Password')->passwordInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'UserName')->textInput(['maxlength' => true,'autocomplete'=>'off']) ?>
 
+                <?= $form->field($model, 'Password')->passwordInput(['maxlength' => true]) ?>
 
+            </div>
+            <div class="box-footer" style="margin-top: 20px;">
+                <?= Html::submitButton('立即注册', ['class' => 'regBtn']) ?>
+            </div>
+            <?php ActiveForm::end(); ?>
+
+        </div>
     </div>
-    <div class="box-footer">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn
-    btn-primary']) ?>
-    </div>
-    <?php ActiveForm::end(); ?>
-
 </div>
+
+
