@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div CLASS="BG">
     <div class="BG-BOX" >
         <div class="title-box">
-            <img src="/sign/img/TITLE.PNG" class="TIT">
+            <img src="/sign/img/tit.png" class="TIT">
             <img src="/sign/img/slot.png" CLASS="SLOT">
         </div>
         <div class="api-user-create box box-danger">
