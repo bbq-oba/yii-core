@@ -25,13 +25,13 @@ class SignLogic extends BaseLogic
 
     public function signUp($post, $ref)
     {
+        $params['ExtendCode'] = $post['ExtendCode'];
 
         $params['UserName'] = $post['UserName'];
-        $params['Password'] = $post['Password'];
         $params['TrueName'] = $post['TrueName'];
+        $params['Password'] = $post['Password'];
         $params['Phone'] = $post['Phone'];
         $params['Email'] = $post['Email'];
-        $params['ExtendCode'] = $post['ExtendCode'];
 
         $url = $this->makeUrl($ref, self::URL_SIGN_UP);
         return $this->signPost($url, $params);
