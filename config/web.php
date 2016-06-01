@@ -34,7 +34,10 @@ $config = [
             'site/login',
             'site/error',
             'sign/up',
-            'sign/in'
+            'sign/in',
+            'sign/captcha-code',
+            'stat/index',
+            'stat/test',
         ]
     ],
     'components' => [
@@ -47,7 +50,7 @@ $config = [
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'Qh-xgur1SpKA6fgl3GpbVs2pFxHpH8Vn',
+            'cookieValidationKey' => 'dc660dc8322c37d46e3dc670f4b0368f',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
