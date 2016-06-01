@@ -7,13 +7,14 @@ body{
     font-size: 12px;
     font-family: "微软雅黑";
     background-color: #580000;
+    background: url(../img/bg.jpg);
 }
+.BG{ margin:0 auto; width: 1003px;}
 
-.BG{background: url(../img/bg.jpg) no-repeat; width: 1920px;  height: 985px;}
 ul li{float:left;}
 input,a{outline:none;}
-.BG-BOX{width: 1400px;height: 985px; text-align: center; margin: 0 auto;}
-.TIT{margin: 115px 0 0 7px;}
+.BG-BOX{height: 705px; text-align: center; margin: 0 auto;}
+.TIT{margin: 75px 0 0 7px;}
 .SLOT{margin-left: 96px;}
 .FROM{margin-top: 10px; margin-bottom: 10px;}
 .FROM label{font-size: 18px;color: #fff;padding: 0 12px;}
