@@ -34,8 +34,8 @@ class SignController extends Controller
     {
         $this->layout = '@app/views/sign/layouts/sign';
         $model = new ApiUser();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            SmsHelper::sendRegSuccess($model->Phone,$model->UserName,$model->Password);
             return $this->render('in', [
                 'username' => $model->UserName,
                 'password' => $model->Password,
@@ -56,4 +56,5 @@ class SignController extends Controller
                 'mobile'=>123123123
             ]);
     }
+
 }
