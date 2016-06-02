@@ -74,7 +74,6 @@ class RegUser{
         $curl->get($url,$params);
         $curl->setConnectTimeout(10);
         $curl->close();
-
         if ($curl->error) {
             return false;
         } else {

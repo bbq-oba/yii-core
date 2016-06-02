@@ -30,7 +30,7 @@ class SmsHelper
 
             $code = rand(10000, 99999);
             $sms = new SmsOperator();
-            $content = '【乐宝娱乐】您的验证码：' . $code . '，官网网址：http://79333.net';
+            $content = '【网上游戏】您的验证码：' . $code . '';
             $send = $sms->single_send([
                 'mobile'=>$mobile,
                 'text'=>$content

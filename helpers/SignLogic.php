@@ -18,21 +18,22 @@ class SignLogic extends BaseLogic
     public function makeUrl($ref, $url)
     {
 //        return 'http://api.vbetctrl.net/'.$url;
-        return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
-        return 'http://www.y88.ph/api/Account/Regist';
+       // return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
+        //return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
+        return 'http://www.y88.ph/api/Extension/Regist';
 //        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
     }
 
     public function signUp($post, $ref)
     {
-        $params['ExtendCode'] = $post['ExtendCode'];
+
 
         $params['UserName'] = $post['UserName'];
-        $params['TrueName'] = $post['TrueName'];
         $params['Password'] = $post['Password'];
+        $params['TrueName'] = $post['TrueName'];
         $params['Phone'] = $post['Phone'];
         $params['Email'] = $post['Email'];
-
+        $params['ReferralCode'] = $post['ReferralCode'];
         $url = $this->makeUrl($ref, self::URL_SIGN_UP);
         return $this->signPost($url, $params);
     }
@@ -60,7 +61,8 @@ class SignLogic extends BaseLogic
     {
         $sign = self::makeSign($params);
         $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
-        return $this->post($url, $params);
+
+return $this->post($url, $params);
     }
 
 
