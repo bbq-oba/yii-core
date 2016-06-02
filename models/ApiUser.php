@@ -55,11 +55,11 @@ class ApiUser extends Model
     {
         return [
             [['Phone','UserName','Password', 'smsCode'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','ip'], 'safe'],
             [['UserName', 'Password', 'TrueName', 'ReferralCode', 'Email'], 'string', 'max' => 255],
             ['ReferralCode','default','value'=>'A000355'],
+            ['ip','default','value'=>\app\stat\IP::getIpFromHeader()],
             [['Phone'], 'validatePhone'],
-            [['smsCode'], 'validateSmsCode']
         ];
     }
 
@@ -93,24 +93,53 @@ class ApiUser extends Model
         ])->orderBy('created_at desc')->one();
 
         if (!$this->checkModel) {
-            $this->addError('smsCode', '短信验证码错误');
+            $this->addError('smsCode', '短信验证码错误1');
             return false;
-        }        if ($this->checkModel->code != $this->smsCode) {
-            $this->addError('smsCode', '短信验证码错误');
+        }
+        if ($this->checkModel->code != $this->smsCode) {
+            $this->addError('smsCode', '短信验证码错误2');
             return false;
         }
         if (CURRENT_TIMESTAMP - $this->checkModel->created_at > 600) {
             $this->addError('smsCode', '验证码已经过期');
             return false;
         }
+        return true;
     }
 
     public function validatePhone($attribute, $params)
     {
+        $model = new ApiUser();
+        $model = $model->find()->where([
+            'Phone'=>$this->Phone
+        ])->one();
+
+        if($model){
+            $this->addError('Phone', '该手机号已经注册');
+            return false;
+        }
         $check = Mobile::check($this->Phone);
         if (!$check) {
             $this->addError('Phone', '请输入正确手机号');
+            return false;
         }
+        $this->checkModel = CaptchaCode::find()->where([
+            'mobile' => $this->Phone,
+            'status' => 0
+        ])->orderBy('created_at desc')->one();
+        if (!$this->checkModel) {
+            $this->addError('smsCode', '短信验证码错误1');
+            return false;
+        }
+        if ($this->checkModel->code != $this->smsCode) {
+            $this->addError('smsCode', '短信验证码错误2');
+            return false;
+        }
+        if (CURRENT_TIMESTAMP - $this->checkModel->created_at > 600) {
+            $this->addError('smsCode', '验证码已经过期');
+            return false;
+        }
+        return true;
     }
 
 
