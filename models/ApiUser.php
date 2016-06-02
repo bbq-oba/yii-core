@@ -58,11 +58,42 @@ class ApiUser extends Model
             [['created_at', 'updated_at','ip'], 'safe'],
             [['UserName', 'Password', 'TrueName', 'ReferralCode', 'Email'], 'string', 'max' => 255],
             ['ReferralCode','default','value'=>'A000355'],
-            ['ip','default','value'=>\app\stat\IP::getIpFromHeader()],
+            ['ip','default','value'=>$_SERVER["REMOTE_ADDR"]],
             [['Phone'], 'validatePhone'],
         ];
     }
 
+    public static function getIp(){
+        if ($_SERVER["HTTP_X_FORWARDED_FOR"])
+        {
+            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        }
+        elseif ($_SERVER["HTTP_CLIENT_IP"])
+        {
+            $ip = $_SERVER["HTTP_CLIENT_IP"];
+        }
+        elseif ($_SERVER["REMOTE_ADDR"])
+        {
+            $ip = $_SERVER["REMOTE_ADDR"];
+        }
+        elseif (getenv("HTTP_X_FORWARDED_FOR"))
+        {
+            $ip = getenv("HTTP_X_FORWARDED_FOR");
+        }
+        elseif (getenv("HTTP_CLIENT_IP"))
+        {
+            $ip = getenv("HTTP_CLIENT_IP");
+        }
+        elseif (getenv("REMOTE_ADDR"))
+        {
+            $ip = getenv("REMOTE_ADDR");
+        }
+        else
+        {
+            $ip = "Unknown";
+        }
+        echo $ip ;
+    }
     /**
      * @inheritdoc
      */
