@@ -18,11 +18,8 @@ class SignLogic extends BaseLogic
     public function makeUrl($ref, $url)
     {
 //        return 'http://api.vbetctrl.net/'.$url;
-<<<<<<< HEAD
        // return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
-=======
-        return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
->>>>>>> b08cab6bb53d5b05d979c685297e0226ef911571
+        //return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
         return 'http://www.y88.ph/api/Extension/Regist';
 //        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
     }
