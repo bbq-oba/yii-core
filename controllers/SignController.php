@@ -18,6 +18,13 @@ class SignController extends Controller
     {
         \yii::$app->response->format = Response::FORMAT_JSON;
         if (Mobile::check($mobile)) {
+            $model = new ApiUser;
+            $model = $model->find()->where([
+                'Phone'=>$mobile
+            ])->one();
+            if($model){
+                return ['code' => 203, 'msg' => '手机号已经注册'];
+            }
             $return = SmsHelper::send($mobile);
         } else {
             $return = ['code' => 203, 'msg' => '请输入正确手机号'];
