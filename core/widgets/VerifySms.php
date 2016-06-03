@@ -162,9 +162,12 @@ class VerifySms extends InputWidget
                         beforeSend:function(){
                         },
 		                success: function(data, textStatus){
-                            vStart();
-
+		                if(data.code != 200){
+		                	alert(data.msg);
+		                }else{
+		                	vStart();	
 		                }
+                                }
                     });
                 }
             });");
