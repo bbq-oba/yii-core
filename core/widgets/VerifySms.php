@@ -163,7 +163,9 @@ class VerifySms extends InputWidget
                         },
 		                success: function(data, textStatus){
 		                if(data.code != 200){
+		                verifyFlag = true;
 		                	alert(data.msg);
+		                	
 		                }else{
 		                	vStart();	
 		                }
