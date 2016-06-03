@@ -47,7 +47,7 @@ class SmsHelper
 
     public static function sendRegSuccess($mobile,$username,$password){
         $sms = new SmsOperator();
-        $content = '成功注册！您的用户名为：'.$username.'，密码为：'.$password.'，官网：http://83222.net';
+        $content = '【网上游戏】成功注册！您的用户名为：'.$username.'，密码为：'.$password.'，官网：http://83222.net';
         return $sms->single_send([
             'mobile'=>$mobile,
             'text'=>$content

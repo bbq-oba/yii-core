@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = \kartik\form\ActiveForm::begin(
                 [
                     'type' => ActiveForm::TYPE_HORIZONTAL,
+                    'enableAjaxValidation' => 'true',
                     'formConfig' => ['labelSpan' =>4, 'deviceSize' => ActiveForm::SIZE_SMALL]
                 ]
             ); ?>

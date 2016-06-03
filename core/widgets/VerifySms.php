@@ -68,7 +68,7 @@ class VerifySms extends InputWidget
      */
     public $options = ['class' => 'form-control'];
     public $buttonOptions = [
-        'class'=>'btn btn-primary'
+        'class' => 'btn btn-primary'
     ];
 
 
@@ -162,14 +162,13 @@ class VerifySms extends InputWidget
                         beforeSend:function(){
                         },
 		                success: function(data, textStatus){
-		                if(data.code != 200){
-		                verifyFlag = true;
-		                	alert(data.msg);
-		                	
-		                }else{
-		                	vStart();	
-		                }
-                                }
+		                    if(data.code != 200){
+                                verifyFlag = true;
+                                alert(data.msg);
+                            }else{
+                                vStart();
+                            }
+                        }
                     });
                 }
             });");
