@@ -47,6 +47,15 @@ class ApiUser extends Model
         ];
     }
 
+    function check($name,$val){
+        $model = $this->findOne([
+            $name =>$val
+        ]);
+        if($model){
+            return ["info"=>$this->getAttributeLabel($name)."已经存在","status"=>"n"];
+        }
+        return ["info"=>"","status"=>"y"];
+    }
 
     /**
      * @inheritdoc
@@ -120,11 +129,17 @@ class ApiUser extends Model
 
     public function validateSmsCode($attribute, $params)
     {
+        if(empty($this->UserName)){
+            $this->addError('Phone', '请填写用户名');
+        }
+        if(empty($this->Password)){
+            $this->addError('Phone', '请填写密码');
+        }
+
         $this->checkModel = CaptchaCode::find()->where([
             'mobile' => $this->Phone,
             'status' => 0
         ])->orderBy('created_at desc')->one();
-
         if (!$this->checkModel) {
             $this->addError('smsCode', '短信验证码错误1');
             return false;
@@ -143,6 +158,12 @@ class ApiUser extends Model
 
     public function validatePhone($attribute, $params)
     {
+        if(empty($this->UserName)){
+            $this->addError('Phone', '请填写用户名');
+        }
+        if(empty($this->Password)){
+            $this->addError('Phone', '请填写密码');
+        }
         $model = new ApiUser();
         $model = $model->find()->where([
             'Phone'=>$this->Phone

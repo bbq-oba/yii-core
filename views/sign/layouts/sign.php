@@ -4,7 +4,7 @@
  */
 use yii\helpers\Html;
 use app\core\assets\AppAsset;
-AppAsset::register($this);
+\app\helpers\SignAsset::register($this);
 /* @var $this \yii\web\View */
 /* @var $content string */
 \yii\web\YiiAsset::register($this);
