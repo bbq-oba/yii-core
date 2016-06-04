@@ -57,6 +57,9 @@ class ApiUser extends Model
         return ["info"=>"","status"=>"y"];
     }
 
+    public function getCreateAt(){
+        return date('Y-m-d H:i:s',$this->created_at);
+    }
     /**
      * @inheritdoc
      */
@@ -121,6 +124,7 @@ class ApiUser extends Model
             'ReferralCode' => '推荐码',
             'Email' => '邮箱',
             'created_at' => 'Created At',
+            'createdAt' =>'注册时间',
             'updated_at' => 'Updated At',
         ];
     }
