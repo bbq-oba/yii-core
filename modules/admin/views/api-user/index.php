@@ -19,14 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            'createdAt',
+            'ip',
             'UserName',
             'Phone',
             'ReferralCode',
             // 'Email:email',
-             'createdAt',
+
             // 'updated_at',
-             'ip',
+
         ],
         'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
