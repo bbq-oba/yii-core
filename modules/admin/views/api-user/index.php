@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'UserName',
-            'Password',
             'TrueName',
             'Phone',
             'ReferralCode',
@@ -45,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '',
             'type' => GridView::TYPE_SUCCESS,
-            'before' => Html::a(Html::icon('plus').Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-default']),
+            'before' =>false,
             'after' => false,
         ],
     ]); ?>
