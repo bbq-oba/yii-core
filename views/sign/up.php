@@ -117,8 +117,6 @@ $js = <<<JS
                         }
                     }
                 });
-
-                jQuery(this).html();
             }
         }
     });
@@ -148,7 +146,7 @@ $this->registerJs($js,\yii\web\View::POS_READY);
             ); ?>
             <div class="api-user-form box-body">
                 <div id="check">
-                <?= $form->field($model, 'UserName')->textInput(['maxlength' => true,'autocomplete'=>'off','datatype'=>'s6-18','ajaxurl'=>'check','nullmsg'=>"请输入用户名 ！"]) ?>
+                <?= $form->field($model, 'UserName')->textInput(['maxlength' => true,'autocomplete'=>'off','datatype'=>'s3-12','ajaxurl'=>'check','nullmsg'=>"请输入用户名 ！"]) ?>
                 <?= $form->field($model, 'Password')->passwordInput(['maxlength' => true,'datatype'=>'*','nullmsg'=>"请输入密码 ！"]) ?>
                 <?= $form->field($model, 'Phone')->textInput(['maxlength' => true,'datatype'=>'n11-11','ajaxurl'=>'check','nullmsg'=>"请输入手机号 ！",'errormsg'=>'手机号格式错误']) ?>
                 </div>
