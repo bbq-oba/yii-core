@@ -57,7 +57,7 @@ class ApiUser extends Model
         return ["info"=>"","status"=>"y"];
     }
 
-    public function getCreateAt(){
+    public function getCreatedAt(){
         return date('Y-m-d H:i:s',$this->created_at);
     }
     /**

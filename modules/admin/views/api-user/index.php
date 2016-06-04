@@ -7,14 +7,12 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\ApiUserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Api Users');
+$this->title = '永利汇表单注册用户';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="api-user-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
