@@ -26,9 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'Email:email',
              'createdAt',
             // 'updated_at',
-            // 'ip',
-
-            ['class' => 'yii\grid\ActionColumn'],
+             'ip',
         ],
         'pjax' => true,
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
