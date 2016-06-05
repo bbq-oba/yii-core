@@ -73,5 +73,6 @@ class CaptchaCode extends Model
         $model->content = $content;
         $model->status = 0;
         $model->save();
+        print_r($model->errors);
     }
 }
