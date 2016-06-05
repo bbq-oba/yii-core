@@ -52,7 +52,7 @@ $js = <<<JS
                                 $.ajax({
                                     async:false,
                                     type: 'post',
-                                    url: 'check-sms-code',
+                                    url: "$getCodeUrl",
                                     dataType:"json",
                                     data:{
                                         mobile:$('#apiuser-phone').val(),
