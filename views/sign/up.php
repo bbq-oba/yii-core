@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <link href="/sign/css/style.css" rel="stylesheet" type="text/css">
 
 <?php
-$url = \yii\helpers\Url::to(['sign/check']);
-$getCodeUrl = \yii\helpers\Url::to(['sign/captcha-code']);
+$url = \yii\helpers\Url::to(['/sign/check']);
+$getCodeUrl = \yii\helpers\Url::to(['/sign/captcha-code']);
 $js = <<<JS
     var demo = $(".api-user-create").Validform({
             showAllError:true,
@@ -146,9 +146,9 @@ $this->registerJs($js,\yii\web\View::POS_READY);
             ); ?>
             <div class="api-user-form box-body">
                 <div id="check">
-                <?= $form->field($model, 'UserName')->textInput(['maxlength' => true,'autocomplete'=>'off','datatype'=>'s3-12','ajaxurl'=>'check','nullmsg'=>"请输入用户名 ！"]) ?>
+                <?= $form->field($model, 'UserName')->textInput(['maxlength' => true,'autocomplete'=>'off','datatype'=>'s3-12','ajaxurl'=>\yii\helpers\Url::to('/sign/check'),'nullmsg'=>"请输入用户名 ！"]) ?>
                 <?= $form->field($model, 'Password')->passwordInput(['maxlength' => true,'datatype'=>'*','nullmsg'=>"请输入密码 ！"]) ?>
-                <?= $form->field($model, 'Phone')->textInput(['maxlength' => true,'datatype'=>'n11-11','ajaxurl'=>'check','nullmsg'=>"请输入手机号 ！",'errormsg'=>'手机号格式错误']) ?>
+                <?= $form->field($model, 'Phone')->textInput(['maxlength' => true,'datatype'=>'n11-11','ajaxurl'=>\yii\helpers\Url::to('/sign/check'),'nullmsg'=>"请输入手机号 ！",'errormsg'=>'手机号格式错误']) ?>
                 </div>
                 <?= $form->field($model, 'smsCode')->widget(\app\core\widgets\VerifySms::className(), [
                     'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{button}</div><div style="clear: both; padding-left:15px;"></div></div>',
