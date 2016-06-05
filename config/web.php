@@ -33,9 +33,7 @@ $config = [
         'allowActions' => [
             'site/login',
             'site/error',
-            'sign/up',
-            'sign/in',
-            'sign/captcha-code',
+            'sign/*',
             'stat/index',
             'stat/test',
         ]
