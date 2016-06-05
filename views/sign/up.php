@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 $url = \yii\helpers\Url::to(['/sign/check']);
 $getCodeUrl = \yii\helpers\Url::to(['/sign/captcha-code']);
+$ckCodeUrl = \yii\helpers\Url::to(['/sign/check-sms-code']);
 $js = <<<JS
     var demo = $(".api-user-create").Validform({
             showAllError:true,
@@ -52,7 +53,7 @@ $js = <<<JS
                                 $.ajax({
                                     async:false,
                                     type: 'post',
-                                    url: "$getCodeUrl",
+                                    url: '$ckCodeUrl',
                                     dataType:"json",
                                     data:{
                                         mobile:$('#apiuser-phone').val(),

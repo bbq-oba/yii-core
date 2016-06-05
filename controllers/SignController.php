@@ -55,9 +55,6 @@ class SignController extends Controller
     public function actionCaptchaCode($mobile)
     {
         \yii::$app->response->format = Response::FORMAT_JSON;
-
-
-
         if (Mobile::check($mobile)) {
 
             $model = new ApiUser;
@@ -68,6 +65,9 @@ class SignController extends Controller
                 return ['code' => 203, 'msg' => '手机号已经注册'];
             }
             $return = SmsHelper::send($mobile);
+            if($return['code'] !=200){
+                $return['msg'] = '请';
+            }
         } else {
             $return = ['code' => 203, 'msg' => '请输入正确手机号'];
         }
