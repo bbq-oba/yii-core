@@ -92,9 +92,9 @@ class VerifySms extends InputWidget
         $this->registerClientScript();
 
         if ($this->hasModel()) {
-            $input = Html::activeTextInput($this->model, $this->attribute, $this->options);
+            $input = Html::activeTextInput($this->model, $this->attribute,$this->options);
         } else {
-            $input = Html::textInput($this->name, $this->value, $this->options);
+            $input = Html::textInput($this->name, $this->value, $this->buttonOptions);
         }
         $route = $this->smsAction;
         if (is_array($route)) {
@@ -114,86 +114,10 @@ class VerifySms extends InputWidget
      */
     public function registerClientScript()
     {
-//        $options = $this->getClientOptions();
-//        $options = empty($options) ? '' : Json::htmlEncode($options);
-        $id = $this->buttonOptions['id'];
-        $view = $this->getView();
-        $url = Url::to(['sign/captcha-code']);
-        $view->registerJs("
-            var verifyFlag = true;
 
-            var timer;
-            var time = initTime =  120;
-            function vStart(){
-               jQuery('#$id').attr('disabled','disabled').html('<span id=\"verifyTime\">'+time+'</span>秒后重新获取');
-               timer = window.setTimeout(function(){
-                    if(!time){
-                        window.clearTimeout(timer);
-                        jQuery('#$id').attr('disabled',false).html('点击获取验证码');
-                        time = initTime;
-                        verifyFlag = true;
-                    }else{
-                        time--;
-                        $('#verifyTime').html(time);
-                        vStart();
-                    }
-               },1000);
-            }
-
-            jQuery('#$id').click(function(){
-                var mobile = $('#apiuser-phone').val();
-                var code = $('#apiuser-verifycode').val();
-
-                if(mobile == ''){
-                    alert('请输入手机号');
-                    return false;
-                }
-                if(verifyFlag){
-                    jQuery(this).html();
-
-                    verifyFlag = false;
-                    $.ajax({
-		               type: 'get',
-		                url: '$url',
-		                data:{
-		                    mobile:mobile,
-		                    code:code
-		                },
-                        beforeSend:function(){
-                        },
-		                success: function(data, textStatus){
-		                    if(data.code != 200){
-                                verifyFlag = true;
-                                alert(data.msg);
-                            }else{
-                                vStart();
-                            }
-                        }
-                    });
-                }
-            });");
     }
 
-    /**
-     * Returns the options for the captcha JS widget.
-     * @return array the options
-     */
-    protected function getClientOptions()
-    {
-        $route = $this->captchaAction;
-        if (is_array($route)) {
-            $route[CaptchaAction::REFRESH_GET_VAR] = 1;
-        } else {
-            $route = [$route, CaptchaAction::REFRESH_GET_VAR => 1];
-        }
 
-        $options = [
-            'refreshUrl' => Url::toRoute($route),
-            'hashKey' => "yiiCaptcha/{$route[0]}",
-        ];
-
-        return $options;
-    }
 
 
 }

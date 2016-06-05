@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\ApiUserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '永利汇表单注册用户';
+$this->title = '永利会表单注册用户';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="api-user-index">

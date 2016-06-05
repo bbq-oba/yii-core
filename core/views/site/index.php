@@ -83,8 +83,14 @@ $str = <<<CODE
 乐宝 = 1
 永利汇 = 2
 
+落地
+<script  type="text/javascript" src="//tj.sasa8.com/ld.js"></script>
 
-<script  type="text/javascript" src="//tj.sasa8.com/tj.js"></script>
+
+
+
+推广
+<script  type="text/javascript" src="//tj.sasa8.com/tg.js"></script>
 CODE;
 ?>
 

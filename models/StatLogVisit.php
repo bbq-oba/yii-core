@@ -195,4 +195,5 @@ class StatLogVisit extends Model
     }
 
 
+
 }

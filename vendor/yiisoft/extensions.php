@@ -336,15 +336,6 @@ return array (
       '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2',
     ),
   ),
-  'alcad/yii2-cas' => 
-  array (
-    'name' => 'alcad/yii2-cas',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@alcad/cas' => $vendorDir . '/alcad/yii2-cas',
-    ),
-  ),
   'kartik-v/yii2-field-range' => 
   array (
     'name' => 'kartik-v/yii2-field-range',
@@ -370,6 +361,15 @@ return array (
     'alias' => 
     array (
       '@kartik/builder' => $vendorDir . '/kartik-v/yii2-builder',
+    ),
+  ),
+  'alcad/yii2-cas' => 
+  array (
+    'name' => 'alcad/yii2-cas',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@alcad/cas' => $vendorDir . '/alcad/yii2-cas',
     ),
   ),
 );

@@ -29,7 +29,7 @@ return [
     'User Donated Charity Logs'=>'运动记录',
     'User Donated Charity Log'=>'运动记录',
 
-    '(not set)' => '(未设置)',
+    '(not set)' => '',
     'An internal server error occurred.' => '服务器内部错误。',
     'Are you sure you want to delete this item?' => '您确定要删除此项吗？',
 

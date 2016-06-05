@@ -1094,7 +1094,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/54262f6a450914f599f71e393c8592676f0fed24",
+            "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/082a199f4e95e5f32975005ff46ff3880ced8406",
             "reference": "f16003c8c9cfdaa50b4c9574cae9f0310946696c",
             "shasum": ""
         },
@@ -1187,7 +1187,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/873a4f10ba961bbf3c63c9ede82a13d407f00acf",
+            "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/d2513eb34e507097ceafc1125164c50aeb905547",
             "reference": "873a4f10ba961bbf3c63c9ede82a13d407f00acf",
             "shasum": ""
         },
@@ -2160,7 +2160,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-tree-manager/zipball/d5a3a7c68f9872559e945959eb95936cc0f3f8dd",
+            "url": "https://api.github.com/repos/kartik-v/yii2-tree-manager/zipball/3944915919d159879cb35db90f1d66f65904f4c6",
             "reference": "0fd506de3ef0c73ec8a3f0c9267ed8353f5e9f89",
             "shasum": ""
         },
@@ -2213,7 +2213,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/574c0e310bda692253c1ba0eac9a94c699b299d5",
+            "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/2f39c05ec05b39452e818c2c49d1d1cee5f51771",
             "reference": "5e190a82c628d96edd94635989af542e438890f6",
             "shasum": ""
         },
@@ -2648,59 +2648,6 @@
         ]
     },
     {
-        "name": "piwik/device-detector",
-        "version": "3.5.0",
-        "version_normalized": "3.5.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/piwik/device-detector.git",
-            "reference": "df9e81508f65f33436bab0daaaf942e1d59c89a1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/piwik/device-detector/zipball/df9e81508f65f33436bab0daaaf942e1d59c89a1",
-            "reference": "df9e81508f65f33436bab0daaaf942e1d59c89a1",
-            "shasum": ""
-        },
-        "require": {
-            "mustangostang/spyc": "*",
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "fabpot/php-cs-fixer": "~1.7",
-            "phpunit/phpunit": "4.1.*"
-        },
-        "suggest": {
-            "doctrine/cache": "Can directly be used for caching purpose"
-        },
-        "time": "2015-12-31 15:58:23",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "DeviceDetector\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL-3.0+"
-        ],
-        "authors": [
-            {
-                "name": "The Piwik Team",
-                "email": "hello@piwik.org",
-                "homepage": "http://piwik.org/the-piwik-team/"
-            }
-        ],
-        "description": "The Universal Device Detection library, that parses User Agents and detects devices (desktop, tablet, mobile, tv, cars, console, etc.), clients (browsers, media players, mobile apps, feed readers, libraries, etc), operating systems, devices, brands and models.",
-        "homepage": "http://piwik.org",
-        "keywords": [
-            "devicedetection",
-            "parser",
-            "useragent"
-        ]
-    },
-    {
         "name": "php-curl-class/php-curl-class",
         "version": "4.8.2",
         "version_normalized": "4.8.2.0",
@@ -3079,54 +3026,6 @@
         ]
     },
     {
-        "name": "alcad/yii2-cas",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/alcad/Yii2-CAS.git",
-            "reference": "fcef6273095275f1a9ee5841874026732aa2b238"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/alcad/Yii2-CAS/zipball/fcef6273095275f1a9ee5841874026732aa2b238",
-            "reference": "fcef6273095275f1a9ee5841874026732aa2b238",
-            "shasum": ""
-        },
-        "require": {
-            "jasig/phpcas": "*",
-            "php": ">=5.3.0",
-            "yiisoft/yii2": "~2.0"
-        },
-        "time": "2016-04-17 19:16:42",
-        "type": "yii2-extension",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "alcad\\cas\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPLv2"
-        ],
-        "authors": [
-            {
-                "name": "Alessio Chiga",
-                "email": "info@alcad.it",
-                "homepage": "http://alcad.it"
-            }
-        ],
-        "description": "Simple client for CAS",
-        "keywords": [
-            "alcad",
-            "cas client",
-            "cas client for yii",
-            "yii2",
-            "yii2-cas"
-        ]
-    },
-    {
         "name": "kartik-v/yii2-builder",
         "version": "v1.6.0",
         "version_normalized": "1.6.0.0",
@@ -3203,5 +3102,179 @@
             "bower-asset-main": "dist/typeahead.bundle.js"
         },
         "installation-source": "dist"
+    },
+    {
+        "name": "piwik/device-detector",
+        "version": "3.6.1",
+        "version_normalized": "3.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/piwik/device-detector.git",
+            "reference": "4f4c2b0ce412fb1b8f679a7c82190783ba697d4c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/piwik/device-detector/zipball/4f4c2b0ce412fb1b8f679a7c82190783ba697d4c",
+            "reference": "4f4c2b0ce412fb1b8f679a7c82190783ba697d4c",
+            "shasum": ""
+        },
+        "require": {
+            "mustangostang/spyc": "*",
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "~1.7",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "suggest": {
+            "doctrine/cache": "Can directly be used for caching purpose"
+        },
+        "time": "2016-03-31 20:28:09",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "DeviceDetector\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "The Piwik Team",
+                "email": "hello@piwik.org",
+                "homepage": "http://piwik.org/the-piwik-team/"
+            }
+        ],
+        "description": "The Universal Device Detection library, that parses User Agents and detects devices (desktop, tablet, mobile, tv, cars, console, etc.), clients (browsers, media players, mobile apps, feed readers, libraries, etc), operating systems, devices, brands and models.",
+        "homepage": "http://piwik.org",
+        "keywords": [
+            "devicedetection",
+            "parser",
+            "useragent"
+        ]
+    },
+    {
+        "name": "bower-asset/fontawesome",
+        "version": "v4.5.0",
+        "version_normalized": "4.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FortAwesome/Font-Awesome.git",
+            "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/fddd2c240452e6c8990c4ef75e0265b455aa7968",
+            "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "less/font-awesome.less",
+                "scss/font-awesome.scss"
+            ],
+            "bower-asset-ignore": [
+                "*/.*",
+                "*.json",
+                "src",
+                "*.yml",
+                "Gemfile",
+                "Gemfile.lock",
+                "*.md"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "OFL-1.1",
+            "MIT",
+            "CC-BY-3.0"
+        ],
+        "description": "Font Awesome"
+    },
+    {
+        "name": "alcad/yii2-cas",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/alcad/Yii2-CAS.git",
+            "reference": "d86f874bef194b88a13571410e40d7d6beb14313"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/alcad/Yii2-CAS/zipball/fcef6273095275f1a9ee5841874026732aa2b238",
+            "reference": "d86f874bef194b88a13571410e40d7d6beb14313",
+            "shasum": ""
+        },
+        "require": {
+            "jasig/phpcas": "*",
+            "php": ">=5.3.0",
+            "yiisoft/yii2": "~2.0"
+        },
+        "time": "2015-09-08 13:17:34",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "alcad\\cas\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Alessio Chiga",
+                "email": "info@alcad.it",
+                "homepage": "http://alcad.it"
+            }
+        ],
+        "description": "Simple client for CAS",
+        "keywords": [
+            "alcad",
+            "cas client",
+            "cas client for yii",
+            "yii2",
+            "yii2-cas"
+        ]
+    },
+    {
+        "name": "piwik/network",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/piwik/component-network.git",
+            "reference": "9037fa29509f86767e02ba58a57d4deb1d01a844"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/piwik/component-network/zipball/9037fa29509f86767e02ba58a57d4deb1d01a844",
+            "reference": "9037fa29509f86767e02ba58a57d4deb1d01a844",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2014-10-23 03:30:23",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Piwik\\Network\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ]
     }
 ]

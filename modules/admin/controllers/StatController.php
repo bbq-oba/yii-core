@@ -14,32 +14,7 @@ use app\modules\admin\models\VisitsDetails;
 
 class StatController extends \yii\web\Controller
 {
-    public function actionCron($type, $num)
-    {
-        \app\models\ApiVisitorDetail::cronUpdateVisitorDataType($type, $num, 5);
-        return $this->render('cron');
-    }
 
-    public function actionTest($user, $type, $ref)
-    {
-        foreach (RegUser::$typeEnum as $k => $v) {
-            echo "---  用戶名:$user  --  $k-$v[0]    ---------------\r\n";
-            print_r(RegUser::get($user, $k, $ref));
-            echo "\r\n";
-        }
-    }
-
-//    public function actionUpdateRegUser(){
-//        $params['filter_offset'] = max(0,\yii::$app->request->get('filter_offset',0));
-//        $params['filter_limit'] = 20;
-//        $params['segment'] = 'userId!=';
-//        if(!empty($visitorId)){
-//            $params['segment'] = 'visitorId=='.$visitorId;
-//        }
-//        $data = API::run('Live.getLastVisitsDetails',$params);
-//        $this->format($data);
-//        $this->redirect(['reg-user','filter_offset'=>$params['filter_offset']]);
-//    }
 
     public function actionRegUserLebao()
     {

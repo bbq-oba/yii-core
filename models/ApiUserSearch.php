@@ -19,7 +19,7 @@ class ApiUserSearch extends ApiUser
     {
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
-            [['UserName', 'Password', 'TrueName', 'Phone', 'ReferralCode', 'Email'], 'safe'],
+            [['UserName', 'Password', 'TrueName', 'Phone', 'ReferralCode', 'Email', 'ip'], 'safe'],
         ];
     }
 
@@ -69,7 +69,8 @@ class ApiUserSearch extends ApiUser
             ->andFilterWhere(['like', 'TrueName', $this->TrueName])
             ->andFilterWhere(['like', 'Phone', $this->Phone])
             ->andFilterWhere(['like', 'ReferralCode', $this->ReferralCode])
-            ->andFilterWhere(['like', 'Email', $this->Email]);
+            ->andFilterWhere(['like', 'Email', $this->Email])
+            ->andFilterWhere(['like', 'ip', $this->ip]);
 
         return $dataProvider;
     }
