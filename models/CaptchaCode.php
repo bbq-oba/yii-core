@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use \app\core\models\Model;
 use \yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "{{%captcha_code}}".
  *
@@ -16,7 +18,7 @@ use \yii\behaviors\TimestampBehavior;
  * @property string $mobile
  * @property string $content
  */
-class CaptchaCode extends Model
+class CaptchaCode extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -73,6 +75,5 @@ class CaptchaCode extends Model
         $model->content = $content;
         $model->status = 0;
         $model->save();
-        print_r($model->errors);
     }
 }
