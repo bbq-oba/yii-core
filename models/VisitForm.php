@@ -123,7 +123,7 @@ class VisitForm extends Model
                 }
                 $this->render = 'reg-user';
                 break;
-            case 2://永利汇
+            case 2://永利会
                 $segment[] = 'customVariableValue2==2';
                 if ($this->userId) {
                     $segment[] = 'userId==' . $this->userId;

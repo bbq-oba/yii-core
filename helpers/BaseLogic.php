@@ -21,7 +21,7 @@ class BaseLogic extends Object
         ],
         2 => [
             'url' => 'wyvbet',
-            'txt' => '永利汇'
+            'txt' => '永利会'
         ]
     ];
 

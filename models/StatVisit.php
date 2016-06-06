@@ -72,7 +72,7 @@ class StatVisit extends ActiveRecord
     public function rules()
     {
         return [
-            [['idvisitor', 'location_ip','flag'], 'required'],
+            [['idvisitor', 'location_ip'], 'required'],
             [['status', 'updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'updated_datatype_4', 'updated_datatype_5', 'updated_datatype_6', 'updated_datatype_7', 'updated_datatype_8', 'updated_datatype_9', 'visitor_referrer', 'iptype', 'updated_at', 'created_at', 'visitor_regtime', 'month_cron'], 'integer'],
             [['idvisitor'], 'string', 'max' => 32],
             [['location_ip', 'visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_datatype_4', 'visitor_datatype_5', 'visitor_datatype_6', 'visitor_datatype_7', 'visitor_datatype_8', 'visitor_datatype_9', 'iptext'], 'string', 'max' => 255]
@@ -113,7 +113,6 @@ class StatVisit extends ActiveRecord
             'visitor_referrer' => '注册源',
             'iptype' => 'IP类型',
             'iptext' => 'IP归属地',
-            'flag' => 'js标识',
             'updated_at' => 'Updated At',
             'created_at' => 'Created At',
             'createdAt' => 'Created At',
@@ -121,6 +120,7 @@ class StatVisit extends ActiveRecord
             'month_cron' => 'Month Cron',
             'info' => '推广信息',
             'youhui' => '未存款优惠',
+            'viewIpText' => 'IP归属地',
         ];
     }
 
@@ -146,8 +146,7 @@ class StatVisit extends ActiveRecord
         $return[] = '金额:'. $this->visitor_datatype_8;
         return implode('<br />',$return);
     }
-    public function getViewRefrrer(){
-
-
+    public function getViewIpText(){
+        return !empty($this->location_ip) ? implode(" ", \app\helpers\IP::find($this->location_ip)) : '';
     }
 }

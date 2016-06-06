@@ -81,7 +81,7 @@ $str = <<<CODE
 <input type="hidden" id="RegisterReferrer" value="1" />
 
 乐宝 = 1
-永利汇 = 2
+永利会 = 2
 
 落地
 <script  type="text/javascript" src="//tj.sasa8.com/ld.js"></script>
@@ -91,6 +91,13 @@ $str = <<<CODE
 
 推广
 <script  type="text/javascript" src="//tj.sasa8.com/tg.js"></script>
+
+
+
+
+
+注册
+<script  type="text/javascript" src="//tj.sasa8.com/zc.js"></script>
 CODE;
 ?>
 

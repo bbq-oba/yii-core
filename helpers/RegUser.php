@@ -21,7 +21,7 @@ class RegUser{
 
     public static $referrerTypeText = [
         1 => '乐宝',
-        2 => '永利汇',
+        2 => '永利会',
     ];
 
 

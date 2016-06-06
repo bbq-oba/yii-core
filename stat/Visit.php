@@ -89,7 +89,6 @@ class Visit
             'visitor_username' => $request->get('ru'),
             'visitor_regtime' => $request->get('rt') ? CURRENT_TIMESTAMP : 0,
             'visitor_referrer' => $request->get('rr' , 0),
-            'flag' => $request->get('rf' , 0),
         ];
     }
 
@@ -107,6 +106,7 @@ class Visit
             $referrers = new Referrers();
             $details = $referrers->getReferrerInformationFromRequest();
             $details['vid'] = $model->id;
+            $details['flag'] = \yii::$app->request->get('rf' , 1);
             $this->insertVisitDetails($details);
         }
 

@@ -71,7 +71,7 @@ class StatController extends \yii\web\Controller
             ],
         ]);
         return $this->render('reg-user', [
-            'title' => '永利汇用户',
+            'title' => '永利会用户',
             'dataProvider' => $dataProvider,
             'model' => $model
         ]);

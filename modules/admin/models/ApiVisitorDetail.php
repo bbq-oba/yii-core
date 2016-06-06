@@ -108,7 +108,7 @@ class ApiVisitorDetail extends Model
 
     public static $referrerTypeText = [
         1 => '乐宝',
-        2 => '永利汇',
+        2 => '永利会',
     ];
 
     public static function getUserData($userName,$userDataType,$referrer = 1){

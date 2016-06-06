@@ -47,7 +47,7 @@ class StatVisitDetails extends Model
     public function rules()
     {
         return [
-            [['vid', 'referer_type', 'created_at', 'updated_at'], 'integer'],
+            [['vid', 'referer_type', 'created_at', 'updated_at','flag'], 'integer'],
             [['referer_url'], 'string'],
             [['current_url'], 'string', 'max' => 500],
             [['referer_name', 'referer_keyword'], 'string', 'max' => 255]
@@ -71,6 +71,7 @@ class StatVisitDetails extends Model
             'created_at' => 'Created At',
             'createdAt' => '访问时间',
             'updated_at' => 'Updated At',
+            'flag' => 'js标识',
         ];
     }
     public function getCreatedAt(){

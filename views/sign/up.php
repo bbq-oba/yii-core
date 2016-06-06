@@ -60,7 +60,8 @@ $js = <<<JS
                                         code:$('#apiuser-smscode').val()
                                     },
                                     success: function(data, textStatus){
-                                        flag = (data.code == 1)
+                                        flag = (data.code == 1);
+
                                     }
                                 });
                             return flag;

@@ -5,7 +5,7 @@ if(document.getElementById("RegisterSuccess") != null && document.getElementById
     _paq.push(['setRegisterReferrers', document.getElementById("RegisterReferrer").value]);
     _paq.push(['setFlag', 3]);
 }else{
-    _paq.push(['setFlag', 2]);
+    _paq.push(['setFlag', 4]);
 }
 _paq.push(['trackPageView']);
 (function() {
