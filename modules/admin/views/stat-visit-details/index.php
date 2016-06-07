@@ -20,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'current_url',
             [
                 'attribute'=>'viewRefererUrl',
                 'format'=>'raw'
             ],
+            'current_url',
             'referer_keyword',
             'createdAt',
 //             'updated_at',
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'condensed' => true,
         'hover' => true,
         'panel' => [
-            'heading' => '',
+            'heading' => 'cookie:'.$idvisitor,
             'type' => GridView::TYPE_SUCCESS,
             'before' => false,
             'after' => false,

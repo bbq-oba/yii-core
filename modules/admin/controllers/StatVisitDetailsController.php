@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\StatVisit;
 use Yii;
 use app\models\StatVisitDetails;
 use app\models\StatVisitDetailsSearch;
@@ -36,9 +37,18 @@ class StatVisitDetailsController extends Controller
         $searchModel = new StatVisitDetailsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $idvisitor = '';
+        if($searchModel->vid){
+            $model = StatVisit::findOne($searchModel->vid);
+            if($model){
+                $idvisitor = $model->idvisitor;
+            }
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'idvisitor' =>$idvisitor
         ]);
     }
 
