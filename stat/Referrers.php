@@ -43,6 +43,10 @@ class Referrers
 
         $currentUrl = PageUrl::cleanupUrl($this->currentUrl);
 
+echo "a";
+        print_r($referrerUrl);exit;
+
+
 
 
 
@@ -96,17 +100,15 @@ class Referrers
         $this->referrerUrl = \yii::$app->request->get('urlref');
         $this->currentUrl  = \yii::$app->request->get('url');
 
+        $this->referrerUrl = '时时彩计划软�����&oq=时时彩计';
 
 
+        $this->referrerUrl = Common::sanitizeInputValues($this->referrerUrl);
 
-        if(preg_match('/[\x{10000}-\x{10FFFF}]/u', $this->referrerUrl)){
-            $this->referrerUrl = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $this->referrerUrl);
-        }
 
         if(preg_match('/[\x{10000}-\x{10FFFF}]/u', $this->currentUrl)){
             $this->currentUrl = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $this->currentUrl);
         }
-
 
 
         return $this->getReferrerInformation();
