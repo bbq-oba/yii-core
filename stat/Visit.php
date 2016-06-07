@@ -81,15 +81,16 @@ class Visit
         return $cip;
     }
 
-    public function load($idvisitor){
+    public function load($idvisitor,$referrers){
         $request = \yii::$app->request;
-        return [
+        return array_merge([
             'idvisitor'=>$idvisitor,
             'location_ip' =>$this->getIp(),
             'visitor_username' => $request->get('ru'),
             'visitor_regtime' => $request->get('rt') ? CURRENT_TIMESTAMP : 0,
             'visitor_referrer' => $request->get('rr' , 0),
-        ];
+            'last_visit_time' => CURRENT_TIMESTAMP
+        ],$referrers);
     }
 
     public function tracker(){
@@ -98,13 +99,14 @@ class Visit
         if(!$model = $this->findVisitor($idvisitor)){
             $model = new StatVisit();
         }
+        $referrers = new Referrers();
+        $details = $referrers->getReferrerInformationFromRequest();
+
         $model->load([
-            'StatVisit'=>$this->load($idvisitor)
+            'StatVisit'=>$this->load($idvisitor,$details)
         ]);
         $model->save();
         if($model->id){
-            $referrers = new Referrers();
-            $details = $referrers->getReferrerInformationFromRequest();
             $details['vid'] = $model->id;
             $details['flag'] = \yii::$app->request->get('rf' , 1);
             $this->insertVisitDetails($details);

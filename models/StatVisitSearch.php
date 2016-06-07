@@ -46,7 +46,7 @@ class StatVisitSearch extends StatVisit
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 15,
+                'pageSize' => 100,
             ],
         ]);
 
@@ -78,7 +78,12 @@ class StatVisitSearch extends StatVisit
             'visitor_regtime' => $this->visitor_regtime,
             'month_cron' => $this->month_cron,
         ]);
-
+        $query->select([
+            StatVisit::tableName().'.*',
+            'COUNT('.StatVisitDetails::tableName().'.vid) as count'
+        ]);
+        $query->orderBy('updated_at desc');
+        $query->leftJoin(StatVisitDetails::tableName(),StatVisit::tableName().'.id = '.StatVisitDetails::tableName().'.vid');
         $query->andFilterWhere(['like', 'idvisitor', $this->idvisitor])
             ->andFilterWhere(['like', 'location_ip', $this->location_ip])
             ->andFilterWhere(['like', 'visitor_username', $this->visitor_username])

@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use \app\core\models\Model;
 use \yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "{{%stat_visit_details}}".
  *
@@ -18,7 +20,7 @@ use \yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class StatVisitDetails extends Model
+class StatVisitDetails extends ActiveRecord
 {
     /**
      * @inheritdoc

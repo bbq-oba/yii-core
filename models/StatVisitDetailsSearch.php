@@ -46,7 +46,7 @@ class StatVisitDetailsSearch extends StatVisitDetails
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 15,
+                'pageSize' => 100,
             ],
         ]);
 
@@ -65,7 +65,7 @@ class StatVisitDetailsSearch extends StatVisitDetails
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-
+        $query->orderBy('updated_at desc');
         $query->andFilterWhere(['like', 'current_url', $this->current_url])
             ->andFilterWhere(['like', 'referer_name', $this->referer_name])
             ->andFilterWhere(['like', 'referer_keyword', $this->referer_keyword])

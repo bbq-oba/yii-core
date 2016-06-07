@@ -23,19 +23,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'options'=>[
             'width'=>150
         ],
+        'format'=>'raw',
+        'value'=>function($data){
+           return Html::a($data->idvisitor, \yii\helpers\Url::to('/admin/stat-visit-details/?StatVisitDetailsSearch[vid]='.$data->id),[
+               'target'=>'_blank',
+               'data-pjax'=>0
+           ]);
+        }
     ];
-    $columns[] = [
-        'attribute'=>'visitor_username',
-        'options'=>[
-            'width'=>150
-        ],
-    ];
-    $columns[] = [
-        'attribute'=>'location_ip',
-        'options'=>[
-            'width'=>150
-        ],
-    ];
+    if(!empty($searchModel->visitor_referrer)) {
+        $columns[] = [
+            'attribute' => 'visitor_username',
+            'options' => [
+                'width' => 150
+            ],
+        ];
+    }
+
+
     if(!empty($searchModel->visitor_referrer)){
         $columns[] = [
             'attribute'=>'info',
@@ -52,8 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ];
     }
-
-    $columns[] = 'iptype';
+    $columns[] = [
+        'attribute'=>'location_ip',
+        'options'=>[
+            'width'=>150
+        ],
+    ];
     $columns[] = [
         'attribute'=>'viewIpText',
         'options'=>[
@@ -61,23 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ];
 
-
-
-    $columns[] = [
-        'class' => 'yii\grid\ActionColumn',
-        'template'=>'{view}',
-        'buttons' => [
-            'view' => function ($url, $model, $key) {
-                $options = [
-                    'title' => Yii::t('yii', 'View'),
-                    'aria-label' => Yii::t('yii', 'View'),
-                    'data-pjax' => '0',
-                    'target' => 'blank',
-                ];
-                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', \yii\helpers\Url::to('/admin/stat-visit-details/?StatVisitDetailsSearch[vid]='.$model->id), $options);
-            },
-        ]
-    ];
+    $columns[] = 'count';
+    $columns[] = 'current_url';
+    $columns[] = 'referer_keyword';
+    $columns[] = 'referer_url';
+    $columns[] = 'viewLastVisitTime';
 
     ?>
 

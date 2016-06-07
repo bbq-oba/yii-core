@@ -42,6 +42,12 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property string $visitor_regtime
  * @property string $month_cron
+ * @property string $current_url
+ * @property string $referer_name
+ * @property string $referer_keyword
+ * @property integer $referer_type
+ * @property string $referer_url
+ * @property integer $last_visit_time
  */
 class StatVisit extends ActiveRecord
 {
@@ -53,19 +59,20 @@ class StatVisit extends ActiveRecord
         return '{{%stat_visit}}';
     }
 
-    /*
-     * 更新时间
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-            ],
-        ];
-    }
+     /*
+      * 更新时间
+      */
+     public function behaviors()
+     {
+         return [
+             [
+                 'class' => TimestampBehavior::className(),
+             ],
+         ];
+     }
 
 
+    public $count = 1;
     /**
      * @inheritdoc
      */
@@ -73,9 +80,11 @@ class StatVisit extends ActiveRecord
     {
         return [
             [['idvisitor', 'location_ip'], 'required'],
-            [['status', 'updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'updated_datatype_4', 'updated_datatype_5', 'updated_datatype_6', 'updated_datatype_7', 'updated_datatype_8', 'updated_datatype_9', 'visitor_referrer', 'iptype', 'updated_at', 'created_at', 'visitor_regtime', 'month_cron'], 'integer'],
+            [['status', 'updated_datatype_0', 'updated_datatype_1', 'updated_datatype_2', 'updated_datatype_3', 'updated_datatype_4', 'updated_datatype_5', 'updated_datatype_6', 'updated_datatype_7', 'updated_datatype_8', 'updated_datatype_9', 'visitor_referrer', 'iptype', 'updated_at', 'created_at', 'visitor_regtime', 'month_cron', 'referer_type', 'last_visit_time'], 'integer'],
+            [['referer_url'], 'string'],
             [['idvisitor'], 'string', 'max' => 32],
-            [['location_ip', 'visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_datatype_4', 'visitor_datatype_5', 'visitor_datatype_6', 'visitor_datatype_7', 'visitor_datatype_8', 'visitor_datatype_9', 'iptext'], 'string', 'max' => 255]
+            [['location_ip', 'visitor_username', 'visitor_datatype_0', 'visitor_datatype_1', 'visitor_datatype_2', 'visitor_datatype_3', 'visitor_datatype_4', 'visitor_datatype_5', 'visitor_datatype_6', 'visitor_datatype_7', 'visitor_datatype_8', 'visitor_datatype_9', 'iptext', 'referer_name', 'referer_keyword'], 'string', 'max' => 255],
+            [['current_url'], 'string', 'max' => 500]
         ];
     }
 
@@ -115,15 +124,19 @@ class StatVisit extends ActiveRecord
             'iptext' => 'IP归属地',
             'updated_at' => 'Updated At',
             'created_at' => 'Created At',
-            'createdAt' => 'Created At',
             'visitor_regtime' => '注册时间',
             'month_cron' => 'Month Cron',
-            'info' => '推广信息',
-            'youhui' => '未存款优惠',
+            'current_url' => '落地页',
+            'referer_name' => 'Referer Name',
+            'referer_keyword' => '关键词',
+            'referer_type' => 'Referer Type',
+            'referer_url' => '来源页',
+            'last_visit_time' => '最后访问时间',
+            'viewLastVisitTime' => '最后访问时间',
             'viewIpText' => 'IP归属地',
+            'count' => '访问次数',
         ];
     }
-
     public function getCreatedAt()
     {
         return date('Y-m-d H:i:s', $this->created_at);
@@ -148,5 +161,9 @@ class StatVisit extends ActiveRecord
     }
     public function getViewIpText(){
         return !empty($this->location_ip) ? implode(" ", \app\helpers\IP::find($this->location_ip)) : '';
+    }
+    public function getViewLastVisitTime(){
+        return date('Y-m-d H:i:s', $this->last_visit_time);
+
     }
 }
