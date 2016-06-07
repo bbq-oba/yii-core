@@ -82,6 +82,7 @@ class StatVisitSearch extends StatVisit
             StatVisit::tableName().'.*',
             'COUNT('.StatVisitDetails::tableName().'.vid) as count'
         ]);
+        $query->groupBy(StatVisit::tableName().'.id');
         $query->orderBy('updated_at desc');
         $query->leftJoin(StatVisitDetails::tableName(),StatVisit::tableName().'.id = '.StatVisitDetails::tableName().'.vid');
         $query->andFilterWhere(['like', 'idvisitor', $this->idvisitor])
