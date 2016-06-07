@@ -20,7 +20,7 @@ class SignLogic extends BaseLogic
 //        return 'http://api.vbetctrl.net/'.$url;
        // return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
         //return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
-        return 'http://www.y88.ph/api/Extension/Regist';
+        return 'http://api.y88.ph/api/Extension/Regist';
 //        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
     }
 
@@ -61,7 +61,6 @@ class SignLogic extends BaseLogic
     {
         $sign = self::makeSign($params);
         $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
-
 return $this->post($url, $params);
     }
 
