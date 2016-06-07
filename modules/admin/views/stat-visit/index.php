@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ];
     }
 
-    $columns[] = 'iptype';
+//    $columns[] = 'iptype';
     $columns[] = [
         'attribute'=>'viewIpText',
         'options'=>[
