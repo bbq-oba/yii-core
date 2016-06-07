@@ -135,6 +135,7 @@ class StatVisit extends ActiveRecord
             'viewLastVisitTime' => '最后访问时间',
             'viewIpText' => 'IP归属地',
             'count' => '访问次数',
+            'viewRefererUrl' => '来源页',
         ];
     }
     public function getCreatedAt()
