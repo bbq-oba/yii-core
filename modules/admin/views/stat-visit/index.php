@@ -73,7 +73,10 @@ $this->params['breadcrumbs'][] = $this->title;
     $columns[] = 'count';
     $columns[] = 'current_url';
     $columns[] = 'referer_keyword';
-    $columns[] = 'referer_url';
+    $columns[] = [
+        'attribute'=>'viewRefererUrl',
+        'format'=>'raw'
+    ];
     $columns[] = 'viewLastVisitTime';
 
     ?>

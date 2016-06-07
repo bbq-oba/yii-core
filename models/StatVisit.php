@@ -166,4 +166,9 @@ class StatVisit extends ActiveRecord
         return date('Y-m-d H:i:s', $this->last_visit_time);
 
     }
+    public function getViewRefererUrl(){
+        $url = $this->referer_url;
+        $url = chunk_split($url,100,'<br />');
+        return $url;
+    }
 }
