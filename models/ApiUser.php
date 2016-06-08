@@ -47,15 +47,15 @@ class ApiUser extends Model
         ];
     }
 
-//    function check($name,$val){
-//        $model = $this->findOne([
-//            $name =>$val
-//        ]);
-//        if($model){
-//            return ["info"=>$this->getAttributeLabel($name)."已经存在","status"=>"n"];
-//        }
-//        return ["info"=>"","status"=>"y"];
-//    }
+    function check($name,$val){
+        $model = $this->findOne([
+            $name =>$val
+        ]);
+        if($model){
+            return ["info"=>$this->getAttributeLabel($name)."已经存在","status"=>"n"];
+        }
+        return ["info"=>"","status"=>"y"];
+    }
 
 
     public function getCreatedAt(){
