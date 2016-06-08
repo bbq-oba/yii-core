@@ -24,7 +24,7 @@ class SignController extends Controller
         $api = new SignLogic();
 
         if($name == 'ApiUser[UserName]'){
-            return $api->returnJsFormat($api->checkUsername($value));
+            return $api->checkUsername($value);
         }
         if($name == 'ApiUser[Phone]'){
             $model = new ApiUser();
