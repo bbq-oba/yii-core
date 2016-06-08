@@ -38,6 +38,17 @@ class SignLogic extends BaseLogic
         return $this->signPost($url, $params);
     }
 
+    public function checkUsername($username){
+         $params['UserName'] = $username;
+         $url = 'http://api.y88.ph/api/Extension/CheckUserName';
+         return $this->signGet($url,$params);
+    }
+    public function checkPhone($username){
+         $params['UserName'] = $username;
+         $url = 'http://api.y88.ph/api/Extension/CheckPhone';
+         return $this->signGet($url,$params);
+    }
+
     public function signIn($username , $password, $ref = 1)
     {
         $post = [
@@ -56,12 +67,18 @@ class SignLogic extends BaseLogic
         return $post;
     }
 
+    public function signGet($url, $params)
+    {
+        $sign = self::makeSign($params);
+        $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
+        return $this->get($url, $params);
+    }
 
     public function signPost($url, $params)
     {
         $sign = self::makeSign($params);
         $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
-return $this->post($url, $params);
+        return $this->post($url, $params);
     }
 
 
@@ -73,6 +90,8 @@ return $this->post($url, $params);
         $sign = md5(self::buildQuery($params));
         return $sign;
     }
+    
+    
 
 
 }
