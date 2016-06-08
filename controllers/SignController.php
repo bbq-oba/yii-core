@@ -35,7 +35,14 @@ class SignController extends Controller
             return $model->check('Phone',$value);
         }
     }
-
+    public function actionCheckUsername($username){
+        \yii::$app->response->format = Response::FORMAT_JSON;
+        return (new SignLogic())->checkUsername($username);
+    }
+    public function actionCheckPhone($phone){
+        \yii::$app->response->format = Response::FORMAT_JSON;
+        return (new SignLogic())->checkPhone($phone);
+    }
     public function actionCheckSmsCode(){
 
         $mobile = \yii::$app->request->post('mobile');
