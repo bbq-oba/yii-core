@@ -21,18 +21,17 @@ class SignController extends Controller
         $value = \yii::$app->request->post('param');
 
         \yii::$app->response->format = Response::FORMAT_JSON;
+        $api = new SignLogic();
 
         if($name == 'ApiUser[UserName]'){
-            $model = new ApiUser();
-
-            return $model->check('UserName',$value);
+            return $api->returnJsFormat($api->checkUsername($value));
         }
         if($name == 'ApiUser[Phone]'){
             $model = new ApiUser();
             if(!Mobile::check($value)){
                 return ["info"=>"手机号格式有误","status"=>"n"];
             }
-            return $model->check('Phone',$value);
+            return $api->returnJsFormat($api->checkPhone($value));
         }
     }
 

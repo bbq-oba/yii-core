@@ -49,6 +49,13 @@ class SignLogic extends BaseLogic
          return $this->signGet($url,$params);
     }
 
+    public function returnJsFormat($array){
+        if($array['code'] != 200){
+            return ["info"=>$this->$array['msg'],"status"=>"n"];
+        }
+        return ["info"=>"","status"=>"y"];
+    }
+
     public function signIn($username , $password, $ref = 1)
     {
         $post = [
