@@ -195,13 +195,16 @@ class VisitForm extends Model
         }
     }
 
-    public function getDb(array $apiData )
+    public function getDb( $apiData )
     {
         $idvisits = [];
         $data = [];
-        foreach ($apiData as $k => $v) {
-            $data[$v['idVisit']] = $v;
-            $idvisits[] = $v['idVisit'];
+
+        if($apiData){
+            foreach ($apiData as $k => $v) {
+                $data[$v['idVisit']] = $v;
+                $idvisits[] = $v['idVisit'];
+            }
         }
         $idvisits = array_unique($idvisits);
         $find = ApiVisitorDetail::find()->where([
