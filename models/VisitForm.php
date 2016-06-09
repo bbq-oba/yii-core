@@ -195,7 +195,7 @@ class VisitForm extends Model
         }
     }
 
-    public function getDb($apiData)
+    public function getDb(array $apiData )
     {
         $idvisits = [];
         $data = [];
