@@ -14,8 +14,9 @@ class SignLogic extends BaseLogic
     CONST URL_SIGN_UP = 'api/Extension/Regist';
     CONST URL_SIGN_IN = 'api/Extension/Login';
     const URL_CHECK_USERNAME = 'api/Extension/CheckUserName';
+    const URL_CHECK_PHONE = 'api/Extension/CheckPhone';
 
-    public function makeUrl($url)
+    public function Url($url)
     {
 //        return 'http://api.vbetctrl.net/'.$url;
         // return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
@@ -34,22 +35,22 @@ class SignLogic extends BaseLogic
         $params['Phone'] = $post['Phone'];
         $params['Email'] = $post['Email'];
         $params['ReferralCode'] = $post['ReferralCode'];
-        $url = $this->makeUrl( self::URL_SIGN_UP);
+        $url = $this->Url( self::URL_SIGN_UP);
         return $this->signPost($url, $params);
     }
 
     public function checkUsername($username)
     {
         $params['UserName'] = $username;
-        $url = $this->makeUrl(self::URL_CHECK_USERNAME);
+        $url = $this->Url(self::URL_CHECK_USERNAME);
         return $this->signPost($url, $params);
     }
 
     public function checkPhone($phone)
     {
         $params['Phone'] = $phone;
-        $url = 'http://api.y88.ph/api/Extension/CheckPhone';
-        return $this->signGet($url, $params);
+        $url = $this->Url(self::URL_CHECK_PHONE);
+        return $this->signPost($url, $params);
     }
 
     public function returnJsFormat($array)
