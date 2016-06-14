@@ -23,16 +23,23 @@ class SignController extends Controller
         \yii::$app->response->format = Response::FORMAT_JSON;
 
         if($name == 'ApiUser[UserName]'){
-            $model = new ApiUser();
-
-            return $model->check('UserName',$value);
+            $return = (new SignLogic())->checkUsername($value);
+            if($return['data'] == 'false'){
+                return ["info"=>"ok","status"=>"y"];
+            }else{
+                return ["info"=>"该账号已经注册","status"=>"n"];
+            }
         }
         if($name == 'ApiUser[Phone]'){
-            $model = new ApiUser();
             if(!Mobile::check($value)){
                 return ["info"=>"手机号格式有误","status"=>"n"];
             }
-            return $model->check('Phone',$value);
+            $return = (new SignLogic())->checkPhone($value);
+            if($return['data'] == 'false'){
+                return ["info"=>"ok","status"=>"y"];
+            }else{
+                return ["info"=>"该手机号已经注册","status"=>"n"];
+            }
         }
     }
     public function actionCheckUsername($username){
@@ -43,6 +50,7 @@ class SignController extends Controller
         \yii::$app->response->format = Response::FORMAT_JSON;
         return (new SignLogic())->checkPhone($phone);
     }
+
     public function actionCheckSmsCode(){
 
         $mobile = \yii::$app->request->post('mobile');
