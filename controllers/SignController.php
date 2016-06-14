@@ -24,8 +24,7 @@ class SignController extends Controller
 
         if($name == 'ApiUser[UserName]'){
             $return = (new SignLogic())->checkUsername($value);
-            var_dump($return);
-            if($return['data'] == 'false'){
+            if($return['data'] == false){
                 return ["info"=>"通过信息验证！","status"=>"y"];
             }else{
                 return ["info"=>"该账号已经注册","status"=>"n"];
@@ -36,7 +35,7 @@ class SignController extends Controller
                 return ["info"=>"手机号格式有误","status"=>"n"];
             }
             $return = (new SignLogic())->checkPhone($value);
-            if($return['data'] == 'false'){
+            if($return['data'] == false){
                 return ["info"=>"通过信息验证！","status"=>"y"];
             }else{
                 return ["info"=>"该手机号已经注册","status"=>"n"];
