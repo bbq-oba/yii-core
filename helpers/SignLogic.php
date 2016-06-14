@@ -35,7 +35,7 @@ class SignLogic extends BaseLogic
 
     public function checkUsername($username)
     {
-        $params['UserName'] = $username;
+        $params['userName'] = $username;
         $params = self::makeSign($params);
         $url = $this->makeUrl('', self::URL_CHECK_USERNAME) . '?'.http_build_query($params);
         echo $url."\r\n";
