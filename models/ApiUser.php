@@ -132,16 +132,6 @@ class ApiUser extends Model
 
     public function validateSmsCode($attribute, $params)
     {
-        if(empty($this->UserName)){
-            $this->addError('UserName', '请填写用户名');
-            return false;
-
-        }
-        if(empty($this->Password)){
-            $this->addError('Phone', '请填写密码');
-            return false;
-
-        }
         $this->checkModel = CaptchaCode::find()->where([
             'mobile' => $this->Phone,
             'status' => 0
