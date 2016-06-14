@@ -91,11 +91,7 @@ class SignLogic extends BaseLogic
         $sign = self::makeSign($params);
         $params['timestamp'] = urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP));
         $params['sign'] = $sign;
-        $str = [];
-        foreach ($params as $k => $v) {
-            $str[] = $k . '=' . $v;
-        }
-        $url = $url . '?' . implode('&', $str);
+        $url = $url . '?' . http_build_query($params);
         return $this->get($url, []);
     }
 
