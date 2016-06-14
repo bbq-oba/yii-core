@@ -68,7 +68,7 @@ class ApiUser extends Model
     {
         return [
             [['Phone','UserName','Password', 'smsCode'], 'required'],
-            [['UserName'], 'unique','message' => '该用户名已经被使用。'],
+            [['UserName'], 'validateUserName'],
             [['Phone'], 'validatePhone'],
             [['created_at', 'updated_at','ip'], 'safe'],
             [['UserName', 'Password', 'TrueName', 'ReferralCode', 'Email'], 'string', 'max' => 255],
@@ -169,36 +169,28 @@ class ApiUser extends Model
         if(empty($this->Password)){
             $this->addError('Phone', '请填写密码');
         }
-        $model = new ApiUser();
-        $model = $model->find()->where([
-            'Phone'=>$this->Phone
-        ])->one();
-
-        if($model){
-            $this->addError('Phone', '该手机号已经注册');
-            return false;
-        }
         $check = Mobile::check($this->Phone);
         if (!$check) {
             $this->addError('Phone', '请输入正确手机号');
             return false;
         }
-//        $this->checkModel = CaptchaCode::find()->where([
-//            'mobile' => $this->Phone,
-//            'status' => 0
-//        ])->orderBy('created_at desc')->one();
-//        if (!$this->checkModel) {
-//            $this->addError('smsCode', '短信验证码错误1');
-//            return false;
-//        }
-//        if ($this->checkModel->code != $this->smsCode) {
-//            $this->addError('smsCode', '短信验证码错误2');
-//            return false;
-//        }
-//        if (CURRENT_TIMESTAMP - $this->checkModel->created_at > 600) {
-//            $this->addError('smsCode', '验证码已经过期');
-//            return false;
-//        }
+        $return = (new SignLogic())->checkPhone($this->Phone);
+        if($return['data'] == true){
+            $this->addError('Phone', '该手机号已经注册');
+            return false;
+        }
+        return true;
+    }
+    public function validateUsername($attribute, $params)
+    {
+        if(empty($this->UserName)){
+            $this->addError('Phone', '请填写用户名');
+        }
+        $return = (new SignLogic())->checkUsername($this->UserName);
+        if($return['data'] == true){
+            $this->addError('UserName', '该用户名已经注册');
+            return false;
+        }
         return true;
     }
 
