@@ -58,7 +58,6 @@ class BaseLogic extends Object
         $params['timestamp'] = date('Y-m-d H:i:s', CURRENT_TIMESTAMP);
         $params['secretKey'] = self::SECRET_KEY;
         $params['sign'] = md5(self::buildQuery($params));
-
         unset($params['secretKey']);
         return $params;
     }
