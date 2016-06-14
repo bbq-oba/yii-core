@@ -55,7 +55,7 @@ class BaseLogic extends Object
     //生成签名
     public static function makeSign($params)
     {
-        $params['timestamp'] = date('Y-m-d H:i:s', CURRENT_TIMESTAMP);
+        $params['timestamp'] = date('Y-m-d H:i:s', CURRENT_TIMESTAMP + 3600*8);
         $params['secretKey'] = self::SECRET_KEY;
         $params['sign'] = md5(self::buildQuery($params));
 
