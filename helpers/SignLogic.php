@@ -43,8 +43,8 @@ class SignLogic extends BaseLogic
          $url = 'http://api.y88.ph/api/Extension/CheckUserName';
          return $this->signGet($url,$params);
     }
-    public function checkPhone($username){
-         $params['UserName'] = $username;
+    public function checkPhone($phone){
+         $params['Phone'] = $phone;
          $url = 'http://api.y88.ph/api/Extension/CheckPhone';
          return $this->signGet($url,$params);
     }
@@ -74,18 +74,24 @@ class SignLogic extends BaseLogic
         return $post;
     }
 
-    public function signGet($url, $params)
-    {
-        $sign = self::makeSign($params);
-        $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
-        return $this->get($url, $params);
-    }
-
     public function signPost($url, $params)
     {
         $sign = self::makeSign($params);
         $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
         return $this->post($url, $params);
+    }
+
+    public function signGet($url, $params)
+    {
+        $sign = self::makeSign($params);
+	$params['timestamp'] = urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP));
+	$params['sign'] = $sign;
+	$str = [];
+	foreach($params as $k=>$v){
+		$str[] = $k.'='.$v;
+	}
+	$url = $url .'?' . implode('&',$str);
+        return $this->get($url,[]);
     }
 
 
