@@ -43,14 +43,14 @@ class SignLogic extends BaseLogic
     {
         $params['UserName'] = $username;
         $url = $this->Url(self::URL_CHECK_USERNAME);
-        return $this->signPost($url, $params);
+        return $this->signGet($url, $params);
     }
 
     public function checkPhone($phone)
     {
         $params['Phone'] = $phone;
         $url = $this->Url(self::URL_CHECK_PHONE);
-        return $this->signPost($url, $params);
+        return $this->signGet($url, $params);
     }
 
     public function returnJsFormat($array)
