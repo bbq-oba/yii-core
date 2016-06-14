@@ -61,9 +61,9 @@ $js = <<<JS
                                     },
                                     success: function(data, textStatus){
                                         flag = (data.code == 1);
-
                                     }
                                 });
+                            console.log(flag);
                             return flag;
                         }
                         return false;
