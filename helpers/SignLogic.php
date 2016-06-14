@@ -16,40 +16,34 @@ class SignLogic extends BaseLogic
     const URL_CHECK_USERNAME = 'api/Extension/CheckUserName';
     const URL_CHECK_PHONE = 'api/Extension/CheckPhone';
 
-    public function Url($url)
+    public function makeUrl($ref , $url)
     {
-//        return 'http://api.vbetctrl.net/'.$url;
-        // return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
-        //return 'http://' . self::$refEnum[$ref]['url'] . '.gallary.work/' . $url;
         return 'http://api.y88.ph/'.$url;
-//        return 'http://'.self::$refEnum[$ref]['url'].'.gallary.work/'.$url;
     }
 
     public function signUp($post, $ref)
     {
-
-
         $params['UserName'] = $post['UserName'];
         $params['Password'] = $post['Password'];
         $params['TrueName'] = $post['TrueName'];
         $params['Phone'] = $post['Phone'];
         $params['Email'] = $post['Email'];
         $params['ReferralCode'] = $post['ReferralCode'];
-        $url = $this->Url( self::URL_SIGN_UP);
+        $url = $this->makeUrl('', self::URL_SIGN_UP);
         return $this->signPost($url, $params);
     }
 
     public function checkUsername($username)
     {
         $params['UserName'] = $username;
-        $url = $this->Url(self::URL_CHECK_USERNAME);
+        $url = $this->makeUrl('', self::URL_CHECK_USERNAME);
         return $this->signGet($url, $params);
     }
 
     public function checkPhone($phone)
     {
         $params['Phone'] = $phone;
-        $url = $this->Url(self::URL_CHECK_PHONE);
+        $url = $this->makeUrl('',self::URL_CHECK_PHONE);
         return $this->signGet($url, $params);
     }
 
@@ -81,23 +75,20 @@ class SignLogic extends BaseLogic
 
     public function signPost($url, $params)
     {
-        $sign = self::makeSign($params);
+        $sign = self::xmakeSign($params);
         $url = $url . '?timestamp=' . urlencode(date('Y-m-d H:i:s', CURRENT_TIMESTAMP)) . '&sign=' . $sign;
         return $this->post($url, $params);
     }
 
     public function signGet($url, $params)
     {
-        $sign = self::makeSign($params);
-        $params['timestamp'] = date('Y-m-d H:i:s', CURRENT_TIMESTAMP);
-        $params['sign'] = $sign;
-        $url = $url . '?' . http_build_query($params);
-        return $this->get($url, []);
+        $params = self::makeSign($params);
+        return $this->get($url,$params);
     }
 
 
     //生成签名
-    public static function makeSign($params)
+    public static function xmakeSign($params)
     {
         $params['timestamp'] = date('Y-m-d H:i:s', CURRENT_TIMESTAMP);
         $params['secretKey'] = self::SECRET_KEY;
