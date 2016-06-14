@@ -36,8 +36,10 @@ class SignLogic extends BaseLogic
     public function checkUsername($username)
     {
         $params['UserName'] = $username;
-        $url = $this->makeUrl('', self::URL_CHECK_USERNAME);
-        return $this->signGet($url, $params);
+        $params = self::makeSign($params);
+        $url = $this->makeUrl('', self::URL_CHECK_USERNAME) . '?'.http_build_query($params);
+        echo $url."\r\n";
+        return $this->get($url, []);
     }
 
     public function checkPhone($phone)
@@ -80,12 +82,17 @@ class SignLogic extends BaseLogic
         return $this->post($url, $params);
     }
 
-    public function signGet($url, $params)
+    public function xsignGet($url, $params)
     {
         $params = self::makeSign($params);
         return $this->get($url,$params);
     }
 
+    public function signGet($url, $params)
+    {
+        $params = self::makeSign($params);
+        return $this->get($url,$params);
+    }
 
     //生成签名
     public static function xmakeSign($params)
