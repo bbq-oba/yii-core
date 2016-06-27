@@ -55,22 +55,12 @@ class SignLogic extends BaseLogic
         return ["info" => "", "status" => "y"];
     }
 
-    public function signIn($username, $password, $ref = 1)
+    public function signIn($post)
     {
-        $post = [
-            'UserName' => $username,
-            'Password' => $password
-        ];
-        $timestamp = date('Y-m-d H:i:s', CURRENT_TIMESTAMP);
-        $sign = self::makeSign($post);
-
-        $url = 'http://api.lb118.com/' . self::URL_SIGN_IN . '?' . http_build_query([
-                'timestamp' => $timestamp,
-                'sign' => $sign
-            ]);
-
-        $post['url'] = $url;
-        return $post;
+        $params['UserName'] = $post['UserName'];
+        $params['Password'] = $post['Password'];
+        $url = $this->makeUrl('', self::URL_SIGN_IN);
+        return $this->signPost($url, $params);
     }
 
     public function signPost($url, $params)
